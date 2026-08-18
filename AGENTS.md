@@ -1,67 +1,79 @@
 # Agent guide — Open Cutaway
 
+**This document owns** how agents work here: read-order, the dependency ask, the shape of a decision page, and collaboration.
+**It does not own** the exact text of S-rules or E-rules. Do not paraphrase those rules. Point at `CLAUDE.md`.
+
 You are working in the public game repository for **Open Cutaway**, a forever-freeware infrastructure-literacy game for ages 7–12 with adult co-play. Children are capable of real systems. Do not use baby talk, talking hydrants, or propaganda.
 
 Collaboration records, ownership fields, and review notes MUST use role or context IDs (`ROLE-IMPLEMENTER`, `CTX-BOOTSTRAP`). Never personal names, usernames, or email addresses.
 
-## Hard-stops
+## Read order
 
-### 1. A1 — personal information never enters the repo
+1. `CLAUDE.md`
+2. `SPEC.md`
+3. `docs/settled.md`
+4. `docs/open-faults.md`
+5. `docs/testing-gauntlet.md`
+6. generated `docs/file-map.md`
+7. generated `docs/code-map.md`, `docs/feature-map.md`, `docs/tutorial-manifest.md`
 
-This is the first hard-stop. If it conflicts with any other task, privacy wins.
+Then the file you are about to change. Safety and engineering rules are in `CLAUDE.md` only.
 
-Before every commit, scrub legal names, emails, phones, home/work/school addresses, GPS, account IDs, identifiable photos, children’s names, real sibling profile names, user-folder paths, hostnames, API keys, `.env` files, and chat exports with personal facts.
+## Six drift parts
 
-- Copyright and README identify **Open Cutaway** / **opencutaway authors** only.
-- Sample profiles use clearly fake names (`Player A`, `Pat`, `Jordan`).
-- Device saves are gitignored. Never commit a household dump.
-- Do not invent a real-looking email for git identity examples. See `docs/PRIVACY.md`.
+The six named parts, their files, and the gate that binds them live in `docs/testing-gauntlet.md`. Do not collapse them into fewer artifacts. Older name file-map is Owners. Effect-map is per-test evidence that supports Gates; it is not a seventh named part.
 
-If you find personal information already staged, remove it, rewrite the file, and do not commit until `npm test` is clean.
+## Player-facing growth
 
-### 2. Product ethos
+When adding something a child or grown-up can do, in the same change:
 
-- Forever freeware, MIT for code, MIT-clean content (original writing; original human-traced SVG; US public-domain or CC0 photos with per-asset attribution). No NC licenses. No copying other books’ text, photos, drawings, chapter lists, or taxonomy.
-- Offline first. No external ads, analytics, or monitoring.
-- Local on-device profiles only. Never cloud, OAuth, email, or sync.
-- No camera or geolocation APIs, permissions, or “stubs for later.”
-- Do not add Next.js, SSR, Electron, Firebase, Supabase, Auth.js, LangChain, LangGraph, OpenAI SDKs, Sentry, Google Analytics, or Plausible.
-- Do not put multi-agent graphs or model calls in `src/`. The shipped game is a normal offline Preact app.
-- Teach-first; optional life-list later. Do not build scavenger-gated progression.
-- Cosmetics (banners vs hats, Steam-like IRL rewards) are **unfrozen**. Keep the `cosmetics/` stub; do not ship a look.
+- Extend JSON Schema and Ajv tests. Schema is the authority path. No ad-hoc parsers for content, config, saves, or UI contracts.
+- Add or extend a Playwright page object, fixture, and spec (teaching, interaction, regression). Do not add a one-off script.
+- Update all six drift parts so G-lockstep stays green.
 
-### 3. Safety (even before lessons exist)
+The finished-work rule for that slice lives in `CLAUDE.md`.
 
-Never gamify approaching tracks, docks, substations, or live gear. Object cards must keep `safety.approachLiveGear` as `never`. Teach from drawings and allowed photos, not by sending children toward live equipment.
+## Maps and lookups
 
-### 4. Scope of this slice
+Owners live in `tools/file-map.mjs`. `docs/file-map.md` is generated. Hand edits of that map are erased.
 
-This run is conventions only. Do not fill twelve object lessons, freeze a First Twelve in schema, or treat `docs/candidates.md` as product data.
+Before an edit, run the blast-radius lookup named in `CLAUDE.md`. The lookup does not fail a build; its `--self-test` does, and that self-test runs in `npm run check`.
 
-## Graph locus
+The effect map is generated. Do not write `docs/effect-map.md` by hand. The code map, feature map, and tutorial manifest are also generated. Do not write those markdown files by hand.
 
-Explicit multi-agent execution graphs are **build-time developer workflows** under `/workflows` (YAML/JSON). Individual models or tools are nodes; routing and file handoffs are edges. Parallel work, branching, and **capped** cycles are allowed there.
+New file: declare it in `tools/file-map.mjs` in the same commit that creates it.
 
-An executable runner (LangGraph or similar) is a later opt-in and must never ship inside the child-facing app.
+## Dependency ask
 
-For content work, follow `workflows/content-authoring.example.yaml` and `.cursor/rules/`. Kid-facing copy and images require a human gate. No unattended loops on child copy.
+If a task needs a new npm package, a new governing document, or a new gate, stop and ask the owner. Do not add it quietly.
 
-## Art ingest (later)
+## Decision page
 
-- Drawings: AI draft → human traces SVG. Prompt logs stay out of git. Commit SVG plus provenance.
-- Photos in v0: US public domain or CC0 only, with a row in `docs/ATTRIBUTION.md`.
-- Do not commit closed-model rasters as “original MIT art.”
-- Learn-mode visuals (later): original cutaways, object portraits, and chain-strips. Not a node-link explorer. No cute anthropomorphic infrastructure.
+When the owner must choose, one question per screen, every option costed, one marked MY PICK, an Other box that outranks the buttons, numbers measured rather than recalled, copy-all at the end. Do not invent a decision page unless you are blocked.
 
-## Profiles
+## Child app
 
-Multiple on-device sibling profiles. Never cloud-shared. Life-list finds are honor-system later.
+The shipped game is a normal offline Preact + Vite app. Do not put execution graphs in `src/`. Do not call network models from the child-facing client. Follow `/workflows` for content work. Kid-facing copy and images require a human gate.
+
+## Privacy scrub (A1)
+
+Personal information of the builder and families must never enter git. If privacy conflicts with architecture completeness, privacy wins. The scrub list and git-identity pattern live in `docs/PRIVACY.md`. Sample players are `Player A`, `Pat`, and `Jordan`. Device saves stay gitignored.
+
+If you find personal information already staged, remove it and do not commit until the privacy lint is clean.
+
+## Product reminders (not the rule text)
+
+- Open Cutaway is infrastructure literacy, not a reading or phonics product.
+- Cosmetics stay unfrozen; keep the stub folder.
+- `docs/candidates.md` is notes, not schema.
+- Teach-first; do not design scavenger-gated progression.
+- Do not copy inspiration books (see `docs/inspiration.md`).
 
 ## Agent Collaboration and Review
 
-Default workflow: **Implement → independent review → correct → verify → integrate**.
-
 These user-approved rules are mandatory for every code-related change in this repository.
+
+Default workflow: **Implement → independent review → correct → verify → integrate**.
 
 ### Independent review
 

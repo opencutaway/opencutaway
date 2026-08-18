@@ -1,6 +1,9 @@
 # Candidate objects (unfrozen)
 
-This file is **brainstorm notes only**. It is not schema, not a locked First Twelve, and not a curriculum map. Later agents must not copy these rows into `schema/` or treat them as product data.
+**This document owns** unfrozen brainstorm notes for later object cards.
+**It does not own** schema, curriculum order, or locked product data.
+
+This file is **brainstorm notes only**. Later agents must not copy these rows into `schema/` or treat them as product data.
 
 ## Candidate First Twelve
 
@@ -20,6 +23,10 @@ Loose list for future object-card work (street objects a child might already hav
 12. Gas station
 
 Status: **unfrozen**. Names, count, order, and teaching sequence may all change.
+
+## World tone (also unfrozen)
+
+Later scenes may show occupational density around these objects: drivers, clerks, line workers, shop staff, and other civic jobs sharing one view with vehicles and storefronts. That is a layout and teaching tone, not a character cast. Do not invent a mascot town. Do not copy any picture-book names or figures.
 
 ## Pedagogy reminder (also unfrozen)
 

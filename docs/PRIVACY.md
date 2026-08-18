@@ -1,5 +1,8 @@
 # Privacy (A1)
 
+**This document owns** what must never be committed, and the PII scrub procedure.
+**It does not own** safety rules that bind the shipped app (`CLAUDE.md`).
+
 Privacy is the first hard-stop for this repository. If privacy conflicts with any other task, privacy wins. Do not commit material and clean it up later.
 
 ## What must never be committed
@@ -20,7 +23,7 @@ Privacy is the first hard-stop for this repository. If privacy conflicts with an
 
 LICENSE and README identify **Open Cutaway** / **opencutaway authors** only. Do not put a personal name or email on the copyright line.
 
-If you configure git for publishing, use a GitHub noreply identity. Do not write a real address into this repository, even as an “example.”
+If you configure git for publishing, use `git config user.name opencutaway` and a GitHub noreply identity in the form GitHub documents for that username. Never invent or commit a real personal email, even as an “example.”
 
 ## Local profiles
 
@@ -30,7 +33,7 @@ Real profile JSON belongs only on the device and is gitignored. Sample data in t
 
 ## What the cheap lint looks for
 
-`npm test` scans files that git would track (except lockfiles) for:
+The PII gate scans files that git would track (except lockfiles) for:
 
 - Email-like strings
 - Windows user-folder path prefixes
@@ -42,5 +45,5 @@ Documentation in this file deliberately avoids those exact path strings so the l
 
 1. Stop. Do not commit.
 2. Remove the material and rewrite the file.
-3. Re-run `npm test`.
+3. Re-run the PII gate.
 4. Only continue when the tree is clean.

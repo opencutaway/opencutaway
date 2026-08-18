@@ -1,9 +1,6 @@
-import Ajv2020 from 'ajv/dist/2020.js'
-import { readRepoJson } from './repo-files.ts'
+import type { AnySchema, ValidateFunction } from 'ajv'
+import { compileByPath } from '../../scripts/lib/ajv-validate.mjs'
 
-const ajv = new Ajv2020({ allErrors: true, strict: true })
-
-export function compileSchema(relativePath: string) {
-  const schema = readRepoJson(relativePath)
-  return ajv.compile(schema)
+export function compileSchema(relativePath: string): ValidateFunction<AnySchema> {
+  return compileByPath(relativePath) as ValidateFunction<AnySchema>
 }

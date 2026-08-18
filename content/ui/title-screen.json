@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "0.1.0",
+  "screenId": "title",
+  "title": "Open Cutaway",
+  "blurb": "A visual game about how infrastructure works. Lessons are not in this build yet. Progress stays on this device.",
+  "actors": ["child", "adult"],
+  "lessonsShipped": false
+}

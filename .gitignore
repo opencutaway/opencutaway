@@ -45,3 +45,6 @@ npm-debug.log*
 # Test leftovers
 tmp/
 .tmp/
+playwright-report/
+test-results/
+blob-report/

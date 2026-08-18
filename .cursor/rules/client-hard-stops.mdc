@@ -18,4 +18,4 @@ Never add to `src/` or client dependencies:
 
 Do not put execution graphs in `src/`. Do not call network models from the child-facing client.
 
-`npm test` must fail if `src/` contains `geolocation`, `getUserMedia`, `gtag`, `Sentry`, `openai`, or `langgraph`.
+The ethos gate must fail if `src/` contains `geolocation`, `getUserMedia`, `gtag`, `Sentry`, `openai`, or `langgraph`.

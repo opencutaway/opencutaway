@@ -47,7 +47,7 @@ describe('test registry coverage', () => {
   const taxonomy = readRepoJson(
     'tests/registry/test-taxonomy-ids.json'
   ) as string[]
-  const registry = readRepoJson('tests/registry/test-registry.json') as Registry
+  const registry = readRepoJson('tests/registry.json') as Registry
 
   it('assesses every taxonomy category as applicable or excluded, never both', () => {
     const applicable = new Map<string, string[]>()

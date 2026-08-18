@@ -1,4 +1,4 @@
-export const GAME_TITLE = 'Open Cutaway'
+import titleScreen from '../../content/ui/title-screen.json' with { type: 'json' }
 
-export const TITLE_BLURB =
-  'A visual game about how infrastructure works. Lessons are not in this build yet. Progress stays on this device.'
+export const GAME_TITLE: string = titleScreen.title
+export const TITLE_BLURB: string = titleScreen.blurb

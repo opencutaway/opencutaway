@@ -150,6 +150,54 @@ const tests = {
     },
     requirement_ids: ['REQ_NAME', 'REQ_DOD', 'REQ_OBJECTIVE']
   }),
+  'TEST-HIT-TARGET': testRecord({
+    identity: {
+      test_id: 'TEST-HIT-TARGET',
+      title: 'Minimum child-facing hit target is 44 CSS pixels',
+      objective: 'The placeholder stylesheet keeps child-facing controls at a 44 CSS-pixel minimum.'
+    },
+    classification: {
+      execution_mode: 'automated',
+      priority: 'high',
+      severity_if_failed: 'high',
+      test_layer: 'unit',
+      test_types: ['TC-FUNCTIONAL-UNIT', 'TC-BEHAVIOUR-POSITIVE']
+    },
+    steps: ['Run tests/hit-target.test.ts via npm test.'],
+    evidence_retained: ['vitest output'],
+    execution_trigger: 'npm test',
+    pipeline_stage: 'local-verification',
+    oracle: {
+      expected_failure_mode: na('Passing run expected.'),
+      expected_logs_events_and_alerts: na('No telemetry in this product.'),
+      expected_outputs: [
+        'src/index.css contains min-height: 44px',
+        'src/index.css contains min-width: 44px'
+      ],
+      expected_state_changes: na('No durable state.'),
+      prohibited_side_effects: ['Must not change game behaviour'],
+      required_invariants: ['Minimum remains 44 CSS pixels']
+    },
+    initial_state: 'src/index.css present.',
+    required_failure_diagnostics: ['Assertion diff for min-height or min-width 44px'],
+    self_validating: true,
+    scope: {
+      component: 'src/index.css',
+      exclusions: ['Playable controls'],
+      included_behaviour: ['Stylesheet min-height and min-width of 44px'],
+      supported_platforms: ['Node.js >=22'],
+      supported_versions: ['0.0.0']
+    },
+    test_data: {
+      boundary_values: ['44'],
+      classification: 'synthetic',
+      generation_method: na('Hard-coded CSS in source.'),
+      inputs: na('No external inputs.'),
+      retention_and_cleanup: na('No retained test data.'),
+      source: 'synthetic'
+    },
+    requirement_ids: ['REQ_DOD']
+  }),
   'TEST-SCHEMA-EXAMPLES': testRecord({
     identity: {
       test_id: 'TEST-SCHEMA-EXAMPLES',
@@ -510,7 +558,7 @@ const tests = {
     required_failure_diagnostics: ['Missing, extra, or dual-assessed category IDs'],
     self_validating: true,
     scope: {
-      component: 'tests/registry/',
+      component: 'tests/registry.json',
       exclusions: ['Runtime product behaviour'],
       included_behaviour: ['Taxonomy coverage', 'Contract group presence'],
       supported_platforms: ['Node.js >=22'],
@@ -522,7 +570,7 @@ const tests = {
       generation_method: 'Committed taxonomy list and registry JSON.',
       inputs: [
         'tests/registry/test-taxonomy-ids.json',
-        'tests/registry/test-registry.json'
+        'tests/registry.json'
       ],
       retention_and_cleanup: 'Registry remains in git.',
       source: 'synthetic'
@@ -575,6 +623,164 @@ const tests = {
       source: 'synthetic'
     },
     requirement_ids: ['REQ_DOD', 'REQ_ENV']
+  }),
+  'TEST-SCHEMA-INVENTORY': testRecord({
+    identity: {
+      test_id: 'TEST-SCHEMA-INVENTORY',
+      title: 'Ajv compiles every schema and enforces the title UI contract',
+      objective:
+        'JSON Schema is the authority path: every committed schema compiles, the title contract is valid, and illegal variants fail.'
+    },
+    classification: {
+      execution_mode: 'automated',
+      priority: 'high',
+      severity_if_failed: 'high',
+      test_layer: 'contract',
+      test_types: [
+        'TC-FUNCTIONAL-CONTRACT',
+        'TC-BEHAVIOUR-NEGATIVE',
+        'TC-BEHAVIOUR-INVARIANT'
+      ]
+    },
+    steps: ['Run tests/schema-inventory.test.ts via npm test.'],
+    evidence_retained: ['vitest output'],
+    execution_trigger: 'npm test',
+    pipeline_stage: 'local-verification',
+    oracle: {
+      expected_failure_mode: na('Passing run expected.'),
+      expected_logs_events_and_alerts: na('No telemetry in this product.'),
+      expected_outputs: [
+        'Five schema paths listed',
+        'Title contract Ajv true',
+        'lessonsShipped true is Ajv false'
+      ],
+      expected_state_changes: na('No durable state.'),
+      prohibited_side_effects: ['Must not change game behaviour'],
+      required_invariants: ['Player-facing JSON is Ajv-validated']
+    },
+    initial_state: 'schema/ and content/ui/title-screen.json present.',
+    required_failure_diagnostics: ['Ajv errors or schema path list mismatch'],
+    self_validating: true,
+    scope: {
+      component: 'schema/ plus content/ui/',
+      exclusions: ['Playable lesson catalog JSON'],
+      included_behaviour: ['Schema compile', 'Title UI contract'],
+      supported_platforms: ['Node.js >=22'],
+      supported_versions: ['0.0.0']
+    },
+    test_data: {
+      boundary_values: ['lessonsShipped false vs true'],
+      classification: 'synthetic',
+      generation_method: 'Committed JSON fixtures.',
+      inputs: ['schema/*.schema.json', 'content/ui/title-screen.json'],
+      retention_and_cleanup: na('No retained test data.'),
+      source: 'synthetic'
+    },
+    requirement_ids: ['REQ_DOD', 'REQ_CODE_QUALITY']
+  }),
+  'TEST-E2E-TITLE': testRecord({
+    identity: {
+      test_id: 'TEST-E2E-TITLE',
+      title: 'Playwright covers title-screen teaching, interaction, and regression',
+      objective:
+        'A child and grown-up opening the app see the name Open Cutaway, can reach the heading, and do not see a leaked lesson.'
+    },
+    classification: {
+      execution_mode: 'automated',
+      priority: 'high',
+      severity_if_failed: 'high',
+      test_layer: 'end-to-end',
+      test_types: [
+        'TC-FUNCTIONAL-END-TO-END',
+        'TC-FUNCTIONAL-SYSTEM',
+        'TC-FUNCTIONAL-ACCEPTANCE'
+      ]
+    },
+    steps: ['Run e2e/specs/title.spec.ts via npm run test:e2e after a production build.'],
+    evidence_retained: ['Playwright list reporter output'],
+    execution_trigger: 'npm run gauntlet',
+    pipeline_stage: 'gauntlet',
+    timing_and_timeouts: 'Playwright 30s test timeout; 5s expect timeout.',
+    maximum_duration: '2m',
+    oracle: {
+      expected_failure_mode: na('Passing run expected.'),
+      expected_logs_events_and_alerts: na('No telemetry in this product.'),
+      expected_outputs: [
+        'Heading Open Cutaway visible',
+        'Lessons are not in this build yet visible',
+        'No Learn heading'
+      ],
+      expected_state_changes: na('No durable state.'),
+      prohibited_side_effects: ['Must not call network APIs from the child app'],
+      required_invariants: ['Title stub is the only shipped screen']
+    },
+    initial_state: 'Dependencies and Chromium installed; dist/ present for preview.',
+    required_failure_diagnostics: ['Playwright trace on retry; screenshot on failure'],
+    self_validating: true,
+    scope: {
+      component: 'e2e/specs/title.spec.ts',
+      exclusions: ['Playable Learn/Challenge lessons'],
+      included_behaviour: ['Teaching', 'Interaction', 'Regression'],
+      supported_platforms: ['Chromium desktop and Pixel 5 viewport'],
+      supported_versions: ['0.0.0']
+    },
+    test_data: {
+      boundary_values: na('Copy literals only.'),
+      classification: 'synthetic',
+      generation_method: na('Page object plus fixture.'),
+      inputs: ['Production preview of the title stub'],
+      retention_and_cleanup: 'playwright-report/ and test-results/ are gitignored.',
+      source: 'synthetic'
+    },
+    requirement_ids: ['REQ_NAME', 'REQ_DOD', 'REQ_AGE_COPLAY']
+  }),
+  'TEST-E2E-STUB-MODES': testRecord({
+    identity: {
+      test_id: 'TEST-E2E-STUB-MODES',
+      title: 'Playwright keeps Learn, Challenge, and Life list unshipped',
+      objective:
+        'The title stub does not grow extra mode buttons or headings before those features exist.'
+    },
+    classification: {
+      execution_mode: 'automated',
+      priority: 'high',
+      severity_if_failed: 'high',
+      test_layer: 'end-to-end',
+      test_types: ['TC-FUNCTIONAL-REGRESSION', 'TC-BEHAVIOUR-NEGATIVE']
+    },
+    steps: ['Run e2e/specs/modes-not-shipped.spec.ts via npm run test:e2e.'],
+    evidence_retained: ['Playwright list reporter output'],
+    execution_trigger: 'npm run gauntlet',
+    pipeline_stage: 'gauntlet',
+    timing_and_timeouts: 'Playwright 30s test timeout; 5s expect timeout.',
+    maximum_duration: '2m',
+    oracle: {
+      expected_failure_mode: na('Passing run expected.'),
+      expected_logs_events_and_alerts: na('No telemetry in this product.'),
+      expected_outputs: ['Zero buttons', 'Zero links', 'No Learn/Challenge/Life list headings'],
+      expected_state_changes: na('No durable state.'),
+      prohibited_side_effects: ['Must not change game behaviour'],
+      required_invariants: ['Stub modes stay unshipped']
+    },
+    initial_state: 'Dependencies and Chromium installed.',
+    required_failure_diagnostics: ['Playwright screenshot on failure'],
+    self_validating: true,
+    scope: {
+      component: 'e2e/specs/modes-not-shipped.spec.ts',
+      exclusions: ['Future mode implementation'],
+      included_behaviour: ['Absence of unshipped modes'],
+      supported_platforms: ['Chromium desktop and Pixel 5 viewport'],
+      supported_versions: ['0.0.0']
+    },
+    test_data: {
+      boundary_values: na('Count of zero controls.'),
+      classification: 'synthetic',
+      generation_method: na('Page object plus fixture.'),
+      inputs: ['Title stub'],
+      retention_and_cleanup: 'playwright-report/ and test-results/ are gitignored.',
+      source: 'synthetic'
+    },
+    requirement_ids: ['REQ_DOD']
   }),
   'TEST-INDEPENDENT-REVIEW': testRecord({
     identity: {
@@ -648,12 +854,6 @@ const tests = {
 }
 
 const exclusions = {
-  'EXCL-NO-PLAYABLE-PRODUCT': exclusion({
-    exclusion_id: 'EXCL-NO-PLAYABLE-PRODUCT',
-    category_ids: ['TC-FUNCTIONAL-END-TO-END', 'TC-FUNCTIONAL-SYSTEM'],
-    reason:
-      'This slice is conventions only: no playable lessons and no production-configured game to exercise end-to-end or system tests.'
-  }),
   'EXCL-NO-FUZZ-MUTATION': exclusion({
     exclusion_id: 'EXCL-NO-FUZZ-MUTATION',
     category_ids: [
@@ -745,7 +945,7 @@ const registry = {
 }
 
 writeFileSync(
-  path.join(repoRoot, 'tests/registry/test-registry.json'),
+  path.join(repoRoot, 'tests/registry.json'),
   `${JSON.stringify(registry, null, 2)}\n`,
   'utf8'
 )

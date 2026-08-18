@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "license": "MIT",
-  "description": "Open Cutaway — visual infrastructure-literacy game (conventions scaffold)",
+  "description": "Open Cutaway — visual infrastructure-literacy game",
   "engines": {
     "node": ">=22.0.0"
   },
@@ -12,10 +12,27 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
-    "test": "vitest run && node scripts/scan-client-gates.mjs && node scripts/scan-pii.mjs"
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "maps": "node scripts/write-test-registry.mjs && node tools/file-map.mjs && node tools/effect-map.mjs && node tools/code-map.mjs && node tools/feature-map.mjs && node tools/tutorial-manifest.mjs",
+    "check": "vitest run && node tools/file-map.mjs --check && node tools/file-map.mjs --self-test && node tools/blast-radius.mjs --self-test && node tools/effect-map.mjs --check && node tools/effect-map.mjs --self-test && node tools/code-map.mjs --check && node tools/code-map.mjs --self-test && node tools/feature-map.mjs --check && node tools/feature-map.mjs --self-test && node tools/tutorial-manifest.mjs --check && node tools/tutorial-manifest.mjs --self-test && node tools/check-lockstep.mjs && node tools/check-lockstep.mjs --self-test && node tools/check-schemas.mjs && node tools/check-schemas.mjs --self-test && node tools/check-governing.mjs && node tools/check-governing.mjs --self-test && node tools/pii-lint.mjs && node tools/pii-lint.mjs --self-test && node tools/pii-lint.mjs --ethos && node tools/check-floors.mjs",
+    "gauntlet": "npm run check && npm run build && npm run test:e2e"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/opencutaway/opencutaway.git"
+  },
+  "dependencies": {
+    "preact": "^10.29.8"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.10.6",
+    "@types/node": "^24.5.2",
+    "ajv": "^8.20.0",
+    "typescript": "^5.9.2",
+    "vite": "^8.2.1",
+    "vitest": "^4.1.11",
+    "yaml": "^2.8.1",
+    "@playwright/test": "^1.55.0"
   }
 }

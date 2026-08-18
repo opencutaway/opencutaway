@@ -14,4 +14,4 @@ Before every commit:
 - Sample profiles use fake names only (`Player A`, `Pat`, `Jordan`).
 - Device saves stay gitignored.
 
-If you find personal information, rewrite the file and do not commit until `npm test` is clean. See `docs/PRIVACY.md`.
+If you find personal information, rewrite the file and do not commit until the privacy lint is clean. See `docs/PRIVACY.md`.
