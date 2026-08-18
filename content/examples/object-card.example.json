@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "0.1.0",
+  "id": "obj-example-placeholder",
+  "displayName": "Example street object",
+  "functionSummary": "Placeholder card used only to validate the object-card schema. Not a lesson and not a catalog entry.",
+  "visualKind": "object-portrait",
+  "systemIds": ["sys-example-placeholder"],
+  "safety": {
+    "approachLiveGear": "never",
+    "notes": "Never treat an example card as permission to approach live equipment."
+  },
+  "license": {
+    "codeCompatible": "MIT-clean",
+    "assetKind": "original-writing"
+  }
+}

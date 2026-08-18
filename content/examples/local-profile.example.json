@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "0.1.0",
+  "profileId": "profile-example-pat",
+  "displayName": "Pat",
+  "createdOnDevice": true,
+  "cloudSync": false,
+  "progress": {
+    "completedObjectIds": []
+  }
+}

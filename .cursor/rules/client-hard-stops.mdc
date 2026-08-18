@@ -1,0 +1,21 @@
+---
+description: Child-facing client hard-stops — offline Preact, no model calls
+globs: src/**,package.json,index.html
+alwaysApply: true
+---
+
+# Game client hard-stops
+
+The shipped game is a normal offline Preact + Vite app.
+
+Never add to `src/` or client dependencies:
+
+- Camera (`getUserMedia`) or geolocation
+- Ads, analytics, or monitoring (`gtag`, Sentry, Plausible, similar)
+- Cloud auth, OAuth, email, or sync
+- LLM / agent SDKs (OpenAI, LangChain, LangGraph, similar)
+- Next.js, SSR, Electron, Firebase, Supabase
+
+Do not put execution graphs in `src/`. Do not call network models from the child-facing client.
+
+`npm test` must fail if `src/` contains `geolocation`, `getUserMedia`, `gtag`, `Sentry`, `openai`, or `langgraph`.

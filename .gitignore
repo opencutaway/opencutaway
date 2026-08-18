@@ -1,0 +1,47 @@
+# Dependencies and build output
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+
+# Secrets and local environment
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
+credentials/
+
+# Device-only player data (never commit household saves)
+local/
+profiles/*.json
+*.save.json
+
+# Art ingest: prompt logs stay out of git
+prompt-logs/
+art-prompts/
+ai-drafts/
+
+# OS and editor junk
+.DS_Store
+Thumbs.db
+Desktop.ini
+ehthumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.swp
+*~
+
+# Logs and caches
+*.log
+npm-debug.log*
+.cache/
+.vite/
+.turbo/
+
+# Test leftovers
+tmp/
+.tmp/

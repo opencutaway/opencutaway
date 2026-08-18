@@ -1,0 +1,17 @@
+---
+description: A1 privacy hard-stop — never commit personal information
+alwaysApply: true
+---
+
+# A1 privacy
+
+Personal information of the builder and families must never enter this git repository. If privacy conflicts with any other task, privacy wins.
+
+Before every commit:
+
+- Scrub legal names, emails, phones, addresses, GPS, account IDs, identifiable photos, children’s names, real sibling profile names, user-folder paths, hostnames, tokens, and `.env` files.
+- Do not put a personal name or email in LICENSE, README, comments, sample JSON, or commit-message instructions.
+- Sample profiles use fake names only (`Player A`, `Pat`, `Jordan`).
+- Device saves stay gitignored.
+
+If you find personal information, rewrite the file and do not commit until `npm test` is clean. See `docs/PRIVACY.md`.

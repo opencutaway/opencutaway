@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opencutaway.github.io/schema/local-profile.schema.json",
+  "title": "Local on-device profile",
+  "description": "Sibling profile stored only on the device. Never cloud-hosted. Sample files must use fake display names.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "profileId",
+    "displayName",
+    "createdOnDevice",
+    "cloudSync"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "0.1.0"
+    },
+    "profileId": {
+      "type": "string",
+      "pattern": "^profile-[a-z0-9-]+$",
+      "maxLength": 64
+    },
+    "displayName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 40
+    },
+    "createdOnDevice": {
+      "type": "boolean",
+      "const": true
+    },
+    "cloudSync": {
+      "type": "boolean",
+      "const": false
+    },
+    "progress": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "completedObjectIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^obj-[a-z0-9-]+$"
+          },
+          "uniqueItems": true
+        }
+      }
+    }
+  }
+}

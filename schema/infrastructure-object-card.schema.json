@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opencutaway.github.io/schema/infrastructure-object-card.schema.json",
+  "title": "Infrastructure object card",
+  "description": "One teachable street or industrial object. Not a filled catalog in this slice.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "displayName",
+    "functionSummary",
+    "visualKind",
+    "safety",
+    "license"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "0.1.0"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^obj-[a-z0-9-]+$",
+      "maxLength": 64
+    },
+    "displayName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "functionSummary": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "visualKind": {
+      "type": "string",
+      "enum": ["cutaway", "object-portrait", "chain-strip"]
+    },
+    "systemIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^sys-[a-z0-9-]+$"
+      },
+      "uniqueItems": true,
+      "default": []
+    },
+    "safety": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["approachLiveGear"],
+      "properties": {
+        "approachLiveGear": {
+          "type": "string",
+          "const": "never"
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 500
+        }
+      }
+    },
+    "license": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["codeCompatible", "assetKind"],
+      "properties": {
+        "codeCompatible": {
+          "type": "string",
+          "const": "MIT-clean"
+        },
+        "assetKind": {
+          "type": "string",
+          "enum": ["original-writing", "original-svg", "us-public-domain", "cc0"]
+        }
+      }
+    },
+    "art": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "svgPath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "provenancePath": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

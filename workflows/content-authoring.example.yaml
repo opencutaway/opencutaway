@@ -1,0 +1,84 @@
+schemaVersion: "0.1.0"
+id: wf-content-authoring-object-card
+locus: build-time
+purpose: >
+  Future object-card authoring for Open Cutaway. Developer graph only.
+  Do not execute this file in the child-facing Preact app.
+cycleCap: 2
+unattendedChildCopyLoops: false
+nodes:
+  - id: draft-text
+    kind: task
+    roleId: ROLE-WRITER
+    summary: Draft original object-card text (name, function, chain role). No book copying.
+    outputs:
+      - content/drafts/{objectId}.md
+  - id: license-gate
+    kind: human-gate
+    roleId: ROLE-LICENSE-REVIEWER
+    halt: true
+    humanGate: true
+    summary: Confirm MIT-clean sources before any image or kid-facing sentence is committed.
+    inputs:
+      - content/drafts/{objectId}.md
+    outputs:
+      - content/drafts/{objectId}.license-ok
+  - id: human-trace-svg
+    kind: human-gate
+    roleId: ROLE-ARTIST
+    halt: true
+    humanGate: true
+    summary: Human traces SVG from any AI draft. Prompt logs stay out of git.
+    inputs:
+      - content/drafts/{objectId}.license-ok
+    outputs:
+      - assets/drawings/{objectId}.svg
+      - assets/drawings/{objectId}.provenance.json
+  - id: schema-validate
+    kind: validate
+    roleId: ROLE-IMPLEMENTER
+    summary: Validate the object card (and optional chain) against JSON Schema.
+    inputs:
+      - content/drafts/{objectId}.md
+      - assets/drawings/{objectId}.svg
+    outputs:
+      - content/objects/{objectId}.json
+  - id: kid-facing-copy-gate
+    kind: human-gate
+    roleId: ROLE-EDITOR
+    halt: true
+    humanGate: true
+    summary: >
+      Required human gate before committing kid-facing copy or images.
+      Must not be auto-approved. No unattended loops on child copy.
+    inputs:
+      - content/objects/{objectId}.json
+      - assets/drawings/{objectId}.svg
+    outputs:
+      - content/objects/{objectId}.human-ok
+  - id: commit-ready
+    kind: halt
+    roleId: ROLE-IMPLEMENTER
+    halt: true
+    summary: Stop until every human gate has passed and A1 PII scrub is clean.
+    inputs:
+      - content/objects/{objectId}.human-ok
+edges:
+  - from: draft-text
+    to: license-gate
+    handoff: content/drafts/{objectId}.md
+  - from: license-gate
+    to: human-trace-svg
+    handoff: content/drafts/{objectId}.license-ok
+  - from: human-trace-svg
+    to: schema-validate
+    handoff: assets/drawings/{objectId}.svg
+  - from: schema-validate
+    to: kid-facing-copy-gate
+    handoff: content/objects/{objectId}.json
+  - from: kid-facing-copy-gate
+    to: commit-ready
+    handoff: content/objects/{objectId}.human-ok
+  - from: kid-facing-copy-gate
+    to: draft-text
+    handoff: content/drafts/{objectId}.revision-request.md

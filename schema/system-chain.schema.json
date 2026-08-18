@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opencutaway.github.io/schema/system-chain.schema.json",
+  "title": "System chain",
+  "description": "An ordered path through infrastructure (this pipe, not that one). Not a node-link explorer UI.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "id", "title", "steps"],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "0.1.0"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^chain-[a-z0-9-]+$",
+      "maxLength": 64
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "summary": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "visualKind": {
+      "type": "string",
+      "const": "chain-strip"
+    },
+    "steps": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 24,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["order", "objectId", "roleInChain"],
+        "properties": {
+          "order": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "objectId": {
+            "type": "string",
+            "pattern": "^obj-[a-z0-9-]+$"
+          },
+          "roleInChain": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          }
+        }
+      }
+    }
+  }
+}

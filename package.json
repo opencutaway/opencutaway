@@ -1,0 +1,21 @@
+{
+  "name": "opencutaway",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "license": "MIT",
+  "description": "Open Cutaway — visual infrastructure-literacy game (conventions scaffold)",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run && node scripts/scan-client-gates.mjs && node scripts/scan-pii.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/opencutaway/opencutaway.git"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "0.1.0",
+  "id": "chain-example-placeholder",
+  "title": "Example chain",
+  "summary": "Placeholder path used only to validate the chain schema. Not a lesson.",
+  "visualKind": "chain-strip",
+  "steps": [
+    {
+      "order": 1,
+      "objectId": "obj-example-placeholder",
+      "roleInChain": "Starting object in a two-step example path."
+    },
+    {
+      "order": 2,
+      "objectId": "obj-example-downstream",
+      "roleInChain": "Downstream object in a two-step example path."
+    }
+  ]
+}

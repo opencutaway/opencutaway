@@ -1,0 +1,16 @@
+---
+description: Follow build-time workflow graphs for content authoring
+globs: content/**,workflows/**,assets/**,schema/**
+alwaysApply: false
+---
+
+# Content workflows
+
+When adding or changing kid-facing copy, drawings, photos, or content schemas, follow the declarative graphs in `/workflows`. Start with `workflows/content-authoring.example.yaml`.
+
+- Nodes are developer/agent steps. Edges are file-path handoffs.
+- License gate and human trace of SVG are human gates.
+- Kid-facing copy and images require `kid-facing-copy-gate`. Do not auto-approve it.
+- Cycles are capped (`cycleCap`). No unattended loops on child copy.
+- These graphs are build-time only. Do not import `/workflows` from `src/`.
+- Do not freeze `docs/candidates.md` into schema.
