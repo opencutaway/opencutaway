@@ -13,3 +13,4 @@ Keep personal names out of this file.
 - Player-facing JSON uses Ajv; Playwright covers the title stub.
 - Visual tone notes now include everyday occupational density (see `docs/inspiration.md`).
 - No playable Learn/Challenge lessons yet.
+- Curriculum shape frozen in `docs/level-spine.md` (busy block, three rungs, hydro + combined sewer). No lessons built from it yet.

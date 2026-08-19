@@ -62,6 +62,7 @@ HISTORY ceiling: 0
 | `docs/feature-map.md` | GENERATED | Written by tools/feature-map.mjs |
 | `docs/file-map.md` | GENERATED | Written by this tool |
 | `docs/inspiration.md` | OWNER | Do-not-copy books |
+| `docs/level-spine.md` | OWNER | Curriculum shape and numbering |
 | `docs/open-faults.md` | OWNER | Open gaps |
 | `docs/reviews/CTX-BOOTSTRAP-DRIFT.md` | DOC | Independent review records |
 | `docs/reviews/README.md` | DOC | Review record home |

@@ -105,6 +105,7 @@ export const FILE_ROWS = [
   { path: 'docs/PRIVACY.md', kind: 'OWNER', notes: 'Commit scrub' },
   { path: 'docs/inspiration.md', kind: 'OWNER', notes: 'Do-not-copy books' },
   { path: 'docs/candidates.md', kind: 'OWNER', notes: 'Unfrozen object notes' },
+  { path: 'docs/level-spine.md', kind: 'OWNER', notes: 'Curriculum shape and numbering' },
   { path: 'docs/ATTRIBUTION.md', kind: 'OWNER', notes: 'Per-asset rows' },
   { path: 'docs/reviews/README.md', kind: 'DOC', notes: 'Review record home' },
   { glob: 'docs/reviews/**', kind: 'DOC', notes: 'Independent review records' },

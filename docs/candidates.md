@@ -1,7 +1,7 @@
 # Candidate objects (unfrozen)
 
-**This document owns** unfrozen brainstorm notes for later object cards.
-**It does not own** schema, curriculum order, or locked product data.
+**This document owns** unfrozen brainstorm notes for later object cards (nouns).
+**It does not own** schema, or curriculum order — order and shape live in `docs/level-spine.md`.
 
 This file is **brainstorm notes only**. Later agents must not copy these rows into `schema/` or treat them as product data.
 
@@ -30,7 +30,7 @@ Later scenes may show occupational density around these objects: drivers, clerks
 
 ## Pedagogy reminder (also unfrozen)
 
-Levels should teach name → function, then system chains (this pipe, not that one). Place-reading of a whole block can wait. Teach-first; optional birdwatcher-style life list later. Do not design scavenger-gated progression.
+Object-card nouns may still change. Numbered order and verbs are frozen in `docs/level-spine.md`. Teach-first; do not design scavenger-gated progression.
 
 ## Safety reminder
 

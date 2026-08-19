@@ -13,7 +13,7 @@ Open Cutaway is a visual, text-rich game about how infrastructure works. Players
 
 ## Ethos the app must keep
 
-Forever freeware. Progress stays on the device. Local sibling profiles only. No camera, no device location, no cloud accounts. Teach first; an optional life list later must never gate levels.
+Forever freeware. Progress stays on the device. Local sibling profiles only. No camera, no device location, no cloud accounts. Teach first; an optional life list later must never gate levels. Life list is not in the current scaffolding pass (`docs/level-spine.md`).
 
 ## Screens (v0)
 
@@ -42,9 +42,9 @@ Child-facing controls must stay large enough to use (see `CLAUDE.md` S9).
 
 An object card teaches a real street or industrial object. It always carries `safety.approachLiveGear: never`. Drawings and allowed photos teach; the game never sends anyone toward live tracks, docks, substations, or live gear.
 
-A chain is an ordered path (this pipe, not that one). Place-reading of a whole block can wait.
+A chain is an ordered path (this pipe, not that one). How chains are numbered, which town they sit in, and which verbs appear on which rung live in `docs/level-spine.md`. That file is the freeze; this file still owns what a shipped screen does.
 
-The First Twelve and other lists live in `docs/candidates.md` as unfrozen notes. They are not this schema and not this curriculum.
+The First Twelve and other lists live in `docs/candidates.md` as unfrozen **nouns**. They are not this schema and not the numbered spine.
 
 ## Profiles
 
@@ -52,11 +52,11 @@ Multiple on-device sibling profiles. Never OAuth, email, or sync. Sample names i
 
 ## Cosmetics
 
-Reward look (banners vs hats, Steam-like IRL rewards) is unfrozen. `cosmetics/` is a stub only.
+Look files in `cosmetics/` are still a stub. The **rules** for hats, badges, and cards are frozen in `docs/level-spine.md`: one album, three shelves (objects, jobs, places); collectibles never open the next rung; no score or timer as the test.
 
 ## Road ahead (not this slice)
 
-1. Human-gated object cards and chain-strips
+1. Human-gated object cards and chain-strips **following** `docs/level-spine.md` (do not invent a second curriculum)
 2. On-device profile picker writing gitignored saves
-3. Optional life list that cannot gate levels
+3. Optional life list that cannot gate levels (not this pass)
 4. An opt-in build-time workflow runner — never inside the child app

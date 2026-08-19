@@ -1,77 +1,63 @@
 # Open Cutaway
 
-**This document owns** the front door: what the game is, and pointers to every owner.
+**This document owns** the front door: what the game is, how to run it, and where to look next.
 **It does not own** counts, gate lists, or restated engineering rules.
 
-A visual, text-rich game that teaches how infrastructure works — street objects, system chains, and the industrial landscape a child may never visit. Designed for ages 7–12 with a parent or other adult as a co-player.
+[Open Cutaway](https://github.com/opencutaway/opencutaway) is a visual infrastructure-literacy game: street objects, system chains, and the industrial landscape a child may never visit. It is for ages 7–12 with an adult co-player. The shipped app is an offline Preact + Vite client; progress stays on the device. No camera, location, cloud accounts, ads, or analytics. Forever freeware.
 
-This repository is the **guard rails plus a placeholder shell**. There are no playable Learn/Challenge lessons in this slice.
+Tone and world draw from Macaulay’s *Underground*, Hayes’s *Infrastructure*, and Scarry’s *What Do People Do All Day?* (occupational density only). Do not copy those books. See [docs/inspiration.md](docs/inspiration.md).
 
-- Display name: **Open Cutaway**
-- Public repo: `opencutaway/opencutaway`
-- License: MIT (code). Content added later must stay MIT-clean (original writing, original traced SVG, or US public-domain / CC0 photos with attribution).
+## Status
 
-## What this is not (yet)
+This slice is guard rails plus a placeholder shell.
 
-- Not a finished curriculum
-- Not a scavenger hunt that gates learning behind outdoor finds
-- Not a node-link graph explorer
-- Not a cloud app, and not a product that uses a camera or device location
-- Not a phonics or reading-aloud game
+| Mode | Status |
+| --- | --- |
+| Title | Shipped stub: the name and a blurb that lessons are not in this build |
+| Learn | Not playable yet |
+| Challenge | Not playable yet |
+| Life list | Not playable yet |
 
-## Requirements
+There is nothing to save in this build. Privacy wins: personal information must never enter git. See [docs/PRIVACY.md](docs/PRIVACY.md).
 
-- Node.js 24 LTS (or another current Node LTS, `>=22`)
-- npm 11 or compatible
+## How to run
 
-## Setup
+Needs Node.js 22+ and npm.
 
 ```bash
 npm install
 npx playwright install chromium
-npm run check
-npm run build
-npm run test:e2e
 npm run dev
 ```
 
-`npm run dev` opens the title-screen stub. This build has nothing to save.
+`npm run dev` opens the title stub.
 
-Which commands run on an ordinary push versus a release is owned by `CLAUDE.md`. Do not restate that cadence here.
+```bash
+npm run check      # everyday gates (unit tests, maps, schemas, privacy)
+npm run gauntlet   # check + production build + Playwright
+```
 
-## Who owns what
+Which of those is for an ordinary push versus a release is owned by [CLAUDE.md](CLAUDE.md). Do not restate that cadence here.
 
-| File | Pointer |
+Player-facing JSON is checked with Ajv. Playwright specs grow with each player-facing feature.
+
+## Where to look
+
+| File | What it is |
 | --- | --- |
-| `CLAUDE.md` | Finished work, safety, engineering |
-| `AGENTS.md` | How agents work here |
-| `SPEC.md` | What the game does |
-| `docs/testing-gauntlet.md` | Gates |
-| `docs/settled.md` | Closed questions |
-| `docs/open-faults.md` | Open gaps |
-| `docs/PRIVACY.md` | What must never be committed |
-| `docs/file-map.md` | Generated owners (source: `tools/file-map.mjs`) |
-| `docs/code-map.md` | Generated produce/consume/validate/publish map |
-| `docs/feature-map.md` | Generated list of what children and grown-ups can do |
-| `docs/tutorial-manifest.md` | Generated list of how each mechanic is taught |
-| `docs/effect-map.md` | Generated test map (source: `tools/effect-map.mjs`) |
-| `docs/inspiration.md` | Books we learn from and must not copy |
-| `docs/candidates.md` | Unfrozen object notes |
-| `.claude/skills/drift-check/SKILL.md` | How to claim a green build |
+| [SPEC.md](SPEC.md) | What the game does |
+| [docs/level-spine.md](docs/level-spine.md) | How levels are numbered (frozen; no lessons built yet) |
+| [CLAUDE.md](CLAUDE.md) | Finished work, safety, engineering |
+| [AGENTS.md](AGENTS.md) | How agents work here |
+| [docs/file-map.md](docs/file-map.md) | Owners (generated) |
+| [docs/code-map.md](docs/code-map.md) | Code map (generated) |
+| [docs/feature-map.md](docs/feature-map.md) | Feature map (generated) |
+| [docs/tutorial-manifest.md](docs/tutorial-manifest.md) | Tutorial manifest (generated) |
+| [docs/testing-gauntlet.md](docs/testing-gauntlet.md) | Gates (blast-radius lookup is `tools/blast-radius.mjs`) |
+| [docs/PRIVACY.md](docs/PRIVACY.md) | What must never be committed |
 
-## Repository layout
+Those six named drift parts (Owners, Code map, Feature map, Tutorial manifest, Blast radius, Gates) are process, not the product. They must stay in lockstep.
 
-| Path | Role |
-| --- | --- |
-| `schema/` | JSON Schema for object cards, chains, local profiles, UI contracts, and build-time workflows |
-| `content/examples/` | Valid schema examples only — not a catalog |
-| `content/ui/` | Player-facing UI contracts (Ajv) |
-| `e2e/` | Playwright specs, fixtures, and page objects |
-| `workflows/` | Declarative build-time execution graphs (not shipped in the game client) |
-| `src/` | Offline Preact shell |
-| `tools/` | File map, blast radius, effect map, and related checks |
-| `cosmetics/` | Stub only; reward look is unfrozen |
+## License
 
-## Ethos (short)
-
-Forever freeware and open source. Offline-first. Local profiles only. The shipped-client network and telemetry rule lives in `CLAUDE.md`.
+MIT. Copyright (c) 2026 Open Cutaway authors. See [LICENSE](LICENSE).
