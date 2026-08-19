@@ -15,7 +15,7 @@ Growth is **widen, then deepen**: first, many needs on the same regular-world pi
 
 ## On-screen copy
 
-Never speak down to kids. Use **industry-correct terms** unless a real name is absolutely impossible. Put the **real name on screen**, plus a **short gloss** if the word is new. Owner exception: comms far site is labeled **network hub** (one cutaway; not CO vs data-hall split). Do not invent other cute substitutes.
+Never speak down to kids. Use **industry-correct terms** unless a real name is absolutely impossible. Put the **real name on screen**, plus a **short gloss** if the word is new. Do not invent cute substitutes (“big sewer pipe,” “network hub,” and the like). Combined sewer (trunk), data center, and other real names stay on screen.
 
 ## The town
 
