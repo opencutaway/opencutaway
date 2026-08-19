@@ -33,14 +33,14 @@ Quiet is **not color-only**. Quiet objects use **lower contrast**, a **dashed / 
 | Heat/cool | Electric (grid). After both house-end rungs, lights and heat share **one power campus tour** (substation then dam) — two through-lines, same campus, lights’ dam sitting first. Not a separate fourth heat sitting unless the house-end process has another honest stop. |
 | Sewage + storm | **Combined sewer**. Rain (inlet) and flush (house lateral) merge into the **combined sewer trunk** (on-screen name; glossary same), then to the wastewater plant. Drinking water is a **different** chain. Never imply the tap is sewer. |
 | Combined overflow | During the combined lesson, **one quiet block beat**: river/outfall graphic plus glossary term **combined sewer overflow** (or **CSO** if you gloss it). Not a fifth rung. Not “all flow always treated in rain.” |
-| Far sites | May sit **outside town** (dam, factory, terminal, intake, network hub, WWTP, trash campus). “Other side of town” was a default, not a law. **No landfill visit.** |
+| Far sites | May sit **outside town** (dam, factory, terminal, intake, data center, WWTP, trash campus). “Other side of town” was a default, not a law. **No landfill visit.** |
 | Goods | The shop/food through-line includes the toy. Frozen far chain: our rail yard, then our port, then the overseas factory. Crossing still teaches tracks as street furniture; rail is quiet until goods. |
 | Shared campuses | Only when the real system shares them (combined plant; power campus for lights and heat). Trash far is **one site, two zones**, not two campuses. Do not merge sites just to save levels. |
 | Drink far | Tap / hydrant → street main → potable treatment plant → reservoir or river intake (outside town OK). **Plant before intake/reservoir**, never the reverse. **Hydrant is potable only.** **Never** the wastewater plant. |
 | Crossing far | Small signal bungalow / rail ops. **Not** the goods / toy factory. |
 | Trash far | **One site, two zones**, in-game only: **transfer station** and **MRF** (sorting). Not a landfill visit. Do not slash-confuse the jobs. |
 | Fuel far | Tank farm / marine or rail terminal (**type, no brand**). Medium: tanker. May sit outside town. |
-| Comms far | **Network hub** (generic far building; type, no brand). Medium: buried conduit. May sit outside town. Not a branded data campus and not a dated central-office split. |
+| Comms far | **Data center** (industry term; **type, no brand**). Medium: buried conduit. May sit outside town. Not a “network hub.” “Central office” is superseded. |
 | Mail far | **Sorting depot**. Medium: street truck. |
 
 Industry also appears as a **quiet hint** on the block (stack, crane, towers, river), then as a **real new scene**.
@@ -55,7 +55,7 @@ Default geography and verbs (the test). Verbs **climb with distance from the chi
 | --- | --- | --- |
 | 1 | **Nearest the child** — inlet by the curb, mailbox by a house, pole on the street | Name (real word + short gloss), function, find it in the busy picture |
 | 2 | **The carrier** — combined sewer trunk, the truck, the wires, the rail leaving the shop | Order this through-line’s rungs, read the cutaway |
-| 3 | **The facility** — plant, dam, yard, factory, terminal, network hub (in-game only) | This path not that one, match a job. Climate/pollution is taught here: why the dam generates; why we clean the blend before the river; why we sort at the MRF |
+| 3 | **The facility** — plant, dam, yard, factory, terminal, data center (in-game only) | This path not that one, match a job. Climate/pollution is taught here: why the dam generates; why we clean the blend before the river; why we sort at the MRF |
 
 Jobs may be visible before the facility; they are not the test until the facility rung. A few **job hats** can still drop on the block (carrier, trash crew) as collectibles, not as the Learn test.
 
@@ -73,7 +73,7 @@ Jobs may be visible before the facility; they are not the test until the facilit
 | Mail | 3 | Box → street truck → sorting depot |
 | Goods | 5 | Shop → truck → our rail yard → our port → overseas factory |
 | Fuel | 3 | Station → tanker → terminal (tank farm / marine or rail terminal) |
-| Comms | 3 | Cabinet / pole gear → buried conduit → **network hub** |
+| Comms | 3 | Cabinet / pole gear → buried conduit → **data center** |
 
 **Challenge** (optional, after that through-line’s rungs): three short beats, **no new nouns** — (1) find it in the busy picture (that need may be fully lit), (2) order the rungs, (3) one path-choice. Does not unlock the next need. Cosmetic star. Not a gate.
 
@@ -85,7 +85,7 @@ Jobs may be visible before the facility; they are not the test until the facilit
 
 **Wrong answer:** stay on the screen and try again. After a **second miss**, a hint **names the rung** without giving the answer. Then the adult can reveal. No shame, no lockout, no timer.
 
-**Glossary:** searchable from the start. It **only lists terms this profile has met**. It **grows with play**. It does not unlock levels. The adult can pin a term. English v1. Frozen glossary names include **combined sewer trunk**, **combined sewer overflow** (CSO if glossed), **network hub**, **transfer station**, **MRF**.
+**Glossary:** searchable from the start. It **only lists terms this profile has met**. It **grows with play**. It does not unlock levels. The adult can pin a term. English v1. Frozen glossary names include **combined sewer trunk**, **combined sewer overflow** (CSO if glossed), **data center**, **transfer station**, **MRF**.
 
 **Save:** per profile, when a sitting (**one rung**) completes. Quit mid-sitting → resume that sitting; it is **not** marked finished. No cloud.
 
@@ -136,7 +136,7 @@ One album, **three shelves**:
 | --- | --- |
 | Objects | Cards for finds on the busy block |
 | Jobs | Hats (block crews and plant jobs; transfer-station work is not MRF sorting) |
-| Places | Campus badges (dam, combined-sewer plant, trash campus, network hub, rail-yard/factory, sorting depot, …) |
+| Places | Campus badges (dam, combined-sewer plant, trash campus, data center, rail-yard/factory, sorting depot, …) |
 
 Need badges are **tab headers**, not a fourth collection. Challenge stars sit on the card, cosmetic.
 
@@ -146,11 +146,11 @@ Original drawings for the busy block, cutaways, and jobs. CC0 / US public-domain
 
 ## IRL and safety
 
-Plants, dams, yards, tracks, cabinets, factories, network hubs, transfer stations: **in-game only**. IRL looking is sidewalk objects, never a quest, never a gate. No life list in this pass. Object cards keep `safety.approachLiveGear: never`.
+Plants, dams, yards, tracks, cabinets, factories, data centers, transfer stations: **in-game only**. IRL looking is sidewalk objects, never a quest, never a gate. No life list in this pass. Object cards keep `safety.approachLiveGear: never`.
 
 ## Banned
 
-Tycoon / city-builder. Mascot town or cute infrastructure animals. Mapping a real hometown or a real family’s house. Hats/cards/badges opening the next rung. Quests to visit industrial sites. A landfill visit. Implying tap water is sewer water. Implying all combined flow is always treated in rain. “Heat comes from the dam” as a pipe or fuel story. Mixing drink vs combined before both full chains (plant and WWTP) are complete. Drink-only Challenge before the full drink chain. Goods order Challenge before the full five stops. Timers or high scores as the test. Scavenger hunts that unlock lessons. Shame, lockout, or a timer on a wrong answer. A shared household album. Cloud save.
+Tycoon / city-builder. Mascot town or cute infrastructure animals. Cute substitutes for industry names (“big sewer pipe,” “network hub”). Mapping a real hometown or a real family’s house. Hats/cards/badges opening the next rung. Quests to visit industrial sites. A landfill visit. Implying tap water is sewer water. Implying all combined flow is always treated in rain. Calling the comms far site a network hub. “Heat comes from the dam” as a pipe or fuel story. Mixing drink vs combined before both full chains (plant and WWTP) are complete. Drink-only Challenge before the full drink chain. Goods order Challenge before the full five stops. Timers or high scores as the test. Scavenger hunts that unlock lessons. Shame, lockout, or a timer on a wrong answer. A shared household album. Cloud save.
 
 Climate is **taught** at the facility rung (why the dam generates; why treat water; why we sort at the MRF). A named fact that unsorted waste can go to a landfill may appear at the trash campus; it is **not** a sitting. Not a stealth sermon and not a level-1 lecture. Drink vs combined sewage is a **path-choice only after both full chains**, never a smear of the tap.
 
