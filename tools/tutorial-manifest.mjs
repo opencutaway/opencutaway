@@ -6,7 +6,7 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
-import { repoRoot } from './file-map.mjs'
+import { renderGeneratedPreamble, repoRoot, tickList } from './file-map.mjs'
 
 const MAP_PATH = path.join(repoRoot, 'docs', 'tutorial-manifest.md')
 
@@ -17,15 +17,26 @@ export const TUTORIALS = [
     taughtBy: 'Title heading and blurb on the title screen',
     featureId: 'FEAT-TITLE',
     status: 'taught',
-    actors: ['child', 'adult']
+    actors: ['child', 'adult'],
+    produces: ['content/ui/title-screen.json', 'src/app/App.tsx'],
+    consumes: ['e2e/specs/title.spec.ts']
   },
   {
     id: 'TUT-OBJECT-NAME-FUNCTION',
     mechanic: 'Street object name to function',
-    taughtBy: 'Learn object cards (not shipped)',
+    taughtBy: 'Widen sittings 1–2 (Get across, Lights) on the busy block',
     featureId: 'FEAT-LEARN',
-    status: 'deferred',
-    actors: ['child', 'adult']
+    status: 'taught',
+    actors: ['child', 'adult'],
+    produces: [
+      'content/sittings/widen-1-get-across.json',
+      'content/sittings/widen-2-lights.json',
+      'src/app/WidenSitting1.tsx'
+    ],
+    consumes: [
+      'e2e/specs/widen-1-get-across.spec.ts',
+      'e2e/specs/widen-2-lights.spec.ts'
+    ]
   },
   {
     id: 'TUT-CHAIN-PATH',
@@ -33,7 +44,9 @@ export const TUTORIALS = [
     taughtBy: 'Learn chain-strips and later Challenge (not shipped)',
     featureId: 'FEAT-LEARN',
     status: 'deferred',
-    actors: ['child', 'adult']
+    actors: ['child', 'adult'],
+    produces: ['SPEC.md'],
+    consumes: ['e2e/specs/modes-not-shipped.spec.ts']
   },
   {
     id: 'TUT-LIFE-LIST',
@@ -41,32 +54,54 @@ export const TUTORIALS = [
     taughtBy: 'Life list (not shipped)',
     featureId: 'FEAT-LIFE-LIST',
     status: 'deferred',
-    actors: ['child', 'adult']
+    actors: ['child', 'adult'],
+    produces: ['SPEC.md'],
+    consumes: ['e2e/specs/modes-not-shipped.spec.ts']
   }
 ]
 
 export function generateMarkdown(tutorials = TUTORIALS) {
   const lines = [
-    '# Tutorial manifest',
-    '',
-    'GENERATED. Do not hand-edit. Source: `tools/tutorial-manifest.mjs`.',
-    '',
-    '**This generated file lists** how each mechanic is taught.',
-    '**It does not own** what players can do (Feature map) or lesson copy (`SPEC.md`).',
-    '',
-    '| id | mechanic | taught by | feature | status | actors |',
-    '|---|---|---|---|---|---|'
+    ...renderGeneratedPreamble({
+      title: 'Tutorial manifest',
+      source: 'tools/tutorial-manifest.mjs',
+      artifact: 'docs/tutorial-manifest.md',
+      gate: 'G-lockstep',
+      must: [
+        'Keep a unique `id` on every row (`TUT-…`).',
+        '`featureId` MUST be a `FEAT-…` id that exists on the Feature map.',
+        'Status is `taught` or `deferred` only.',
+        '`produces` and `consumes` are exact paths that exist on disk.',
+        'Shipped features MUST have at least one tutorial with status `taught` (enforced by G-lockstep).',
+        'Regenerate (`node tools/tutorial-manifest.mjs`) so this artifact byte-matches `generateMarkdown()`.'
+      ],
+      mustNot: [
+        'Hand-edit this file.',
+        'Point `featureId` at a string that does not start with `FEAT-`.',
+        'Mark a mechanic `taught` when the teaching files are missing.',
+        'Treat a deferred tutorial as proof the feature shipped.'
+      ],
+      negativeControls: ['missing-feature', 'bad-status', 'missing-path'],
+      notOwn:
+        '**Does not own** what players can do (Feature map) or lesson copy (`SPEC.md`). **Part:** Tutorial manifest.',
+      cannotSee: [
+        'That kid-facing copy passed the human gate.',
+        'That a deferred mechanic is ready to teach.'
+      ]
+    }),
+    '| id | mechanic | taughtBy | featureId | status | actors | produces | consumes |',
+    '|---|---|---|---|---|---|---|---|'
   ]
   for (const row of tutorials) {
     lines.push(
-      `| ${row.id} | ${row.mechanic} | ${row.taughtBy} | ${row.featureId} | ${row.status} | ${row.actors.join(', ')} |`
+      `| ${row.id} | ${row.mechanic} | ${row.taughtBy} | ${row.featureId} | ${row.status} | ${row.actors.join(', ')} | ${tickList(row.produces)} | ${tickList(row.consumes)} |`
     )
   }
   lines.push('')
   return `${lines.join('\n')}\n`
 }
 
-export function findProblems(tutorials = TUTORIALS) {
+export function findProblems(tutorials = TUTORIALS, root = repoRoot) {
   const problems = []
   const seen = new Set()
   for (const row of tutorials) {
@@ -77,6 +112,11 @@ export function findProblems(tutorials = TUTORIALS) {
     }
     if (!row.featureId.startsWith('FEAT-')) {
       problems.push({ code: 'missing-feature', id: row.id })
+    }
+    for (const rel of [...(row.produces ?? []), ...(row.consumes ?? [])]) {
+      if (!existsSync(path.join(root, rel))) {
+        problems.push({ code: 'missing-path', id: row.id, file: rel })
+      }
     }
   }
   const expected = generateMarkdown(tutorials)
@@ -96,7 +136,9 @@ export function runSelfTest() {
       taughtBy: 'Nowhere',
       featureId: 'NOPE',
       status: 'taught',
-      actors: ['child', 'adult']
+      actors: ['child', 'adult'],
+      produces: ['SPEC.md'],
+      consumes: ['e2e/specs/title.spec.ts']
     }
   ])
   if (!bad.some((p) => p.code === 'missing-feature')) {
@@ -109,11 +151,28 @@ export function runSelfTest() {
       taughtBy: 'Nowhere',
       featureId: 'FEAT-TITLE',
       status: 'maybe',
-      actors: ['child', 'adult']
+      actors: ['child', 'adult'],
+      produces: ['SPEC.md'],
+      consumes: ['e2e/specs/title.spec.ts']
     }
   ])
   if (!status.some((p) => p.code === 'bad-status')) {
     failures.push('bad-status detector silent')
+  }
+  const missingPath = findProblems([
+    {
+      id: 'TUT-PATH',
+      mechanic: 'Path',
+      taughtBy: 'Nowhere',
+      featureId: 'FEAT-TITLE',
+      status: 'taught',
+      actors: ['child', 'adult'],
+      produces: ['does-not-exist.json'],
+      consumes: ['e2e/specs/title.spec.ts']
+    }
+  ])
+  if (!missingPath.some((p) => p.code === 'missing-path' && p.file === 'does-not-exist.json')) {
+    failures.push('missing-path detector silent')
   }
   return failures
 }
@@ -127,7 +186,7 @@ function main() {
       process.exitCode = 1
       return
     }
-    console.log('tutorial-manifest self-test: 2/2 controls')
+    console.log('tutorial-manifest self-test: 3/3 controls')
     return
   }
   if (arg === '--check') {

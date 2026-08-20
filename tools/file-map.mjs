@@ -78,52 +78,101 @@ export const FACTS = [
  * kind: OWNER | SOURCE | TEST | GATE | DOC | GENERATED | DATA | HISTORY
  */
 export const FILE_ROWS = [
-  { path: 'docs/file-map.md', kind: 'GENERATED', notes: 'Written by this tool' },
-  { path: 'docs/effect-map.md', kind: 'GENERATED', notes: 'Written by tools/effect-map.mjs' },
-  { path: 'docs/code-map.md', kind: 'GENERATED', notes: 'Written by tools/code-map.mjs' },
-  { path: 'docs/feature-map.md', kind: 'GENERATED', notes: 'Written by tools/feature-map.mjs' },
-  { path: 'docs/tutorial-manifest.md', kind: 'GENERATED', notes: 'Written by tools/tutorial-manifest.mjs' },
-  { path: 'tests/registry.json', kind: 'GENERATED', notes: 'Written by scripts/write-test-registry.mjs' },
-  { path: 'CLAUDE.md', kind: 'OWNER', notes: 'Finished work, S-rules, E-rules' },
-  { path: 'AGENTS.md', kind: 'OWNER', notes: 'Agent practice' },
-  { path: 'SPEC.md', kind: 'OWNER', notes: 'Game behaviour' },
-  { path: 'README.md', kind: 'OWNER', notes: 'Front door and pointers' },
-  { path: 'CHANGELOG.md', kind: 'DOC', notes: 'Parent-facing history' },
-  { path: 'LICENSE', kind: 'DOC', notes: 'MIT' },
-  { path: 'package.json', kind: 'SOURCE', notes: 'App and check scripts' },
-  { path: 'package-lock.json', kind: 'DATA', notes: 'npm lockfile; PII allowlist' },
-  { path: '.gitignore', kind: 'SOURCE', notes: 'Includes local profiles' },
-  { path: '.gitattributes', kind: 'SOURCE', notes: 'LF and binaries' },
-  { path: 'index.html', kind: 'SOURCE', notes: 'Vite entry' },
-  { path: 'tsconfig.json', kind: 'SOURCE', notes: 'TypeScript' },
-  { path: 'vite.config.ts', kind: 'SOURCE', notes: 'Vite + vitest' },
-  { path: '.claude/gate-baseline.json', kind: 'GATE', notes: 'Floors and ceilings' },
-  { path: '.claude/skills/drift-check/SKILL.md', kind: 'OWNER', notes: 'Drift-check procedure' },
-  { path: 'docs/testing-gauntlet.md', kind: 'OWNER', notes: 'Gate contract' },
-  { path: 'docs/settled.md', kind: 'OWNER', notes: 'Closed questions' },
-  { path: 'docs/open-faults.md', kind: 'OWNER', notes: 'Open gaps' },
-  { path: 'docs/PRIVACY.md', kind: 'OWNER', notes: 'Commit scrub' },
-  { path: 'docs/inspiration.md', kind: 'OWNER', notes: 'Do-not-copy books' },
-  { path: 'docs/candidates.md', kind: 'OWNER', notes: 'Unfrozen object notes' },
-  { path: 'docs/level-spine.md', kind: 'OWNER', notes: 'Curriculum shape and numbering' },
-  { path: 'docs/ATTRIBUTION.md', kind: 'OWNER', notes: 'Per-asset rows' },
-  { path: 'docs/reviews/README.md', kind: 'DOC', notes: 'Review record home' },
-  { glob: 'docs/reviews/**', kind: 'DOC', notes: 'Independent review records' },
-  { glob: '.cursor/rules/**', kind: 'DOC', notes: 'Agent hard-stops' },
-  { glob: 'schema/**', kind: 'DATA', notes: 'JSON Schema' },
-  { glob: 'content/**', kind: 'DATA', notes: 'Schema examples only' },
-  { glob: 'src/**', kind: 'SOURCE', notes: 'Offline Preact shell' },
-  { glob: 'tests/**', kind: 'TEST', notes: 'Vitest and registry' },
-  { glob: 'e2e/**', kind: 'TEST', notes: 'Playwright player-facing specs' },
-  { path: 'playwright.config.ts', kind: 'TEST', notes: 'Playwright runner' },
-  { glob: 'scripts/**', kind: 'GATE', notes: 'PII and client scans' },
-  { glob: 'tools/**', kind: 'GATE', notes: 'Maps and floors' },
-  { glob: 'workflows/**', kind: 'DATA', notes: 'Build-time graphs' },
-  { glob: 'assets/**', kind: 'DATA', notes: 'Drawings and photos later' },
-  { glob: 'cosmetics/**', kind: 'DATA', notes: 'Unfrozen stub' },
-  { glob: 'printables/**', kind: 'DATA', notes: 'Later print sheets' },
-  { glob: 'profiles/**', kind: 'DATA', notes: 'Keep file only; JSON gitignored' }
+  { id: 'OWN-GEN-FILE-MAP', path: 'docs/file-map.md', kind: 'GENERATED', notes: 'Written by this tool' },
+  { id: 'OWN-GEN-EFFECT-MAP', path: 'docs/effect-map.md', kind: 'GENERATED', notes: 'Written by tools/effect-map.mjs' },
+  { id: 'OWN-GEN-CODE-MAP', path: 'docs/code-map.md', kind: 'GENERATED', notes: 'Written by tools/code-map.mjs' },
+  { id: 'OWN-GEN-FEATURE-MAP', path: 'docs/feature-map.md', kind: 'GENERATED', notes: 'Written by tools/feature-map.mjs' },
+  { id: 'OWN-GEN-TUTORIAL-MANIFEST', path: 'docs/tutorial-manifest.md', kind: 'GENERATED', notes: 'Written by tools/tutorial-manifest.mjs' },
+  { id: 'OWN-GEN-TEST-REGISTRY', path: 'tests/registry.json', kind: 'GENERATED', notes: 'Written by scripts/write-test-registry.mjs' },
+  { id: 'OWN-CLAUDE', path: 'CLAUDE.md', kind: 'OWNER', notes: 'Finished work, S-rules, E-rules' },
+  { id: 'OWN-AGENTS', path: 'AGENTS.md', kind: 'OWNER', notes: 'Agent practice' },
+  { id: 'OWN-SPEC', path: 'SPEC.md', kind: 'OWNER', notes: 'Game behaviour and shipped look' },
+  { id: 'OWN-README', path: 'README.md', kind: 'OWNER', notes: 'Front door and pointers' },
+  { id: 'OWN-CHANGELOG', path: 'CHANGELOG.md', kind: 'DOC', notes: 'Parent-facing history' },
+  { id: 'OWN-LICENSE', path: 'LICENSE', kind: 'DOC', notes: 'MIT' },
+  { id: 'OWN-PACKAGE-JSON', path: 'package.json', kind: 'SOURCE', notes: 'App and check scripts' },
+  { id: 'OWN-PACKAGE-LOCK', path: 'package-lock.json', kind: 'DATA', notes: 'npm lockfile; PII allowlist' },
+  { id: 'OWN-GITIGNORE', path: '.gitignore', kind: 'SOURCE', notes: 'Includes local profiles' },
+  { id: 'OWN-GITATTRIBUTES', path: '.gitattributes', kind: 'SOURCE', notes: 'LF and binaries' },
+  { id: 'OWN-INDEX-HTML', path: 'index.html', kind: 'SOURCE', notes: 'Vite entry' },
+  { id: 'OWN-TSCONFIG', path: 'tsconfig.json', kind: 'SOURCE', notes: 'TypeScript' },
+  { id: 'OWN-VITE-CONFIG', path: 'vite.config.ts', kind: 'SOURCE', notes: 'Vite + vitest' },
+  { id: 'OWN-GATE-BASELINE', path: '.claude/gate-baseline.json', kind: 'GATE', notes: 'Floors and ceilings' },
+  { id: 'OWN-DRIFT-CHECK-SKILL', path: '.claude/skills/drift-check/SKILL.md', kind: 'OWNER', notes: 'Drift-check procedure' },
+  { id: 'OWN-TESTING-GAUNTLET', path: 'docs/testing-gauntlet.md', kind: 'OWNER', notes: 'Gate contract' },
+  { id: 'OWN-SETTLED', path: 'docs/settled.md', kind: 'OWNER', notes: 'Closed questions' },
+  { id: 'OWN-OPEN-FAULTS', path: 'docs/open-faults.md', kind: 'OWNER', notes: 'Open gaps' },
+  { id: 'OWN-PRIVACY', path: 'docs/PRIVACY.md', kind: 'OWNER', notes: 'Commit scrub' },
+  { id: 'OWN-INSPIRATION', path: 'docs/inspiration.md', kind: 'OWNER', notes: 'Do-not-copy books and 16-bit isometric tone' },
+  { id: 'OWN-CANDIDATES', path: 'docs/candidates.md', kind: 'OWNER', notes: 'Unfrozen object notes' },
+  { id: 'OWN-LEVEL-SPINE', path: 'docs/level-spine.md', kind: 'OWNER', notes: 'Curriculum shape and numbering' },
+  { id: 'OWN-ATTRIBUTION', path: 'docs/ATTRIBUTION.md', kind: 'OWNER', notes: 'Per-asset rows' },
+  { id: 'OWN-REVIEWS-README', path: 'docs/reviews/README.md', kind: 'DOC', notes: 'Review record home' },
+  { id: 'OWN-GLOB-REVIEWS', glob: 'docs/reviews/**', kind: 'DOC', notes: 'Independent review records' },
+  { id: 'OWN-GLOB-CURSOR-RULES', glob: '.cursor/rules/**', kind: 'DOC', notes: 'Agent hard-stops' },
+  { id: 'OWN-GLOB-SCHEMA', glob: 'schema/**', kind: 'DATA', notes: 'JSON Schema' },
+  { id: 'OWN-GLOB-CONTENT', glob: 'content/**', kind: 'DATA', notes: 'Schema examples, UI contracts, sitting copy' },
+  { id: 'OWN-GLOB-SRC', glob: 'src/**', kind: 'SOURCE', notes: 'Offline Preact shell' },
+  { id: 'OWN-GLOB-TESTS', glob: 'tests/**', kind: 'TEST', notes: 'Vitest and registry' },
+  { id: 'OWN-GLOB-E2E', glob: 'e2e/**', kind: 'TEST', notes: 'Playwright player-facing specs' },
+  { id: 'OWN-PLAYWRIGHT-CONFIG', path: 'playwright.config.ts', kind: 'TEST', notes: 'Playwright runner' },
+  { id: 'OWN-GLOB-SCRIPTS', glob: 'scripts/**', kind: 'GATE', notes: 'PII and client scans' },
+  { id: 'OWN-GLOB-TOOLS', glob: 'tools/**', kind: 'GATE', notes: 'Maps and floors' },
+  { id: 'OWN-GLOB-WORKFLOWS', glob: 'workflows/**', kind: 'DATA', notes: 'Build-time graphs' },
+  { id: 'OWN-GLOB-ASSETS', glob: 'assets/**', kind: 'DATA', notes: 'Drawings and photos later' },
+  { id: 'OWN-GLOB-COSMETICS', glob: 'cosmetics/**', kind: 'DATA', notes: 'Unfrozen stub' },
+  { id: 'OWN-GLOB-PRINTABLES', glob: 'printables/**', kind: 'DATA', notes: 'Later print sheets' },
+  { id: 'OWN-GLOB-PROFILES', glob: 'profiles/**', kind: 'DATA', notes: 'Keep file only; JSON gitignored' }
 ]
+
+export function tickList(items) {
+  if (!items || items.length === 0) return '—'
+  return items.map((item) => `\`${item}\``).join(', ')
+}
+
+export function renderGeneratedPreamble({
+  title,
+  source,
+  artifact,
+  gate,
+  must,
+  mustNot,
+  negativeControls,
+  notOwn,
+  cannotSee = []
+}) {
+  const lines = [
+    `# ${title}`,
+    '',
+    `GENERATED. Do not hand-edit. Source: \`${source}\`.`,
+    '',
+    '| action | command |',
+    '|---|---|',
+    `| regenerate | \`node ${source}\` |`,
+    `| check | \`node ${source} --check\` |`,
+    `| self-test | \`node ${source} --self-test\` |`,
+    `| gate | ${gate} |`,
+    '| fail | exit 1; JSON problem objects on stderr |',
+    `| artifact | \`${artifact}\` |`,
+    '',
+    'MUST:',
+    ...must.map((item) => `- ${item}`),
+    '',
+    'MUST NOT:',
+    ...mustNot.map((item) => `- ${item}`),
+    '',
+    `Negative controls: ${negativeControls.map((code) => `\`${code}\``).join(', ')}`,
+    '',
+    notOwn,
+    ''
+  ]
+  if (cannotSee.length > 0) {
+    lines.push('## Cannot see', '')
+    for (const item of cannotSee) lines.push(`- ${item}`)
+    lines.push('')
+  }
+  return lines
+}
 
 function globToRegExp(glob) {
   const escaped = glob
@@ -227,44 +276,107 @@ export function historyCount(tracked) {
   return tracked.filter((rel) => classifyPath(rel)?.kind === 'HISTORY').length
 }
 
+export function fileRowIdProblems(rows = FILE_ROWS) {
+  const problems = []
+  const seen = new Set()
+  for (const row of rows) {
+    const match = row.path || row.glob || ''
+    if (!row.id) {
+      problems.push({ code: 'row-missing-id', file: match })
+      continue
+    }
+    if (seen.has(row.id)) {
+      problems.push({ code: 'duplicate-id', id: row.id })
+    }
+    seen.add(row.id)
+    if (!row.path && !row.glob) {
+      problems.push({ code: 'row-missing-match', id: row.id })
+    }
+  }
+  return problems
+}
+
 export function generateMarkdown(tracked = listTrackedFiles()) {
   const lines = [
-    '# File map',
-    '',
-    'GENERATED. Do not hand-edit. Source: `tools/file-map.mjs`.',
-    '',
-    '**This generated file lists** owners and kinds. **It does not own** the table.',
-    '',
-    '## Honest limits',
-    '',
-    '- A stale paragraph in fresh words is invisible.',
-    '- A sentence that denies an owned fact but contains its shape is still refused.',
-    '- A new fact family is unguarded until its row exists in the tool.',
-    '',
+    ...renderGeneratedPreamble({
+      title: 'File map',
+      source: 'tools/file-map.mjs',
+      artifact: 'docs/file-map.md',
+      gate: 'G-map',
+      must: [
+        'Declare every tracked path in `FILE_ROWS` (exact `path` or `glob`) in the same change that creates the file.',
+        'Keep a unique `id` on every `FILE_ROWS` row and every `FACTS` row.',
+        'The owner file must contain the fact `control` string exactly.',
+        'Regenerate this artifact (`node tools/file-map.mjs`) so it byte-matches `generateMarkdown()`.',
+        'Leave tombstones absent from disk and from git.'
+      ],
+      mustNot: [
+        'Hand-edit this file.',
+        'Copy a fact `control` string into a non-owner file outside `COPY_EXEMPT`.',
+        'Recreate `docs/STATUS.md` or `docs/session-summary.md`.',
+        'Add HISTORY-kind files above ceiling 0.',
+        'Infer who owns a path; read `rowId` + `kind`.'
+      ],
+      negativeControls: [
+        'control-missing',
+        'copied-fact',
+        'undeclared',
+        'tombstone',
+        'row-missing-id'
+      ],
+      notOwn:
+        '**Does not own** product behaviour, gate floors, or live coverage numbers. **Part:** Owners.',
+      cannotSee: [
+        'A stale paragraph rewritten in fresh words.',
+        'A sentence that denies an owned fact but contains its shape is still refused.',
+        'A new fact family is unguarded until its row exists in `tools/file-map.mjs`.'
+      ]
+    }),
     '## Owned facts',
     '',
-    '| id | owner | why |',
-    '|---|---|---|',
-    ...FACTS.map((fact) => `| ${fact.id} | \`${fact.owner}\` | ${fact.why} |`),
+    '| id | owner | control | why | shapes |',
+    '|---|---|---|---|---|',
+    ...FACTS.map(
+      (fact) =>
+        `| ${fact.id} | \`${fact.owner}\` | ${fact.control} | ${fact.why} | ${fact.shapes.map((shape) => shape.id).join(', ')} |`
+    ),
     '',
-    '## Tombstones (must not exist)',
+    '## COPY_EXEMPT (copied control strings allowed only here)',
+    '',
+    ...[...COPY_EXEMPT].sort().map((file) => `- \`${file}\``),
+    '',
+    '## Tombstones (MUST NOT exist)',
     '',
     ...TOMBSTONES.map((t) => `- \`${t}\``),
     '',
     `HISTORY ceiling: ${HISTORY_FILES_MAX}`,
     '',
+    '## FILE_ROWS (declaration table; edit this in `tools/file-map.mjs`)',
+    '',
+    '| id | match | kind | notes |',
+    '|---|---|---|---|'
+  ]
+
+  for (const row of FILE_ROWS) {
+    const match = row.path ? row.path : row.glob
+    lines.push(`| ${row.id} | \`${match}\` | ${row.kind} | ${row.notes} |`)
+  }
+
+  lines.push(
+    '',
     '## Tracked files',
     '',
-    '| path | kind | notes |',
-    '|---|---|---|'
-  ]
+    '| path | rowId | kind | notes |',
+    '|---|---|---|---|'
+  )
 
   const sorted = [...tracked].sort()
   for (const rel of sorted) {
     const row = classifyPath(rel)
     const kind = row?.kind ?? 'UNDECLARED'
     const notes = row?.notes ?? ''
-    lines.push(`| \`${rel}\` | ${kind} | ${notes} |`)
+    const rowId = row?.id ?? '—'
+    lines.push(`| \`${rel}\` | ${rowId} | ${kind} | ${notes} |`)
   }
   lines.push('')
   return `${lines.join('\n')}\n`
@@ -284,6 +396,7 @@ export function checkRepo(root = repoRoot) {
   }
 
   const problems = [
+    ...fileRowIdProblems(),
     ...missingOwnerControls(contents),
     ...copiedFacts(contents),
     ...undeclaredFiles(tracked).map((file) => ({ code: 'undeclared', file })),
@@ -345,6 +458,11 @@ export function runSelfTest() {
     failures.push('tombstone detector silent for tracked path')
   }
 
+  const noId = fileRowIdProblems([{ path: 'ghost.dat', kind: 'DATA', notes: 'x' }])
+  if (!noId.some((p) => p.code === 'row-missing-id' && p.file === 'ghost.dat')) {
+    failures.push('row-missing-id detector silent')
+  }
+
   return failures
 }
 
@@ -366,7 +484,7 @@ function main() {
       process.exitCode = 1
       return
     }
-    console.log(`file-map self-test: 4/4 controls`)
+    console.log(`file-map self-test: 5/5 controls`)
     return
   }
   if (arg === '--check') {

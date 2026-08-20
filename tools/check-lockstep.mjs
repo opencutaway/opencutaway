@@ -13,60 +13,87 @@ import { repoRoot } from './file-map.mjs'
 
 export const DRIFT_PARTS = [
   {
+    id: 'DRIFT-OWNERS',
     name: 'Owners',
     source: 'tools/file-map.mjs',
     generated: 'docs/file-map.md',
+    baseline: null,
     gate: 'G-map'
   },
   {
+    id: 'DRIFT-CODE-MAP',
     name: 'Code map',
     source: 'tools/code-map.mjs',
     generated: 'docs/code-map.md',
+    baseline: null,
     gate: 'G-lockstep'
   },
   {
+    id: 'DRIFT-FEATURE-MAP',
     name: 'Feature map',
     source: 'tools/feature-map.mjs',
     generated: 'docs/feature-map.md',
+    baseline: null,
     gate: 'G-lockstep'
   },
   {
+    id: 'DRIFT-TUTORIAL',
     name: 'Tutorial manifest',
     source: 'tools/tutorial-manifest.mjs',
     generated: 'docs/tutorial-manifest.md',
+    baseline: null,
     gate: 'G-lockstep'
   },
   {
+    id: 'DRIFT-BLAST',
     name: 'Blast radius',
     source: 'tools/blast-radius.mjs',
     generated: null,
+    baseline: null,
     gate: 'G-blast'
   },
   {
+    id: 'DRIFT-GATES',
     name: 'Gates',
     source: 'docs/testing-gauntlet.md',
     generated: null,
+    baseline: '.claude/gate-baseline.json',
     gate: 'G-floors'
   }
 ]
+
+export function requiredPartFiles(part) {
+  const files = [{ file: part.source, code: 'part-source-missing' }]
+  if (part.generated) files.push({ file: part.generated, code: 'part-generated-missing' })
+  if (part.baseline) files.push({ file: part.baseline, code: 'part-source-missing' })
+  return files
+}
+
+export function missingPartFiles(
+  parts = DRIFT_PARTS,
+  exists = (rel) => existsSync(path.join(repoRoot, rel))
+) {
+  const problems = []
+  for (const part of parts) {
+    for (const item of requiredPartFiles(part)) {
+      if (!exists(item.file)) {
+        problems.push({ code: item.code, name: part.name, file: item.file })
+      }
+    }
+  }
+  return problems
+}
 
 export function findProblems(root = repoRoot) {
   const problems = []
   if (DRIFT_PARTS.length !== 6) {
     problems.push({ code: 'drift-parts-count', live: DRIFT_PARTS.length })
   }
-  for (const part of DRIFT_PARTS) {
-    if (!existsSync(path.join(root, part.source))) {
-      problems.push({ code: 'part-source-missing', name: part.name, file: part.source })
-    }
-    if (part.generated && !existsSync(path.join(root, part.generated))) {
-      problems.push({ code: 'part-generated-missing', name: part.name, file: part.generated })
-    }
-  }
+  problems.push(...missingPartFiles(DRIFT_PARTS, (rel) => existsSync(path.join(root, rel))))
 
   const featureIds = new Set(FEATURES.map((feature) => feature.id))
   const tutorialIds = new Set(TUTORIALS.map((row) => row.id))
-  const codeIds = new Set(CODE_ROWS.map((row) => row.id))
+  const codeById = new Map(CODE_ROWS.map((row) => [row.id, row]))
   const specText = readFileSync(path.join(root, 'SPEC.md'), 'utf8')
 
   for (const feature of FEATURES) {
@@ -83,12 +110,37 @@ export function findProblems(root = repoRoot) {
       }
     }
     for (const schemaId of feature.schemaIds) {
-      if (!codeIds.has(schemaId)) {
+      const code = codeById.get(schemaId)
+      if (!code) {
         problems.push({
           code: 'feature-code-row-missing',
           feature: feature.id,
-          code: schemaId
+          schemaId
         })
+        continue
+      }
+      for (const spec of code.e2eSpecs ?? []) {
+        if (!(feature.e2eSpecs ?? []).includes(spec)) {
+          problems.push({
+            code: 'feature-e2e-spec-missing',
+            feature: feature.id,
+            schemaId,
+            file: spec
+          })
+        }
+      }
+    }
+    if (!Array.isArray(feature.e2eSpecs) || feature.e2eSpecs.length === 0) {
+      problems.push({ code: 'missing-e2e-spec', id: feature.id })
+    } else {
+      for (const spec of feature.e2eSpecs) {
+        if (!existsSync(path.join(root, spec))) {
+          problems.push({
+            code: 'e2e-spec-missing-on-disk',
+            id: feature.id,
+            file: spec
+          })
+        }
       }
     }
   }
@@ -110,6 +162,9 @@ export function findProblems(root = repoRoot) {
     })
     if (taught.length === 0) {
       problems.push({ code: 'shipped-feature-untaught', id: feature.id })
+    }
+    if ((feature.schemaIds ?? []).length === 0) {
+      problems.push({ code: 'shipped-feature-without-schema', id: feature.id })
     }
   }
 
@@ -134,8 +189,39 @@ export function runSelfTest() {
       failures.push(`missing named part ${required}`)
     }
   }
+
+  const gates = DRIFT_PARTS.find((part) => part.name === 'Gates')
+  if (
+    !gates ||
+    gates.source !== 'docs/testing-gauntlet.md' ||
+    gates.baseline !== '.claude/gate-baseline.json'
+  ) {
+    failures.push('Gates files are not docs/testing-gauntlet.md plus .claude/gate-baseline.json')
+  }
+
+  const missingBaseline = missingPartFiles(
+    [
+      {
+        id: 'DRIFT-GATES',
+        name: 'Gates',
+        source: 'docs/testing-gauntlet.md',
+        generated: null,
+        baseline: '.claude/gate-baseline.json',
+        gate: 'G-floors'
+      }
+    ],
+    (rel) => rel !== '.claude/gate-baseline.json'
+  )
+  if (
+    !missingBaseline.some(
+      (p) => p.code === 'part-source-missing' && p.file === '.claude/gate-baseline.json'
+    )
+  ) {
+    failures.push('part-source-missing detector silent for gate-baseline.json')
+  }
+
   const ghostFeature = FEATURES[0]
-  const original = ghostFeature.tutorialIds
+  const originalTutorials = ghostFeature.tutorialIds
   ghostFeature.tutorialIds = ['TUT-DOES-NOT-EXIST']
   try {
     const problems = findProblems()
@@ -143,8 +229,44 @@ export function runSelfTest() {
       failures.push('feature-tutorial-missing detector silent')
     }
   } finally {
-    ghostFeature.tutorialIds = original
+    ghostFeature.tutorialIds = originalTutorials
   }
+
+  const learn = FEATURES.find((feature) => feature.id === 'FEAT-LEARN')
+  const originalLearnSpecs = learn.e2eSpecs
+  learn.e2eSpecs = ['e2e/specs/widen-1-get-across.spec.ts']
+  try {
+    const problems = findProblems()
+    if (
+      !problems.some(
+        (p) =>
+          p.code === 'feature-e2e-spec-missing' &&
+          p.file === 'e2e/specs/widen-2-lights.spec.ts'
+      )
+    ) {
+      failures.push('feature-e2e-spec-missing detector silent for sitting 2')
+    }
+  } finally {
+    learn.e2eSpecs = originalLearnSpecs
+  }
+
+  const originalTitleSpecs = ghostFeature.e2eSpecs
+  ghostFeature.e2eSpecs = ['e2e/specs/does-not-exist.spec.ts']
+  try {
+    const problems = findProblems()
+    if (
+      !problems.some(
+        (p) =>
+          p.code === 'e2e-spec-missing-on-disk' &&
+          p.file === 'e2e/specs/does-not-exist.spec.ts'
+      )
+    ) {
+      failures.push('e2e-spec-missing-on-disk detector silent')
+    }
+  } finally {
+    ghostFeature.e2eSpecs = originalTitleSpecs
+  }
+
   return failures
 }
 
@@ -157,7 +279,7 @@ function main() {
       process.exitCode = 1
       return
     }
-    console.log('lockstep self-test: 3/3 controls')
+    console.log('lockstep self-test: 7/7 controls')
     return
   }
   const problems = findProblems()

@@ -6,25 +6,25 @@
 import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
-import { repoRoot } from './file-map.mjs'
+import { renderGeneratedPreamble, repoRoot } from './file-map.mjs'
 
 const MAP_PATH = path.join(repoRoot, 'docs', 'effect-map.md')
 
 /** Per-file declarations small enough to stay true. */
 export const FILE_META = {
   'tests/title.test.ts': {
-    protects: 'Placeholder shell names the infrastructure game and does not ship a lesson.',
-    doesNotProve: 'Playable Learn/Challenge content.',
-    oracle: 'Literal title string Open Cutaway.',
+    protects: 'The title names Open Cutaway and offers Get across and Lights.',
+    doesNotProve: 'Sittings 3–11 or Challenge.',
+    oracle: 'Literal title string Open Cutaway and control labels Get across and Lights.',
     platform: 'Node vitest',
     mutantFamily: 'none',
     evidence: 'vitest',
     registryIds: ['TEST-BOOTSTRAP-TITLE']
   },
   'tests/hit-target.test.ts': {
-    protects: 'Child-facing hit targets in the shipped stylesheet stay at 44 CSS pixels.',
-    doesNotProve: 'Real controls exist yet.',
-    oracle: 'Literal min-height and min-width 44px in src/index.css.',
+    protects: 'Child-facing hit targets stay at 44 CSS pixels; the busy block is SVG without WebGL.',
+    doesNotProve: 'That 44px is enough for every future control, or that SVG is the only allowed 2D renderer.',
+    oracle: 'Literal min-height and min-width 44px in src/index.css; BusyBlock contains <svg and not webgl.',
     platform: 'Node vitest',
     mutantFamily: 'none',
     evidence: 'vitest',
@@ -85,17 +85,41 @@ export const FILE_META = {
     registryIds: ['TEST-REGISTRY-COVERAGE']
   },
   'tests/schema-inventory.test.ts': {
-    protects: 'Every committed JSON Schema compiles in Ajv; the title UI contract is accepted and invalid variants fail.',
-    doesNotProve: 'Playable lesson JSON, which must not exist yet.',
+    protects: 'Every committed JSON Schema compiles in Ajv; the title UI contract and sitting 1–2 contracts are accepted and invalid variants fail.',
+    doesNotProve: 'Sittings 3–11 or a filled object catalog.',
     oracle: 'Literal schema path list; Ajv true/false on fixtures.',
     platform: 'Node vitest',
     mutantFamily: 'none',
     evidence: 'vitest',
     registryIds: ['TEST-SCHEMA-INVENTORY']
+  },
+  'tests/widen-sitting-1.test.ts': {
+    protects: 'Widen sitting 1 validates, uses real names, and teaches miss/hint/find without a timer.',
+    doesNotProve: 'Sittings 3–11, Challenge, or the human copy gate.',
+    oracle: 'Ajv true/false plus literal names Traffic signal, Crosswalk, Crossing gates.',
+    platform: 'Node vitest',
+    mutantFamily: 'none',
+    evidence: 'vitest',
+    registryIds: ['TEST-WIDEN-SITTING-1']
+  },
+  'tests/widen-sitting-2.test.ts': {
+    protects: 'Widen sitting 2 validates, uses real names, and keeps crossing objects quiet.',
+    doesNotProve: 'Sittings 3–11, Challenge, the dam sitting, or the human copy gate.',
+    oracle: 'Ajv true/false plus literal names Utility pole, Overhead conductor, Distribution transformer.',
+    platform: 'Node vitest',
+    mutantFamily: 'none',
+    evidence: 'vitest',
+    registryIds: ['TEST-WIDEN-SITTING-2']
   }
 }
 
-const NON_VITEST_AUTOMATED = new Set(['TEST-BUILD', 'TEST-E2E-TITLE', 'TEST-E2E-STUB-MODES'])
+const NON_VITEST_AUTOMATED = new Set([
+  'TEST-BUILD',
+  'TEST-E2E-TITLE',
+  'TEST-E2E-STUB-MODES',
+  'TEST-E2E-WIDEN-1',
+  'TEST-E2E-WIDEN-2'
+])
 
 const IT_RE = /(?:^|\n)\s*(?:it|test)\(\s*(['"`])([\s\S]*?)\1/g
 
@@ -142,13 +166,26 @@ export function collectSuite(root = repoRoot) {
 
 export function generateMarkdown(suite = collectSuite()) {
   const lines = [
-    '# Effect map',
-    '',
-    'GENERATED. Do not hand-edit. Source: `tools/effect-map.mjs`.',
-    '',
-    '**This generated file lists** what each executable test protects.',
-    '**It does not own** the gate contract or product behaviour.',
-    '',
+    ...renderGeneratedPreamble({
+      title: 'Effect map',
+      source: 'tools/effect-map.mjs',
+      artifact: 'docs/effect-map.md',
+      gate: 'G-effect',
+      must: [
+        'Every `tests/**/*.test.ts` file has a `FILE_META` row.',
+        'Every `FILE_META.registryIds` id exists in `tests/registry.json`.',
+        'Regenerate (`node tools/effect-map.mjs`) so this artifact byte-matches `generateMarkdown()`.'
+      ],
+      mustNot: [
+        'Hand-edit this file.',
+        'Treat this map as a seventh named drift part. It supports Gates only.',
+        'Leave a vitest file unlinked from the registry.'
+      ],
+      negativeControls: ['missing-file-meta', 'row-for-missing-file', 'registry-unlinked', 'vitest-unlinked'],
+      notOwn:
+        '**Does not own** the gate contract or product behaviour. **Supports:** Gates. **Not** a seventh named drift part.',
+      cannotSee: ['That a test is the right test.', 'Paraphrased product drift.']
+    }),
     `Executable tests: ${suite.rows.length} over ${suite.files.length} files.`,
     '',
     '## Per-file declarations',

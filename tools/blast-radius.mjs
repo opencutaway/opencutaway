@@ -2,6 +2,10 @@
 /**
  * Blast-radius lookup. Name a thing; list tracked files that mention it.
  * This lookup never fails a build. --self-test does, and belongs in npm run check.
+ *
+ * Depends means: tracked files whose relative path or contents include the
+ * token as a case-insensitive substring; not an import graph, call graph, or
+ * git history.
  */
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
@@ -13,6 +17,19 @@ import {
 } from './file-map.mjs'
 
 export const SELF_TEST_WORD = 'opencutaway-blast-control-token'
+
+export const DEPENDS_MEANS =
+  'tracked files whose relative path or contents include the token as a case-insensitive substring; not an import graph, call graph, or git history'
+
+export const USAGE = `Blast radius (named drift part; lookup, no markdown map)
+Query: node tools/blast-radius.mjs --word TOKEN
+Also:  node tools/blast-radius.mjs --symbol NAME | --count TOKEN | --self-test
+Depends means: ${DEPENDS_MEANS}
+MUST: run --word TOKEN before editing the named thing.
+MUST NOT: treat this as an import/call/git graph; treat empty hits as "nothing depends" without checking token spelling.
+build-fail: never (lookup). --self-test fails the build via G-blast.
+Gate: G-blast
+Negative controls: word lookup missed tools/blast-radius.mjs; symbol lookup missed SELF_TEST_WORD; expected GATE kind`
 
 export function lookupWord(word, root = repoRoot) {
   const needle = word.toLowerCase()
@@ -86,10 +103,16 @@ export function runSelfTest() {
   if (classified && classified.kind !== 'GATE') {
     failures.push(`expected GATE kind, got ${classified.kind}`)
   }
+  const src = readText(repoRoot, 'tools/blast-radius.mjs')
+  if (!src.includes('not an import graph, call graph, or git history')) {
+    failures.push('depends-means contract missing')
+  }
   return failures
 }
 
 function printHits(label, hits) {
+  console.log(`depends-means: ${DEPENDS_MEANS}`)
+  console.log('build-fail: never (lookup). --self-test fails the build via G-blast.')
   console.log(`${label}: ${hits.length} files`)
   const counts = countByKind(hits)
   console.log(`kinds: ${JSON.stringify(counts)}`)
@@ -107,7 +130,7 @@ function main() {
       process.exitCode = 1
       return
     }
-    console.log('blast-radius self-test: 3/3 controls')
+    console.log('blast-radius self-test: 4/4 controls')
     return
   }
   if (args[0] === '--word' && args[1]) {
@@ -123,7 +146,7 @@ function main() {
     console.log(String(hits.length))
     return
   }
-  console.error('Usage: node tools/blast-radius.mjs --word TOKEN | --symbol NAME | --count TOKEN | --self-test')
+  console.error(USAGE)
   process.exitCode = 1
 }
 

@@ -5,14 +5,14 @@ alwaysApply: true
 
 # Drift maps
 
-The six named drift parts are Owners, Code map, Feature map, Tutorial manifest, Blast radius, and Gates. Paths and the lockstep gate live in `docs/testing-gauntlet.md`. Do not collapse them.
+The six named drift parts are Owners, Code map, Feature map, Tutorial manifest, Blast radius, and Gates. Paths, commands, MUST / MUST NOT, and the lockstep gate live in `docs/testing-gauntlet.md`. Do not collapse them. Gates is that file plus `.claude/gate-baseline.json`.
 
-Owners live in `tools/file-map.mjs`. Generate `docs/file-map.md`, `docs/code-map.md`, `docs/feature-map.md`, `docs/tutorial-manifest.md`, and `docs/effect-map.md`. Do not hand-edit those markdown files.
+Owners live in `tools/file-map.mjs`. Generate `docs/file-map.md`, `docs/code-map.md`, `docs/feature-map.md`, `docs/tutorial-manifest.md`, and `docs/effect-map.md` with `node tools/….mjs` (or `npm run maps`). Do not hand-edit those markdown files.
 
-Before an edit, look up the name with `node tools/blast-radius.mjs --word …`. The lookup itself does not fail a build.
+Before an edit, look up the name with `node tools/blast-radius.mjs --word …`. Depends means path or content substring, not an import graph. The lookup itself does not fail a build.
 
-Declare a new file in the file-map table in the same change that creates it.
+Declare a new file in the file-map `FILE_ROWS` table in the same change that creates it.
 
-Player-facing work must extend JSON Schema plus Ajv tests and a Playwright spec/fixture in the same change. Schema is the authority path for content, config, saves, and UI contracts.
+Player-facing work must extend JSON Schema plus Ajv tests and a Playwright spec/fixture in the same change. Put every spec on the feature `e2eSpecs` array. Schema is the authority path for content, config, saves, and UI contracts.
 
 Never add LLM, agent, or network-model calls to `src/`. Follow `/workflows` for content work. Kid-facing copy and images require a human gate.

@@ -53,7 +53,7 @@ Drift check — <date>
 | Code map | <n> rows, <n> problems |
 | Feature map | <n> features, <n> problems |
 | Tutorial manifest | <n> rows, <n> problems |
-| Lockstep (six parts) | <n> parts, <n> problems |
+| Lockstep (six parts) | <n> parts, <n> problems (e2e specs + gate-baseline) |
 | Map identical to table | yes / no |
 | Blast radius (G-blast) | <n>/<n> controls |
 | Effect map (G-effect) | <n> tests over <n> files, <n> problems |

@@ -6,7 +6,7 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
-import { repoRoot } from './file-map.mjs'
+import { renderGeneratedPreamble, repoRoot, tickList } from './file-map.mjs'
 
 const MAP_PATH = path.join(repoRoot, 'docs', 'feature-map.md')
 
@@ -16,22 +16,31 @@ export const FEATURES = [
     name: 'Title screen',
     status: 'shipped',
     actors: ['child', 'adult'],
-    canDo: 'See the game name and that lessons are not in this build. Progress stays on this device.',
+    canDo: 'See the game name and open Get across or Lights (widen sittings 1 and 2). Progress stays on this device.',
     entry: 'src/app/App.tsx',
-    e2eSpec: 'e2e/specs/title.spec.ts',
+    e2eSpecs: ['e2e/specs/title.spec.ts'],
     tutorialIds: ['TUT-TITLE-NAME'],
     schemaIds: ['CODE-TITLE-SCREEN']
   },
   {
     id: 'FEAT-LEARN',
     name: 'Learn',
-    status: 'stub',
+    status: 'shipped',
     actors: ['child', 'adult'],
-    canDo: 'Later: object cards and chain-strips (name to function, this path not that one).',
-    entry: 'SPEC.md',
-    e2eSpec: 'e2e/specs/modes-not-shipped.spec.ts',
+    canDo:
+      'Widen sittings 1–2: find Get across objects or Lights objects (pole, overhead conductor, distribution transformer) on the busy block; read the real name, a short gloss, and what it does. Sittings 3–11 are not in this build.',
+    entry: 'src/app/WidenSitting1.tsx',
+    e2eSpecs: [
+      'e2e/specs/widen-1-get-across.spec.ts',
+      'e2e/specs/widen-2-lights.spec.ts'
+    ],
     tutorialIds: ['TUT-OBJECT-NAME-FUNCTION', 'TUT-CHAIN-PATH'],
-    schemaIds: ['CODE-OBJECT-CARD', 'CODE-SYSTEM-CHAIN']
+    schemaIds: [
+      'CODE-OBJECT-CARD',
+      'CODE-SYSTEM-CHAIN',
+      'CODE-WIDEN-SITTING-1',
+      'CODE-WIDEN-SITTING-2'
+    ]
   },
   {
     id: 'FEAT-CHALLENGE',
@@ -40,7 +49,7 @@ export const FEATURES = [
     actors: ['child', 'adult'],
     canDo: 'Later: recall and path-choice without becoming a scavenger hunt.',
     entry: 'SPEC.md',
-    e2eSpec: 'e2e/specs/modes-not-shipped.spec.ts',
+    e2eSpecs: ['e2e/specs/modes-not-shipped.spec.ts'],
     tutorialIds: ['TUT-CHAIN-PATH'],
     schemaIds: ['CODE-SYSTEM-CHAIN']
   },
@@ -51,7 +60,7 @@ export const FEATURES = [
     actors: ['child', 'adult'],
     canDo: 'Later: optional honor-system IRL finds that must not unlock Learn or Challenge.',
     entry: 'SPEC.md',
-    e2eSpec: 'e2e/specs/modes-not-shipped.spec.ts',
+    e2eSpecs: ['e2e/specs/modes-not-shipped.spec.ts'],
     tutorialIds: ['TUT-LIFE-LIST'],
     schemaIds: []
   }
@@ -63,19 +72,46 @@ export function shippedFeatures(features = FEATURES) {
 
 export function generateMarkdown(features = FEATURES) {
   const lines = [
-    '# Feature map',
-    '',
-    'GENERATED. Do not hand-edit. Source: `tools/feature-map.mjs`.',
-    '',
-    '**This generated file lists** what children and grown-ups can do.',
-    '**It does not own** how a mechanic is taught (Tutorial manifest) or gate commands (Gates).',
-    '',
-    '| id | name | status | actors | can do | e2e spec | tutorials |',
-    '|---|---|---|---|---|---|---|'
+    ...renderGeneratedPreamble({
+      title: 'Feature map',
+      source: 'tools/feature-map.mjs',
+      artifact: 'docs/feature-map.md',
+      gate: 'G-lockstep',
+      must: [
+        'Keep a unique `id` on every row (`FEAT-…`).',
+        'Status is `shipped` or `stub` only.',
+        'Actors MUST include `child` and `adult`.',
+        '`e2eSpecs` is a non-empty array of Playwright spec paths; every path MUST exist on disk.',
+        'Shipped Learn sittings MUST list every sitting spec (Get across and Lights).',
+        'Name `entry`, `schemaIds`, and `tutorialIds`; G-lockstep reads those fields.',
+        'Regenerate (`node tools/feature-map.mjs`) so this artifact byte-matches `generateMarkdown()`.'
+      ],
+      mustNot: [
+        'Hand-edit this file.',
+        'Ship a feature with an empty `e2eSpecs` array or a missing spec file.',
+        'Point `e2eSpecs` at a one-off script instead of `e2e/specs/*.spec.ts`.',
+        'Omit sitting 2 (`e2e/specs/widen-2-lights.spec.ts`) from shipped `FEAT-LEARN`.'
+      ],
+      negativeControls: [
+        'e2e-spec-missing-on-disk',
+        'missing-e2e-spec',
+        'untutoried-feature',
+        'missing-coplay-actor',
+        'bad-status'
+      ],
+      notOwn:
+        '**Does not own** how a mechanic is taught (Tutorial manifest) or gate commands (Gates). **Part:** Feature map.',
+      cannotSee: [
+        'That a stub feature is ready to ship.',
+        'That kid-facing copy passed the human gate.'
+      ]
+    }),
+    '| id | name | status | actors | entry | e2eSpecs | schemaIds | tutorialIds | canDo |',
+    '|---|---|---|---|---|---|---|---|---|'
   ]
   for (const feature of features) {
     lines.push(
-      `| ${feature.id} | ${feature.name} | ${feature.status} | ${feature.actors.join(', ')} | ${feature.canDo} | \`${feature.e2eSpec}\` | ${feature.tutorialIds.join(', ')} |`
+      `| ${feature.id} | ${feature.name} | ${feature.status} | ${feature.actors.join(', ')} | \`${feature.entry}\` | ${tickList(feature.e2eSpecs)} | ${tickList(feature.schemaIds)} | ${tickList(feature.tutorialIds)} | ${feature.canDo} |`
     )
   }
   lines.push('')
@@ -94,10 +130,17 @@ export function findProblems(features = FEATURES, root = repoRoot) {
     if (!feature.actors.includes('child') || !feature.actors.includes('adult')) {
       problems.push({ code: 'missing-coplay-actor', id: feature.id })
     }
-    if (!feature.e2eSpec) {
+    if (feature.entry && !existsSync(path.join(root, feature.entry))) {
+      problems.push({ code: 'entry-missing-on-disk', id: feature.id, file: feature.entry })
+    }
+    if (!Array.isArray(feature.e2eSpecs) || feature.e2eSpecs.length === 0) {
       problems.push({ code: 'missing-e2e-spec', id: feature.id })
-    } else if (!existsSync(path.join(root, feature.e2eSpec))) {
-      problems.push({ code: 'e2e-spec-missing-on-disk', id: feature.id, file: feature.e2eSpec })
+    } else {
+      for (const spec of feature.e2eSpecs) {
+        if (!existsSync(path.join(root, spec))) {
+          problems.push({ code: 'e2e-spec-missing-on-disk', id: feature.id, file: spec })
+        }
+      }
     }
     if (feature.tutorialIds.length === 0) {
       problems.push({ code: 'untutoried-feature', id: feature.id })
@@ -121,12 +164,12 @@ export function runSelfTest() {
       actors: ['child', 'adult'],
       canDo: 'Nothing',
       entry: 'SPEC.md',
-      e2eSpec: 'e2e/specs/does-not-exist.spec.ts',
+      e2eSpecs: ['e2e/specs/does-not-exist.spec.ts'],
       tutorialIds: ['TUT-GHOST'],
       schemaIds: []
     }
   ])
-  if (!ghost.some((p) => p.code === 'e2e-spec-missing-on-disk')) {
+  if (!ghost.some((p) => p.code === 'e2e-spec-missing-on-disk' && p.file === 'e2e/specs/does-not-exist.spec.ts')) {
     failures.push('e2e-spec-missing-on-disk detector silent')
   }
   const noTutorial = findProblems([
@@ -137,13 +180,26 @@ export function runSelfTest() {
       actors: ['child', 'adult'],
       canDo: 'Nothing',
       entry: 'SPEC.md',
-      e2eSpec: 'e2e/specs/title.spec.ts',
+      e2eSpecs: ['e2e/specs/title.spec.ts'],
       tutorialIds: [],
       schemaIds: []
     }
   ])
   if (!noTutorial.some((p) => p.code === 'untutoried-feature')) {
     failures.push('untutoried-feature detector silent')
+  }
+  const md = generateMarkdown()
+  if (!md.includes('| entry |')) {
+    failures.push('generated feature map omitted entry column')
+  }
+  if (!md.includes('| schemaIds |')) {
+    failures.push('generated feature map omitted schemaIds column')
+  }
+  if (!md.includes('src/app/App.tsx')) {
+    failures.push('generated feature map omitted FEAT-TITLE entry')
+  }
+  if (!md.includes('e2e/specs/widen-2-lights.spec.ts')) {
+    failures.push('generated feature map omitted sitting 2 spec')
   }
   return failures
 }
@@ -157,7 +213,7 @@ function main() {
       process.exitCode = 1
       return
     }
-    console.log('feature-map self-test: 2/2 controls')
+    console.log('feature-map self-test: 6/6 controls')
     return
   }
   if (arg === '--check') {

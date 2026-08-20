@@ -21,7 +21,18 @@ Then the file you are about to change. Safety and engineering rules are in `CLAU
 
 ## Six drift parts
 
-The six named parts, their files, and the gate that binds them live in `docs/testing-gauntlet.md`. Do not collapse them into fewer artifacts. Older name file-map is Owners. Effect-map is per-test evidence that supports Gates; it is not a seventh named part.
+Exact files, commands, MUST / MUST NOT, and fail codes live in `docs/testing-gauntlet.md`. Do not collapse the six parts. Older name file-map is Owners. Effect-map supports Gates; it is not a seventh named part. Do not paraphrase S/E rules; open `CLAUDE.md`.
+
+| Part | Edit | Regenerate | Check |
+|---|---|---|---|
+| Owners | `tools/file-map.mjs` | `node tools/file-map.mjs` | `node tools/file-map.mjs --check` and `--self-test` |
+| Code map | `tools/code-map.mjs` | `node tools/code-map.mjs` | `node tools/code-map.mjs --check` and `--self-test` |
+| Feature map | `tools/feature-map.mjs` | `node tools/feature-map.mjs` | `node tools/feature-map.mjs --check` and `--self-test` |
+| Tutorial manifest | `tools/tutorial-manifest.mjs` | `node tools/tutorial-manifest.mjs` | `node tools/tutorial-manifest.mjs --check` and `--self-test` |
+| Blast radius | (lookup only) | none | `node tools/blast-radius.mjs --self-test` |
+| Gates | `docs/testing-gauntlet.md` and `.claude/gate-baseline.json` | none | `node tools/check-lockstep.mjs` and `node tools/check-floors.mjs` |
+
+All six at once: `npm run maps` then `node tools/check-lockstep.mjs`. Generated `docs/*.md` maps are outputs; hand edits are erased.
 
 ## Player-facing growth
 
@@ -29,19 +40,24 @@ When adding something a child or grown-up can do, in the same change:
 
 - Extend JSON Schema and Ajv tests. Schema is the authority path. No ad-hoc parsers for content, config, saves, or UI contracts.
 - Add or extend a Playwright page object, fixture, and spec (teaching, interaction, regression). Do not add a one-off script.
+- List every Playwright spec on the feature `e2eSpecs` array. Shipped Learn MUST include `e2e/specs/widen-1-get-across.spec.ts` and `e2e/specs/widen-2-lights.spec.ts`.
 - Update all six drift parts so G-lockstep stays green.
 
 The finished-work rule for that slice lives in `CLAUDE.md`.
 
 ## Maps and lookups
 
-Owners live in `tools/file-map.mjs`. `docs/file-map.md` is generated. Hand edits of that map are erased.
+Owners live in `tools/file-map.mjs`. `docs/file-map.md` is generated. Hand edits of that map are erased. New file: declare it in `FILE_ROWS` in the same commit that creates it.
 
-Before an edit, run the blast-radius lookup named in `CLAUDE.md`. The lookup does not fail a build; its `--self-test` does, and that self-test runs in `npm run check`.
+Before an edit:
+
+```
+node tools/blast-radius.mjs --word TOKEN
+```
+
+Depends means: tracked files whose relative path or contents include the token as a case-insensitive substring; not an import graph, call graph, or git history. The lookup does not fail a build; its `--self-test` does, and that self-test runs in `npm run check`.
 
 The effect map is generated. Do not write `docs/effect-map.md` by hand. The code map, feature map, and tutorial manifest are also generated. Do not write those markdown files by hand.
-
-New file: declare it in `tools/file-map.mjs` in the same commit that creates it.
 
 ## Dependency ask
 
