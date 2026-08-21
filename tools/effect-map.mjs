@@ -66,6 +66,15 @@ export const FILE_META = {
     evidence: 'vitest',
     registryIds: ['TEST-FORBIDDEN-DEPENDENCIES']
   },
+  'tests/gate-integrity.test.ts': {
+    protects: 'Tests and scripts have no skip/.only/vacuous expect(true); package.json scripts do not hide failure; Vitest allowOnly stays false.',
+    doesNotProve: 'That G-e2e ran, or that a paraphrase of a skip exists in docs.',
+    oracle: 'Planted skip/.only/expect(true)/forced-success fire; live scan is empty; vite.config.ts contains allowOnly: false.',
+    platform: 'Node vitest',
+    mutantFamily: 'none',
+    evidence: 'vitest',
+    registryIds: ['TEST-GATE-INTEGRITY']
+  },
   'tests/workflow-graph.test.ts': {
     protects: 'Example workflow is build-time, capped, and has a kid-facing human gate.',
     doesNotProve: 'An executable runner.',
@@ -110,6 +119,15 @@ export const FILE_META = {
     mutantFamily: 'none',
     evidence: 'vitest',
     registryIds: ['TEST-WIDEN-SITTING-2']
+  },
+  'tests/hotspot-layout.test.ts': {
+    protects: 'Every hotspot box in both sittings is at least 44 CSS px at the 720 px minimum block width and no two boxes intersect (S9).',
+    doesNotProve: 'Rendered sizes in a browser; the Playwright reachability step proves those.',
+    oracle: 'findHotspotLayoutProblems returns [] for the committed sittings and literal problem codes for planted overlapping, narrow, short, and off-block boxes.',
+    platform: 'Node vitest',
+    mutantFamily: 'none',
+    evidence: 'vitest',
+    registryIds: ['TEST-HOTSPOT-LAYOUT']
   }
 }
 

@@ -1,9 +1,9 @@
 # Level spine (scaffolding freeze)
 
 **This document owns** how Open Cutaway is numbered and taught from first block lesson to industrial sites: what a level is, the town, rungs (three is the default, not a law), need order, verbs, on-screen names, collectibles, save, glossary, bans, and climate. It only changes when the owner reopens a closed question.
-**It does not own** object-card copy, art files, JSON Schema, or shipped screens. Do not build Learn levels until this file is the brief.
+**It does not own** object-card copy, art files, JSON Schema, or playable screens. Build Learn levels only with this file as the brief.
 
-Closed from the 2026-08-18–19 owner questionnaire and the 2026-08-19 civil-expert interview. Unbuilt. Not a lesson catalog.
+Closed from the 2026-08-18–19 owner questionnaire and the 2026-08-19 civil-expert interview. Widen sittings 1–2 are built from it; sittings 3–11 and every deepen rung are unbuilt. Not a lesson catalog.
 
 ## What a level is
 
@@ -19,7 +19,7 @@ Never speak down to kids. Use **industry-correct terms** unless a real name is a
 
 ## The town
 
-One **stylized block**, denser than real life (occupational density: jobs, vehicles, shops, civic work in one view). Not a map of a real town. Not a mascot town. People are **jobs**, not named characters. Every on-device profile plays **this same town**.
+One **stylized isometric block**, denser than real life (occupational density: jobs, vehicles, shops, civic work in one view). Not a map of a real town. Not a mascot town. People are **jobs**, not named characters. Every on-device profile plays **this same town**. The view is **isometric** (art and runtime freeze: `SPEC.md` and `docs/inspiration.md`).
 
 The whole block is drawn from the start. Off-need objects stay **visually quiet** until their through-line (still there, not the test).
 
@@ -142,7 +142,9 @@ Need badges are **tab headers**, not a fourth collection. Challenge stars sit on
 
 ## Art
 
-Original drawings for the busy block, cutaways, and jobs. CC0 / US public-domain photos for far sites, with a row in `docs/ATTRIBUTION.md`. No identifiable people. No unlicensed scrapes. Do not copy inspiration books.
+Art and runtime (isometric 16-bit SNES-JRPG-*inspired* placeholders, modest/iPad, no WebGL, do-not-copy) are frozen in `SPEC.md` and `docs/inspiration.md`. This file does not fork that freeze.
+
+Original drawings for the busy block, cutaways, and jobs. CC0 / US public-domain photos for far sites, with a row in `docs/ATTRIBUTION.md`. No identifiable people. No unlicensed scrapes.
 
 ## IRL and safety
 
@@ -150,10 +152,10 @@ Plants, dams, yards, tracks, cabinets, factories, data centers, transfer station
 
 ## Banned
 
-Tycoon / city-builder. Mascot town or cute infrastructure animals. Cute substitutes for industry names (“big sewer pipe,” “network hub”). Mapping a real hometown or a real family’s house. Hats/cards/badges opening the next rung. Quests to visit industrial sites. A landfill visit. Implying tap water is sewer water. Implying all combined flow is always treated in rain. Calling the comms far site a network hub. “Heat comes from the dam” as a pipe or fuel story. Mixing drink vs combined before both full chains (plant and WWTP) are complete. Drink-only Challenge before the full drink chain. Goods order Challenge before the full five stops. Timers or high scores as the test. Scavenger hunts that unlock lessons. Shame, lockout, or a timer on a wrong answer. A shared household album. Cloud save.
+Tycoon / city-builder. Mascot town or cute infrastructure animals. Cute substitutes for industry names (“big sewer pipe,” “network hub”). Mapping a real hometown or a real family’s house. Hats/cards/badges opening the next rung. Quests to visit industrial sites. A landfill visit. Implying tap water is sewer water. Implying all combined flow is always treated in rain. Calling the comms far site a network hub. “Heat comes from the dam” as a pipe or fuel story. Mixing drink vs combined before both full chains (plant and WWTP) are complete. Drink-only Challenge before the full drink chain. Goods order Challenge before the full five stops. Timers or high scores as the test. Scavenger hunts that unlock lessons. Shame, lockout, or a timer on a wrong answer. A shared household album. Cloud save. WebGL or a heavy 3D engine in the child app. Copying SNES (or other) game tiles, characters, or maps.
 
 Climate is **taught** at the facility rung (why the dam generates; why treat water; why we sort at the MRF). A named fact that unsorted waste can go to a landfill may appear at the trash campus; it is **not** a sitting. Not a stealth sermon and not a level-1 lecture. Drink vs combined sewage is a **path-choice only after both full chains**, never a smear of the tap.
 
 ## Do not build yet
 
-No hydrant lesson, no plant scene, no album UI, until object cards and schemas follow this spine. `docs/candidates.md` remains unfrozen **nouns**; this file owns **order and shape**.
+No sitting 3 or later without the owner, no hydrant lesson, no plant scene, no album UI, until object cards and schemas follow this spine. `docs/candidates.md` remains unfrozen **nouns**; this file owns **order and shape**.

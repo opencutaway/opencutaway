@@ -1,3 +1,3 @@
 # Renderers
 
-Empty on purpose. Later Learn/Challenge views belong here. Those views should read as layered everyday work (jobs, vehicles, shops in one glance), not a node-link explorer. Do not add playable lesson content in this slice.
+Busy-block drawing for widen sittings 1–2 lives here: original isometric 16-bit SVG placeholders, no WebGL. Later sittings and Challenge views should read as layered everyday work (jobs, vehicles, shops in one glance), not a node-link explorer. Sittings 3–11 are not built.

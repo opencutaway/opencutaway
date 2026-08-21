@@ -21,7 +21,7 @@ Then the file you are about to change. Safety and engineering rules are in `CLAU
 
 ## Six drift parts
 
-Exact files, commands, MUST / MUST NOT, and fail codes live in `docs/testing-gauntlet.md`. Do not collapse the six parts. Older name file-map is Owners. Effect-map supports Gates; it is not a seventh named part. Do not paraphrase S/E rules; open `CLAUDE.md`.
+Exact files, commands, MUST / MUST NOT, and fail codes live in `docs/testing-gauntlet.md`. Do not collapse the six parts. Older name file-map is Owners. Effect-map supports Gates; it is not a seventh named part. Do not paraphrase S/E rules; open `CLAUDE.md`. Gate integrity (no retry-to-green, no paper-over) is the Agent contract in that gauntlet; when blocked, use the decision page below.
 
 | Part | Edit | Regenerate | Check |
 |---|---|---|---|
@@ -65,7 +65,7 @@ If a task needs a new npm package, a new governing document, or a new gate, stop
 
 ## Decision page
 
-When the owner must choose, one question per screen, every option costed, one marked MY PICK, an Other box that outranks the buttons, numbers measured rather than recalled, copy-all at the end. Do not invent a decision page unless you are blocked.
+When the owner must choose, one question per screen, every option costed, one marked MY PICK, an Other box that outranks the buttons, numbers measured rather than recalled, copy-all at the end. Do not invent a decision page unless you are blocked. Do not execute a pick until the operator replies; silence is not approval.
 
 ## Child app
 

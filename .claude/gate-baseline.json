@@ -1,11 +1,11 @@
 {
-  "vitest_files": 9,
-  "vitest_cases": 26,
+  "vitest_files": 13,
+  "vitest_cases": 92,
   "governing_files": 9,
   "history_files_max": 0,
-  "playwright_specs": 2,
-  "schema_files": 5,
-  "shipped_features": 1,
+  "playwright_specs": 4,
+  "schema_files": 7,
+  "shipped_features": 2,
   "declared_features": 4,
   "drift_parts": 6
 }

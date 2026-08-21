@@ -1,26 +1,40 @@
+import { expectControlsAtLeast44 } from '../helpers/hotspot-reach.ts'
 import { expect, test } from '../fixtures/player.ts'
 
 test.describe('title screen', () => {
-  test('teaches the game name and that lessons are not here yet', async ({
+  test('teaches the game name and opens Get across or Lights', async ({
     titleScreen,
+    widenSitting1,
+    widenSitting2,
     page
   }) => {
-    await test.step('teaching: name and placeholder blurb', async () => {
+    await test.step('teaching: name, blurb, Get across, and Lights', async () => {
       await expect(page).toHaveTitle('Open Cutaway')
       await expect(titleScreen.heading()).toBeVisible()
       await expect(titleScreen.blurb()).toBeVisible()
+      await expect(titleScreen.learnControl()).toBeVisible()
+      await expect(titleScreen.lightsControl()).toBeVisible()
+      await expectControlsAtLeast44(page, ['Get across', 'Lights'])
     })
 
-    await test.step('interaction: the child can reach the heading in main', async () => {
-      await expect(titleScreen.main()).toBeVisible()
-      await titleScreen.heading().focus()
+    await test.step('interaction: Get across opens widen sitting 1', async () => {
+      await titleScreen.learnControl().click()
+      await expect(widenSitting1.heading()).toBeVisible()
+      await expect(widenSitting1.prompt()).toBeVisible()
+    })
+
+    await test.step('interaction: Lights opens widen sitting 2', async () => {
+      await widenSitting1.backControl().click()
       await expect(titleScreen.heading()).toBeVisible()
+      await titleScreen.lightsControl().click()
+      await expect(widenSitting2.heading()).toBeVisible()
+      await expect(widenSitting2.prompt()).toBeVisible()
     })
 
-    await test.step('regression: no playable lesson leaked onto the title', async () => {
-      await expect(page.getByRole('heading', { name: 'Learn' })).toHaveCount(0)
+    await test.step('regression: no hydrant lesson or dam dump on the title path', async () => {
       await expect(page.getByText(/hydrant lesson/i)).toHaveCount(0)
-      await expect(titleScreen.blurb()).toContainText('Lessons are not in this build yet')
+      await expect(page.getByRole('heading', { name: 'Challenge' })).toHaveCount(0)
+      await expect(page.getByText(/walky light/i)).toHaveCount(0)
     })
   })
 })

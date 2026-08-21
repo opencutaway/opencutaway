@@ -1,4 +1,5 @@
 import { writeFileSync } from 'node:fs'
+import { forbiddenClientTokens } from './lib/client-gates.mjs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -104,8 +105,8 @@ const tests = {
   'TEST-BOOTSTRAP-TITLE': testRecord({
     identity: {
       test_id: 'TEST-BOOTSTRAP-TITLE',
-      title: 'Title-screen stub names Open Cutaway',
-      objective: 'The placeholder shell identifies the game and does not contain lessons.'
+      title: 'Title screen names Open Cutaway and offers Get across and Lights',
+      objective: 'The title identifies the game and points to widen sittings 1 and 2.'
     },
     classification: {
       execution_mode: 'automated',
@@ -125,18 +126,18 @@ const tests = {
     oracle: {
       expected_failure_mode: na('Passing run expected.'),
       expected_logs_events_and_alerts: na('No telemetry in this product.'),
-      expected_outputs: ['GAME_TITLE equals Open Cutaway'],
+      expected_outputs: ['GAME_TITLE equals Open Cutaway', 'LEARN_CONTROL_LABEL equals Get across', 'LIGHTS_CONTROL_LABEL equals Lights'],
       expected_state_changes: na('No durable state.'),
-      prohibited_side_effects: ['No network calls', 'No lesson catalog'],
-      required_invariants: ['Placeholder does not teach a specific object']
+      prohibited_side_effects: ['No network calls', 'No hydrant lesson on the title'],
+      required_invariants: ['Title offers Get across and Lights']
     },
     initial_state: 'src/app/title.ts present.',
     required_failure_diagnostics: ['Assertion diff for GAME_TITLE or TITLE_BLURB'],
     self_validating: true,
     scope: {
       component: 'src/app/title.ts',
-      exclusions: ['Playable Learn/Challenge lessons'],
-      included_behaviour: ['Title string', 'Placeholder blurb'],
+      exclusions: ['Sittings 3–11 and Challenge'],
+      included_behaviour: ['Title string', 'Get across control', 'Lights control'],
       supported_platforms: ['Node.js >=22'],
       supported_versions: ['0.0.0']
     },
@@ -183,7 +184,7 @@ const tests = {
     self_validating: true,
     scope: {
       component: 'src/index.css',
-      exclusions: ['Playable controls'],
+      exclusions: ['That every hotspot is large enough on every viewport'],
       included_behaviour: ['Stylesheet min-height and min-width of 44px'],
       supported_platforms: ['Node.js >=22'],
       supported_versions: ['0.0.0']
@@ -233,7 +234,7 @@ const tests = {
     self_validating: true,
     scope: {
       component: 'schema/ and content/examples/',
-      exclusions: ['Filled object catalog'],
+      exclusions: ['Filled object catalog beyond sitting 1'],
       included_behaviour: [
         'Object card example',
         'System chain example',
@@ -345,14 +346,7 @@ const tests = {
       expected_logs_events_and_alerts: na('No telemetry in this product.'),
       expected_outputs: ['Empty findings for src/'],
       expected_state_changes: na('No durable state.'),
-      prohibited_side_effects: [
-        'geolocation',
-        'getUserMedia',
-        'gtag',
-        'Sentry',
-        'openai',
-        'langgraph'
-      ],
+      prohibited_side_effects: forbiddenClientTokens(),
       required_invariants: ['Child client stays offline and model-free']
     },
     initial_state: 'src/ tree present.',
@@ -480,6 +474,75 @@ const tests = {
     },
     requirement_ids: ['REQ_ETHOS', 'REQ_CODE_QUALITY'],
     threat_ids: ['THREAT-LLM-IN-CLIENT', 'THREAT-TELEMETRY']
+  }),
+  'TEST-GATE-INTEGRITY': testRecord({
+    identity: {
+      test_id: 'TEST-GATE-INTEGRITY',
+      title: 'Paper-over marks in tests and scripts fail G-unit',
+      objective: 'Detect skip and only marks, a vacuous boolean expect subject, and package.json scripts that hide failure without adding a 12th named gate.'
+    },
+    classification: {
+      execution_mode: 'automated',
+      priority: 'critical',
+      severity_if_failed: 'critical',
+      test_layer: 'static',
+      test_types: [
+        'TC-BEHAVIOUR-INVARIANT',
+        'TC-BEHAVIOUR-NEGATIVE',
+        'TC-FUNCTIONAL-REGRESSION',
+        'TC-STATIC-LINTING'
+      ]
+    },
+    steps: [
+      'Run tests/gate-integrity.test.ts via npm test.',
+      'Run node tools/check-gate-integrity.mjs.',
+      'Run node tools/check-gate-integrity.mjs --self-test.'
+    ],
+    evidence_retained: ['vitest output', 'check-gate-integrity stderr on failure'],
+    execution_trigger: 'npm test',
+    pipeline_stage: 'local-verification',
+    oracle: {
+      expected_failure_mode: 'Non-empty paper-over findings or a silent planted control.',
+      expected_logs_events_and_alerts: na('No telemetry in this product.'),
+      expected_outputs: [
+        'Empty live findings',
+        'Planted skip-mark, only-mark, vacuous-expect, and forced-success codes'
+      ],
+      expected_state_changes: na('No durable state.'),
+      prohibited_side_effects: [
+        'skip and only marks on it/test/describe, plus xit and xdescribe',
+        'a boolean literal as the expect subject',
+        'package.json scripts that use || true or process.exit(0) to hide failure'
+      ],
+      required_invariants: [
+        'G-unit stays one of the eleven named gates',
+        'toBeTruthy is not banned'
+      ]
+    },
+    initial_state: 'tests/, e2e/, scripts/, package.json, vite.config.ts, and playwright.config.ts present.',
+    required_failure_diagnostics: ['Finding code and relative path'],
+    self_validating: true,
+    scope: {
+      component: 'G-unit paper-over scan',
+      exclusions: ['docs that name skip marks', 'toBeTruthy existence guards'],
+      included_behaviour: [
+        'Skip and only marks',
+        'Vacuous boolean expect subject',
+        'Forced-success package.json scripts',
+        'Vitest allowOnly false and Playwright retries 0'
+      ],
+      supported_platforms: ['Node.js >=22 with git'],
+      supported_versions: ['0.0.0']
+    },
+    test_data: {
+      boundary_values: na('Mark presence is boolean.'),
+      classification: 'synthetic',
+      generation_method: 'Runtime-constructed plants plus live tree scan.',
+      inputs: ['tests/**', 'e2e/**', 'scripts/**', 'package.json', 'vite.config.ts', 'playwright.config.ts'],
+      retention_and_cleanup: na('No extra data stored.'),
+      source: 'synthetic'
+    },
+    requirement_ids: ['REQ_CODE_QUALITY', 'REQ_PROCESS']
   }),
   'TEST-WORKFLOW-GRAPH': testRecord({
     identity: {
@@ -650,9 +713,11 @@ const tests = {
       expected_failure_mode: na('Passing run expected.'),
       expected_logs_events_and_alerts: na('No telemetry in this product.'),
       expected_outputs: [
-        'Five schema paths listed',
+        'Seven schema paths listed',
         'Title contract Ajv true',
-        'lessonsShipped true is Ajv false'
+        'Wrong sittingId is Ajv false',
+        'Widen sitting 1 Ajv true',
+        'Widen sitting 2 Ajv true'
       ],
       expected_state_changes: na('No durable state.'),
       prohibited_side_effects: ['Must not change game behaviour'],
@@ -663,13 +728,13 @@ const tests = {
     self_validating: true,
     scope: {
       component: 'schema/ plus content/ui/',
-      exclusions: ['Playable lesson catalog JSON'],
-      included_behaviour: ['Schema compile', 'Title UI contract'],
+      exclusions: ['Sittings 3–11 catalog JSON'],
+      included_behaviour: ['Schema compile', 'Title UI contract', 'Widen sitting 1 contract', 'Widen sitting 2 contract'],
       supported_platforms: ['Node.js >=22'],
       supported_versions: ['0.0.0']
     },
     test_data: {
-      boundary_values: ['lessonsShipped false vs true'],
+      boundary_values: ['learnControl.sittingId must be sitting-widen-1-get-across'],
       classification: 'synthetic',
       generation_method: 'Committed JSON fixtures.',
       inputs: ['schema/*.schema.json', 'content/ui/title-screen.json'],
@@ -683,7 +748,7 @@ const tests = {
       test_id: 'TEST-E2E-TITLE',
       title: 'Playwright covers title-screen teaching, interaction, and regression',
       objective:
-        'A child and grown-up opening the app see the name Open Cutaway, can reach the heading, and do not see a leaked lesson.'
+        'A child and grown-up opening the app see Open Cutaway and can open Get across or Lights without a dam dump.'
     },
     classification: {
       execution_mode: 'automated',
@@ -707,19 +772,21 @@ const tests = {
       expected_logs_events_and_alerts: na('No telemetry in this product.'),
       expected_outputs: [
         'Heading Open Cutaway visible',
-        'Lessons are not in this build yet visible',
-        'No Learn heading'
+        'Get across control visible',
+        'Lights control visible',
+        'Sitting heading Get across after click',
+        'Sitting heading Lights after click'
       ],
       expected_state_changes: na('No durable state.'),
       prohibited_side_effects: ['Must not call network APIs from the child app'],
-      required_invariants: ['Title stub is the only shipped screen']
+      required_invariants: ['Title offers Get across and Lights']
     },
     initial_state: 'Dependencies and Chromium installed; dist/ present for preview.',
     required_failure_diagnostics: ['Playwright trace on retry; screenshot on failure'],
     self_validating: true,
     scope: {
       component: 'e2e/specs/title.spec.ts',
-      exclusions: ['Playable Learn/Challenge lessons'],
+      exclusions: ['Sittings 3–11'],
       included_behaviour: ['Teaching', 'Interaction', 'Regression'],
       supported_platforms: ['Chromium desktop and Pixel 5 viewport'],
       supported_versions: ['0.0.0']
@@ -737,9 +804,9 @@ const tests = {
   'TEST-E2E-STUB-MODES': testRecord({
     identity: {
       test_id: 'TEST-E2E-STUB-MODES',
-      title: 'Playwright keeps Learn, Challenge, and Life list unshipped',
+      title: 'Playwright keeps Challenge and Life list unshipped',
       objective:
-        'The title stub does not grow extra mode buttons or headings before those features exist.'
+        'The title offers Get across and Lights and does not grow Challenge or Life list controls.'
     },
     classification: {
       execution_mode: 'automated',
@@ -757,17 +824,17 @@ const tests = {
     oracle: {
       expected_failure_mode: na('Passing run expected.'),
       expected_logs_events_and_alerts: na('No telemetry in this product.'),
-      expected_outputs: ['Zero buttons', 'Zero links', 'No Learn/Challenge/Life list headings'],
+      expected_outputs: ['Get across button', 'Lights button', 'No Challenge button', 'No Life list heading'],
       expected_state_changes: na('No durable state.'),
       prohibited_side_effects: ['Must not change game behaviour'],
-      required_invariants: ['Stub modes stay unshipped']
+      required_invariants: ['Challenge and Life list stay unshipped']
     },
     initial_state: 'Dependencies and Chromium installed.',
     required_failure_diagnostics: ['Playwright screenshot on failure'],
     self_validating: true,
     scope: {
       component: 'e2e/specs/modes-not-shipped.spec.ts',
-      exclusions: ['Future mode implementation'],
+      exclusions: ['Future Challenge and Life list implementation'],
       included_behaviour: ['Absence of unshipped modes'],
       supported_platforms: ['Chromium desktop and Pixel 5 viewport'],
       supported_versions: ['0.0.0']
@@ -781,6 +848,296 @@ const tests = {
       source: 'synthetic'
     },
     requirement_ids: ['REQ_DOD']
+  }),
+  'TEST-WIDEN-SITTING-1': testRecord({
+    identity: {
+      test_id: 'TEST-WIDEN-SITTING-1',
+      title: 'Widen sitting 1 validates and teaches miss, hint, and find',
+      objective:
+        'Get across copy matches schema, uses real names, and the session shows try-again then a rung hint.'
+    },
+    classification: {
+      execution_mode: 'automated',
+      priority: 'high',
+      severity_if_failed: 'high',
+      test_layer: 'unit',
+      test_types: [
+        'TC-FUNCTIONAL-UNIT',
+        'TC-FUNCTIONAL-CONTRACT',
+        'TC-BEHAVIOUR-POSITIVE',
+        'TC-BEHAVIOUR-NEGATIVE'
+      ]
+    },
+    steps: ['Run tests/widen-sitting-1.test.ts via npm test.'],
+    evidence_retained: ['vitest output'],
+    execution_trigger: 'npm test',
+    pipeline_stage: 'local-verification',
+    oracle: {
+      expected_failure_mode: na('Passing run expected.'),
+      expected_logs_events_and_alerts: na('No telemetry in this product.'),
+      expected_outputs: [
+        'Ajv true for sitting JSON',
+        'Through-line names Traffic signal, Crosswalk, Crossing gates',
+        'Second miss names getting across without naming shop or a tap target'
+      ],
+      expected_state_changes: na('No durable state.'),
+      prohibited_side_effects: ['No timer', 'No network calls'],
+      required_invariants: ['Off-need stays out of tab order in the contract']
+    },
+    initial_state: 'content/sittings/widen-1-get-across.json present.',
+    required_failure_diagnostics: ['Ajv errors or assertion diff on names'],
+    self_validating: true,
+    scope: {
+      component: 'content/sittings/ and src/app/sitting-session.ts',
+      exclusions: ['Sittings 3–11', 'Human copy gate'],
+      included_behaviour: ['Schema', 'Through-line names', 'Miss/hint/find'],
+      supported_platforms: ['Node.js >=22'],
+      supported_versions: ['0.0.0']
+    },
+    test_data: {
+      boundary_values: ['inTabOrder true vs false by role'],
+      classification: 'synthetic',
+      generation_method: 'Committed sitting JSON plus in-memory session.',
+      inputs: ['content/sittings/widen-1-get-across.json'],
+      retention_and_cleanup: na('No retained test data.'),
+      source: 'synthetic'
+    },
+    requirement_ids: ['REQ_DOD', 'REQ_PEDAGOGY', 'REQ_ETHOS']
+  }),
+  'TEST-E2E-WIDEN-1': testRecord({
+    identity: {
+      test_id: 'TEST-E2E-WIDEN-1',
+      title: 'Playwright covers Get across teaching, interaction, and regression',
+      objective:
+        'A child can open sitting 1, miss the shop twice, then find the traffic signal and read name plus function. An adult can reveal and toggle Show all names.'
+    },
+    classification: {
+      execution_mode: 'automated',
+      priority: 'high',
+      severity_if_failed: 'high',
+      test_layer: 'end-to-end',
+      test_types: [
+        'TC-FUNCTIONAL-END-TO-END',
+        'TC-FUNCTIONAL-SYSTEM',
+        'TC-FUNCTIONAL-ACCEPTANCE'
+      ]
+    },
+    steps: [
+      'Run e2e/specs/widen-1-get-across.spec.ts via npm run test:e2e after a production build.'
+    ],
+    evidence_retained: ['Playwright list reporter output'],
+    execution_trigger: 'npm run gauntlet',
+    pipeline_stage: 'gauntlet',
+    timing_and_timeouts: 'Playwright 30s test timeout; 5s expect timeout.',
+    maximum_duration: '2m',
+    oracle: {
+      expected_failure_mode: na('Passing run expected.'),
+      expected_logs_events_and_alerts: na('No telemetry in this product.'),
+      expected_outputs: [
+        'Traffic signal name visible on the through-line',
+        'Try again then rung hint after shop taps',
+        'Name, gloss, and function after a correct find',
+        'Show all names toggles off-need labels',
+        'Adult reveal lists crossing objects without finding one',
+        'Every hotspot and control at least 44 CSS px with nothing painted over it, on desktop and Pixel 5',
+        'Tab reaches the through-line objects in order with a visible focus ring; every shown name fits its box'
+      ],
+      expected_state_changes: na('No durable state.'),
+      prohibited_side_effects: ['Must not call network APIs from the child app'],
+      required_invariants: ['No dam dump', 'No cute substitute names', 'No timer']
+    },
+    initial_state: 'Dependencies and Chromium installed; dist/ present for preview.',
+    required_failure_diagnostics: ['Playwright trace on retry; screenshot on failure'],
+    self_validating: true,
+    scope: {
+      component: 'e2e/specs/widen-1-get-across.spec.ts',
+      exclusions: ['Sittings 3–11', 'Challenge'],
+      included_behaviour: ['Teaching', 'Interaction', 'Regression'],
+      supported_platforms: ['Chromium desktop and Pixel 5 viewport'],
+      supported_versions: ['0.0.0']
+    },
+    test_data: {
+      boundary_values: na('Copy literals only.'),
+      classification: 'synthetic',
+      generation_method: na('Page object plus fixture.'),
+      inputs: ['Production preview of widen sitting 1'],
+      retention_and_cleanup: 'playwright-report/ and test-results/ are gitignored.',
+      source: 'synthetic'
+    },
+    requirement_ids: ['REQ_DOD', 'REQ_PEDAGOGY', 'REQ_AGE_COPLAY']
+  }),
+  'TEST-WIDEN-SITTING-2': testRecord({
+    identity: {
+      test_id: 'TEST-WIDEN-SITTING-2',
+      title: 'Widen sitting 2 validates and keeps crossing objects quiet',
+      objective:
+        'Lights copy matches schema, uses real names, and keeps Get across objects off the through-line.'
+    },
+    classification: {
+      execution_mode: 'automated',
+      priority: 'high',
+      severity_if_failed: 'high',
+      test_layer: 'unit',
+      test_types: [
+        'TC-FUNCTIONAL-UNIT',
+        'TC-FUNCTIONAL-CONTRACT',
+        'TC-BEHAVIOUR-POSITIVE',
+        'TC-BEHAVIOUR-NEGATIVE'
+      ]
+    },
+    steps: ['Run tests/widen-sitting-2.test.ts via npm test.'],
+    evidence_retained: ['vitest output'],
+    execution_trigger: 'npm test',
+    pipeline_stage: 'local-verification',
+    oracle: {
+      expected_failure_mode: na('Passing run expected.'),
+      expected_logs_events_and_alerts: na('No telemetry in this product.'),
+      expected_outputs: [
+        'Ajv true for sitting JSON',
+        'Through-line names Utility pole, Overhead conductor, Distribution transformer',
+        'Traffic signal stays off-need',
+        'Distribution transformer gloss leads with the real name'
+      ],
+      expected_state_changes: na('No durable state.'),
+      prohibited_side_effects: ['No timer', 'No network calls', 'No dam sitting'],
+      required_invariants: ['Off-need stays out of tab order in the contract']
+    },
+    initial_state: 'content/sittings/widen-2-lights.json present.',
+    required_failure_diagnostics: ['Ajv errors or assertion diff on names'],
+    self_validating: true,
+    scope: {
+      component: 'content/sittings/ and schema/sitting-widen-2.schema.json',
+      exclusions: ['Sittings 3–11', 'Human copy gate', 'Dam sitting'],
+      included_behaviour: ['Schema', 'Through-line names', 'Quiet crossing objects'],
+      supported_platforms: ['Node.js >=22'],
+      supported_versions: ['0.0.0']
+    },
+    test_data: {
+      boundary_values: ['inTabOrder true vs false by role'],
+      classification: 'synthetic',
+      generation_method: 'Committed sitting JSON.',
+      inputs: ['content/sittings/widen-2-lights.json'],
+      retention_and_cleanup: na('No retained test data.'),
+      source: 'synthetic'
+    },
+    requirement_ids: ['REQ_DOD', 'REQ_PEDAGOGY', 'REQ_ETHOS']
+  }),
+  'TEST-HOTSPOT-LAYOUT': testRecord({
+    identity: {
+      test_id: 'TEST-HOTSPOT-LAYOUT',
+      title: 'Hotspot layout keeps every target reachable',
+      objective:
+        'At the 720 px minimum block width every hotspot in both sittings is at least 44 CSS px on both axes and no two hotspot boxes intersect, so a later-painted hotspot can never cover another.'
+    },
+    classification: {
+      execution_mode: 'automated',
+      priority: 'high',
+      severity_if_failed: 'high',
+      test_layer: 'unit',
+      test_types: [
+        'TC-FUNCTIONAL-UNIT',
+        'TC-BEHAVIOUR-POSITIVE',
+        'TC-BEHAVIOUR-NEGATIVE',
+        'TC-BEHAVIOUR-BOUNDARY'
+      ]
+    },
+    steps: ['Run tests/hotspot-layout.test.ts via npm test.'],
+    evidence_retained: ['vitest output'],
+    execution_trigger: 'npm test',
+    pipeline_stage: 'local-verification',
+    oracle: {
+      expected_failure_mode: 'Literal problem codes too-narrow, too-short, overlap, out-of-block on planted boxes.',
+      expected_logs_events_and_alerts: na('No telemetry in this product.'),
+      expected_outputs: [
+        'Empty problem list for both committed sittings',
+        'Identical boxes for the eight objects both sittings share',
+        'Stylesheet minimum block width 720px with a scrolling wrapper'
+      ],
+      expected_state_changes: na('No durable state.'),
+      prohibited_side_effects: ['No hotspot under 44 px', 'No intersecting hotspots'],
+      required_invariants: ['S9 minimum hit target 44 CSS px']
+    },
+    initial_state: 'content/sittings/*.json and src/index.css present.',
+    required_failure_diagnostics: ['Problem code with hotspot id and measured px'],
+    self_validating: true,
+    scope: {
+      component: 'src/app/sitting.ts findHotspotLayoutProblems and content/sittings/',
+      exclusions: ['Rendered pixel sizes (Playwright)', 'Sittings 3–11'],
+      included_behaviour: ['Minimum size', 'Non-intersection', 'Shared geometry across sittings'],
+      supported_platforms: ['Node.js >=22'],
+      supported_versions: ['0.0.0']
+    },
+    test_data: {
+      boundary_values: ['6.2% of 720 px = 44.6 px passes; 5% fails', 'Boxes that touch but do not overlap pass'],
+      classification: 'synthetic',
+      generation_method: 'Committed sitting JSON plus planted boxes.',
+      inputs: ['content/sittings/widen-1-get-across.json', 'content/sittings/widen-2-lights.json'],
+      retention_and_cleanup: na('No retained test data.'),
+      source: 'synthetic'
+    },
+    requirement_ids: ['REQ_DOD', 'REQ_AGE_COPLAY']
+  }),
+  'TEST-E2E-WIDEN-2': testRecord({
+    identity: {
+      test_id: 'TEST-E2E-WIDEN-2',
+      title: 'Playwright covers Lights teaching, interaction, and regression',
+      objective:
+        'A child can open sitting 2 from the title, miss the shop twice, then find the overhead conductor and read name plus function. An adult can reveal and toggle Show all names.'
+    },
+    classification: {
+      execution_mode: 'automated',
+      priority: 'high',
+      severity_if_failed: 'high',
+      test_layer: 'end-to-end',
+      test_types: [
+        'TC-FUNCTIONAL-END-TO-END',
+        'TC-FUNCTIONAL-SYSTEM',
+        'TC-FUNCTIONAL-ACCEPTANCE'
+      ]
+    },
+    steps: [
+      'Run e2e/specs/widen-2-lights.spec.ts via npm run test:e2e after a production build.'
+    ],
+    evidence_retained: ['Playwright list reporter output'],
+    execution_trigger: 'npm run gauntlet',
+    pipeline_stage: 'gauntlet',
+    timing_and_timeouts: 'Playwright 30s test timeout; 5s expect timeout.',
+    maximum_duration: '2m',
+    oracle: {
+      expected_failure_mode: na('Passing run expected.'),
+      expected_logs_events_and_alerts: na('No telemetry in this product.'),
+      expected_outputs: [
+        'Overhead conductor name visible on the through-line',
+        'Try again then rung hint after quiet taps',
+        'Name, gloss, and function after a correct find',
+        'Show all names toggles off-need labels',
+        'Adult reveal lists lighting objects without finding one',
+        'Every hotspot and control at least 44 CSS px with nothing painted over it, on desktop and Pixel 5',
+        'Tab reaches the through-line objects in order with a visible focus ring; every shown name fits its box'
+      ],
+      expected_state_changes: na('No durable state.'),
+      prohibited_side_effects: ['Must not call network APIs from the child app'],
+      required_invariants: ['No dam dump', 'No cute substitute names', 'No timer']
+    },
+    initial_state: 'Dependencies and Chromium installed; dist/ present for preview.',
+    required_failure_diagnostics: ['Playwright trace on retry; screenshot on failure'],
+    self_validating: true,
+    scope: {
+      component: 'e2e/specs/widen-2-lights.spec.ts',
+      exclusions: ['Sittings 3–11', 'Challenge', 'Dam sitting'],
+      included_behaviour: ['Teaching', 'Interaction', 'Regression'],
+      supported_platforms: ['Chromium desktop and Pixel 5 viewport'],
+      supported_versions: ['0.0.0']
+    },
+    test_data: {
+      boundary_values: na('Copy literals only.'),
+      classification: 'synthetic',
+      generation_method: na('Page object plus fixture.'),
+      inputs: ['Production preview of widen sitting 2'],
+      retention_and_cleanup: 'playwright-report/ and test-results/ are gitignored.',
+      source: 'synthetic'
+    },
+    requirement_ids: ['REQ_DOD', 'REQ_PEDAGOGY', 'REQ_AGE_COPLAY']
   }),
   'TEST-INDEPENDENT-REVIEW': testRecord({
     identity: {
@@ -826,7 +1183,7 @@ const tests = {
     responsible_owner: 'ROLE-REVIEWER',
     scope: {
       component: 'integrated bootstrap revision',
-      exclusions: ['Playable lesson content, which must not exist yet'],
+      exclusions: ['Sittings 3–11, Challenge, and Life list'],
       included_behaviour: [
         'PII scrub',
         'MIT license holder check',

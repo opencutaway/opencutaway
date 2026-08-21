@@ -15,6 +15,10 @@ main {
   padding: 0 1.25rem;
 }
 
+main.sitting {
+  max-width: 64rem;
+}
+
 h1 {
   font-weight: 600;
   letter-spacing: 0.01em;
@@ -25,4 +29,175 @@ a,
 [role='button'] {
   min-height: 44px;
   min-width: 44px;
+}
+
+.sitting-header p {
+  max-width: 40rem;
+}
+
+.sitting-controls,
+.title-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.sitting-controls {
+  margin: 1.25rem 0 2rem;
+}
+
+.sitting-feedback {
+  min-height: 4.5rem;
+  margin-top: 1rem;
+}
+
+.object-card {
+  border: 2px solid #12202a;
+  padding: 0.75rem 1rem;
+  background: #fffdf8;
+  max-width: 36rem;
+}
+
+.object-card h2 {
+  margin: 0 0 0.35rem;
+}
+
+/* S9: every hotspot box is laid out to be at least 44 CSS px at this block width,
+   so phones pan the block inside this wrapper instead of shrinking the targets. */
+.busy-block-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.busy-block {
+  position: relative;
+  min-width: 720px;
+  margin: 0;
+  border: 2px solid #1a1424;
+  background: #3e6e92;
+  image-rendering: pixelated;
+}
+
+.busy-block-art {
+  display: block;
+  width: 100%;
+  height: auto;
+  shape-rendering: crispEdges;
+}
+
+.busy-block-art .quiet-shape {
+  filter: grayscale(0.46) contrast(0.68) brightness(1.08);
+}
+
+.busy-block-art .quiet-shape * {
+  stroke-dasharray: 5 4;
+}
+
+.busy-block-art .through-shape {
+  filter: contrast(1.16);
+}
+
+.busy-block-art .through-shape * {
+  stroke-dasharray: none;
+}
+
+.busy-block-hotspots {
+  position: absolute;
+  inset: 0;
+}
+
+.hotspot {
+  position: absolute;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.hotspot-through {
+  outline: 3px solid #12202a;
+  outline-offset: 2px;
+  background: rgb(18 32 42 / 0.08);
+}
+
+.hotspot-quiet {
+  outline: 2px dashed #8f8678;
+  outline-offset: 1px;
+  background: rgb(143 134 120 / 0.12);
+  filter: grayscale(0.35) contrast(0.72);
+}
+
+.hotspot-name {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #12202a;
+  background: #f4f1ea;
+  padding: 0.15rem 0.35rem;
+  text-align: left;
+  pointer-events: none;
+  max-width: 100%;
+}
+
+.hotspot-quiet .hotspot-name {
+  color: #5e574d;
+  background: #d9d3c8;
+}
+
+.hotspot-found {
+  outline-color: #2e7d4f;
+}
+
+.hotspot-revealed {
+  outline-style: solid;
+}
+
+/* Keyboard focus must look different from the always-on through-line outline. */
+.hotspot:focus-visible {
+  outline: 4px solid #b8770a;
+  outline-offset: 3px;
+  animation: none;
+}
+
+button:focus-visible,
+a:focus-visible,
+[role='button']:focus-visible {
+  outline: 3px solid #1e6e8a;
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hotspot-through:not(.hotspot-found) {
+    animation: through-pulse 2.4s ease-in-out infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .busy-block .hotspot-through {
+    animation: none;
+  }
+}
+
+@keyframes through-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgb(18 32 42 / 0.35);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgb(18 32 42 / 0);
+  }
 }

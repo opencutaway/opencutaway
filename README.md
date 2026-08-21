@@ -5,20 +5,20 @@
 
 [Open Cutaway](https://github.com/opencutaway/opencutaway) is a visual infrastructure-literacy game: street objects, system chains, and the industrial landscape a child may never visit. It is for ages 7–12 with an adult co-player. The shipped app is an offline Preact + Vite client; progress stays on the device. No camera, location, cloud accounts, ads, or analytics. Forever freeware.
 
-Tone and world draw from Macaulay’s *Underground*, Hayes’s *Infrastructure*, and Scarry’s *What Do People Do All Day?* (occupational density only). Do not copy those books. See [docs/inspiration.md](docs/inspiration.md).
+Tone and world draw from Macaulay’s *Underground*, Hayes’s *Infrastructure*, and Scarry’s *What Do People Do All Day?* (occupational density only). The busy block is isometric 16-bit in the tone of 1990s SNES JRPG towns. Do not copy those books or those games. See [docs/inspiration.md](docs/inspiration.md).
 
 ## Status
 
-This slice is guard rails plus a placeholder shell.
+This slice makes the title plus **widen sittings 1–2 (Get across, Lights)** playable on one busy block; their kid-facing copy is still waiting on the human copy gate. Later sittings, Challenge, and Life list are not playable yet.
 
 | Mode | Status |
 | --- | --- |
-| Title | Shipped stub: the name and a blurb that lessons are not in this build |
-| Learn | Not playable yet |
+| Title | Placeholder playable: the name and **Get across** plus **Lights** controls |
+| Learn | Sittings 1–2 playable, copy gate open: find the through-line object, read the real name and what it does |
 | Challenge | Not playable yet |
 | Life list | Not playable yet |
 
-There is nothing to save in this build. Privacy wins: personal information must never enter git. See [docs/PRIVACY.md](docs/PRIVACY.md).
+There is no profile picker in this build. Privacy wins: personal information must never enter git. See [docs/PRIVACY.md](docs/PRIVACY.md).
 
 ## How to run
 
@@ -30,7 +30,7 @@ npx playwright install chromium
 npm run dev
 ```
 
-`npm run dev` opens the title stub.
+`npm run dev` opens the title. Choose **Get across** for sitting 1 or **Lights** for sitting 2.
 
 ```bash
 npm run check      # everyday gates (unit tests, maps, schemas, privacy)
@@ -46,7 +46,7 @@ Player-facing JSON is checked with Ajv. Playwright specs grow with each player-f
 | File | What it is |
 | --- | --- |
 | [SPEC.md](SPEC.md) | What the game does |
-| [docs/level-spine.md](docs/level-spine.md) | How levels are numbered (frozen; no lessons built yet) |
+| [docs/level-spine.md](docs/level-spine.md) | How levels are numbered (frozen; sittings 1–2 follow it) |
 | [CLAUDE.md](CLAUDE.md) | Finished work, safety, engineering |
 | [AGENTS.md](AGENTS.md) | How agents work here |
 | [docs/file-map.md](docs/file-map.md) | Owners (generated) |

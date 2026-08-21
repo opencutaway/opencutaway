@@ -19,7 +19,10 @@ declare module '../scripts/lib/pii-scan.mjs' {
     email: RegExp
   }
   export function findPiiInText(text: string): string[]
+  export function isIgnoredScanPath(relativePath: string): boolean
   export function shouldScanRelativePath(relativePath: string): boolean
+  export function listCandidateFiles(root: string): string[]
+  export function scanPiiInTree(root: string): { file: string; hits: string[] }[]
 }
 
 declare module '../scripts/lib/ajv-validate.mjs' {
@@ -37,6 +40,39 @@ declare module '../scripts/lib/ajv-validate.mjs' {
     data: unknown,
     root?: string
   ): { ok: boolean; errors: ErrorObject[] }
+}
+
+declare module '../tools/check-gate-integrity.mjs' {
+  export function shouldScanRelativePath(relativePath: string): boolean
+  export function findPaperOvers(text: string): { code: string; detail: string }[]
+  export function findForcedSuccessInPackageJson(
+    text: string,
+    file?: string
+  ): { code: string; file: string; script: string; detail: string }[]
+  export function findConfigProblems(
+    relativePath: string,
+    text: string
+  ): { code: string; file: string }[]
+  export function scanRepoPaperOvers(
+    root?: string
+  ): { code: string; file?: string; detail?: string; script?: string }[]
+  export function listScanTargets(
+    root?: string,
+    filter?: (relativePath: string) => boolean
+  ): string[]
+  export function scanRepo(root?: string): {
+    problems: { code: string; file?: string; detail?: string; script?: string }[]
+    scanned: string[]
+  }
+  export function findPopulationProblems(
+    scanned: string[],
+    tracked: string[]
+  ): { code: string; file: string; detail?: string }[]
+  export function selfTestControlCount(): number
+  export const REQUIRED_SCAN_TARGETS: string[]
+  export const VITEST_CONFIG_FILES: string[]
+  export const PLAYWRIGHT_CONFIG_FILES: string[]
+  export function runSelfTest(): string[]
 }
 
 declare module '../scripts/lib/forbidden-dependencies.mjs' {

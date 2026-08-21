@@ -1,0 +1,194 @@
+{
+  "schemaVersion": "0.1.0",
+  "sittingId": "sitting-widen-2-lights",
+  "throughLine": "Lights",
+  "phase": "widen",
+  "rung": 1,
+  "sittingNumber": 2,
+  "overture": "This is our town. We notice one need at a time.",
+  "prompt": "Find the street object that brings electric light to this block.",
+  "tryAgain": "Try again.",
+  "secondMissHint": "This is the street object for lights.",
+  "adultRevealLabel": "Reveal the lighting objects",
+  "showAllNamesLabel": "Show all names",
+  "backLabel": "Back to title",
+  "motion": {
+    "throughLinePulse": "unless-reduce-motion"
+  },
+  "safety": {
+    "approachLiveGear": "never",
+    "notes": "Teach lights from this drawing only. Never send anyone toward a live pole, wire, or transformer."
+  },
+  "license": {
+    "codeCompatible": "MIT-clean",
+    "assetKind": "original-writing"
+  },
+  "hotspots": [
+    {
+      "id": "obj-utility-pole",
+      "role": "through-line",
+      "displayName": "Utility pole",
+      "gloss": "the pole that holds the wires above the street",
+      "functionSummary": "It holds the overhead conductors and the transformer above the street.",
+      "inTabOrder": true,
+      "visual": {
+        "contrast": "high",
+        "pattern": "solid"
+      },
+      "layout": {
+        "xPercent": 43.8,
+        "yPercent": 18.5,
+        "widthPercent": 6.6,
+        "heightPercent": 23.4
+      }
+    },
+    {
+      "id": "obj-overhead-conductor",
+      "role": "through-line",
+      "displayName": "Overhead conductor",
+      "gloss": "the wire that carries electricity along the street",
+      "functionSummary": "It carries electricity along this block toward buildings that need light.",
+      "inTabOrder": true,
+      "visual": {
+        "contrast": "high",
+        "pattern": "solid"
+      },
+      "layout": {
+        "xPercent": 61.2,
+        "yPercent": 15,
+        "widthPercent": 15.3,
+        "heightPercent": 18
+      }
+    },
+    {
+      "id": "obj-distribution-transformer",
+      "role": "through-line",
+      "displayName": "Distribution transformer",
+      "gloss": "distribution transformer; it steps voltage down so nearby buildings can use it",
+      "functionSummary": "It changes the street voltage to a lower voltage buildings can use.",
+      "inTabOrder": true,
+      "visual": {
+        "contrast": "high",
+        "pattern": "solid"
+      },
+      "layout": {
+        "xPercent": 50.6,
+        "yPercent": 20.5,
+        "widthPercent": 10.4,
+        "heightPercent": 14.5
+      }
+    },
+    {
+      "id": "obj-traffic-signal",
+      "role": "off-need",
+      "displayName": "Traffic signal",
+      "inTabOrder": false,
+      "visual": {
+        "contrast": "low",
+        "pattern": "dashed-quiet"
+      },
+      "layout": {
+        "xPercent": 50.8,
+        "yPercent": 35.5,
+        "widthPercent": 7.6,
+        "heightPercent": 17.8
+      }
+    },
+    {
+      "id": "obj-crosswalk",
+      "role": "off-need",
+      "displayName": "Crosswalk",
+      "inTabOrder": false,
+      "visual": {
+        "contrast": "low",
+        "pattern": "dashed-quiet"
+      },
+      "layout": {
+        "xPercent": 42,
+        "yPercent": 53.5,
+        "widthPercent": 16,
+        "heightPercent": 12.3
+      }
+    },
+    {
+      "id": "obj-crossing-gates",
+      "role": "off-need",
+      "displayName": "Crossing gates",
+      "inTabOrder": false,
+      "visual": {
+        "contrast": "low",
+        "pattern": "dashed-quiet"
+      },
+      "layout": {
+        "xPercent": 43,
+        "yPercent": 66,
+        "widthPercent": 12,
+        "heightPercent": 12.5
+      }
+    },
+    {
+      "id": "obj-shop",
+      "role": "off-need",
+      "displayName": "Shop",
+      "inTabOrder": false,
+      "visual": {
+        "contrast": "low",
+        "pattern": "dashed-quiet"
+      },
+      "layout": {
+        "xPercent": 24,
+        "yPercent": 3.5,
+        "widthPercent": 18.5,
+        "heightPercent": 28
+      }
+    },
+    {
+      "id": "obj-mailbox",
+      "role": "off-need",
+      "displayName": "Mailbox",
+      "inTabOrder": false,
+      "visual": {
+        "contrast": "low",
+        "pattern": "dashed-quiet"
+      },
+      "layout": {
+        "xPercent": 28.4,
+        "yPercent": 32,
+        "widthPercent": 7.6,
+        "heightPercent": 11
+      }
+    },
+    {
+      "id": "obj-fire-hydrant",
+      "role": "off-need",
+      "displayName": "Fire hydrant",
+      "inTabOrder": false,
+      "visual": {
+        "contrast": "low",
+        "pattern": "dashed-quiet"
+      },
+      "layout": {
+        "xPercent": 36.2,
+        "yPercent": 33.5,
+        "widthPercent": 7.4,
+        "heightPercent": 11
+      }
+    },
+    {
+      "id": "obj-railroad-tracks",
+      "role": "off-need",
+      "displayName": "Railroad tracks",
+      "inTabOrder": false,
+      "visual": {
+        "contrast": "low",
+        "pattern": "dashed-quiet"
+      },
+      "layout": {
+        "xPercent": 8,
+        "yPercent": 78.6,
+        "widthPercent": 50,
+        "heightPercent": 11
+      }
+    }
+  ]
+}

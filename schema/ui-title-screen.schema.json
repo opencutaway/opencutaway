@@ -11,12 +11,13 @@
     "title",
     "blurb",
     "actors",
-    "lessonsShipped"
+    "learnControl",
+    "lightsControl"
   ],
   "properties": {
     "schemaVersion": {
       "type": "string",
-      "const": "0.1.0"
+      "const": "0.3.0"
     },
     "screenId": {
       "type": "string",
@@ -41,9 +42,37 @@
         "enum": ["child", "adult"]
       }
     },
-    "lessonsShipped": {
-      "type": "boolean",
-      "const": false
+    "learnControl": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "sittingId"],
+      "properties": {
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "sittingId": {
+          "type": "string",
+          "const": "sitting-widen-1-get-across"
+        }
+      }
+    },
+    "lightsControl": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "sittingId"],
+      "properties": {
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "sittingId": {
+          "type": "string",
+          "const": "sitting-widen-2-lights"
+        }
+      }
     }
   }
 }

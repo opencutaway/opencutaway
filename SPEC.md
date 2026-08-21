@@ -1,6 +1,6 @@
 # SPEC.md — Open Cutaway behaviour
 
-**This document owns** behaviour of the infrastructure game: what Open Cutaway does, screens, copy the app shows, and the road ahead. Stubs are OK when a mode is not built yet.
+**This document owns** behaviour of the infrastructure game: what Open Cutaway does, screens, copy the app shows, the shipped look (art and runtime), and the road ahead. Stubs are OK when a mode is not built yet.
 **It does not own** how behaviour is proved.
 
 Open Cutaway is a visual, text-rich game about how infrastructure works. Players aged 7–12, with a parent or other adult as co-player, learn street objects (name → function) and system chains (this path, not that one). It is not a phonics, CVC, or reading-aloud game.
@@ -19,24 +19,28 @@ Forever freeware. Progress stays on the device. Local sibling profiles only. No 
 
 | Feature ID | Screen | Status | What the player sees |
 |---|---|---|---|
-| FEAT-TITLE | Title | Placeholder shipped | The name **Open Cutaway** and a short blurb that lessons are not in this build. Progress would stay on this device. |
-| FEAT-LEARN | Learn | Stub | Later: object cards and chain-strips. Name the object, say what it does, show how it sits in a path. |
+| FEAT-TITLE | Title | Placeholder playable | The name **Open Cutaway**, a short blurb, and **Get across** plus **Lights** controls that open widen sittings 1 and 2. Progress stays on this device. |
+| FEAT-LEARN | Learn | Sittings 1–2 playable; copy gate open | **Get across** (widen sitting 1): through-line objects (traffic signal, crosswalk, crossing gates) are high contrast, named, and first in tab order. **Lights** (widen sitting 2): through-line objects (utility pole, overhead conductor, distribution transformer) are high contrast, named, and first in tab order. The busy block is at least 720 CSS px wide so every hotspot is a 44 px target that no other hotspot covers; on a narrower screen the block pans sideways inside its own frame and the page does not. Off-need objects stay quiet: lower contrast, dashed pattern, not in tab order. The player finds a through-line object, then reads the real name, a short gloss, and what it does. A wrong tap says try again; a second miss names the rung without giving the answer. After a second miss the adult can reveal the through-line names; show all names can be toggled at any time. Reduce-motion: no pulse. Sittings 3–11, chain-strips, plants, and the dam are not in this build. |
 | FEAT-CHALLENGE | Challenge | Stub | Later: recall and path-choice without becoming a scavenger hunt. |
 | FEAT-LIFE-LIST | Life list | Stub | Later: optional honor-system IRL finds. Must not unlock Learn or Challenge. |
 
 Machine-checkable rows for those ids live in the generated feature map. This file owns the behaviour those rows describe.
 
-There is no playable hydrant lesson in this slice. There is no node-link graph explorer.
+Status words. *Playable* means the code, content, JSON Schema, and Playwright proof have landed in lockstep. The generated feature map's `shipped` status is that same lockstep label and nothing more. Kid-facing copy counts as shipped only after the human ROLE-EDITOR gate, tracked as `F-lessons` in `docs/open-faults.md`.
 
-## Visual language
+There is no playable hydrant lesson in this slice. There is no node-link graph explorer. There is no dam sitting.
 
-Learn graphics mix original cutaways/cross-sections, object portraits, and chain-strips.
+## Shipped look (art and runtime freeze)
 
-Scenes should read at a glance as a busy cross-section of everyday work: vehicles, shops, civic jobs, and overlapping activity. Warm and specific — this pipe, that worker's job — not an abstract systems diagram and not a talking-hydrant cartoon.
+**Frozen:** isometric **16-bit SNES JRPG-inspired** placeholders (1990s isometric towns, readable props, limited palette) until a human artist replaces them. The client stays **2D and light** for **modest machines and iPads**: no WebGL, no heavy 3D engine, no huge textures. Touch-first; child-facing controls stay at least 44 CSS pixels (see `CLAUDE.md` S9).
 
-Inspiration for that density of people-doing-jobs is listed in `docs/inspiration.md`. Do not copy those books' characters, names, towns, art, or text.
+Until commissioned art exists, sittings use **original SVG (or tiny PNG) placeholders** in that style. Placeholders are allowed now; real art later swaps in. No photoreal photos on the block. Do not copy SNES games, Scarry, Macaulay, or any copyrighted tiles or sprites.
 
-Child-facing controls must stay large enough to use (see `CLAUDE.md` S9).
+Learn graphics also mix original cutaways/cross-sections, object portraits, and chain-strips.
+
+Scenes should read at a glance as a busy town of everyday work: vehicles, shops, civic jobs, and overlapping activity. Warm and specific — this pipe, that worker's job — not an abstract systems diagram and not a talking-hydrant cartoon.
+
+Inspiration for density of people-doing-jobs and for the 16-bit isometric tone is listed in `docs/inspiration.md`. Do not copy those books' or those games' characters, names, towns, tiles, art, or text.
 
 ## Object cards and chains
 

@@ -1,0 +1,325 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opencutaway.github.io/schema/sitting-widen-2.schema.json",
+  "title": "Widen sitting 2 (Lights)",
+  "description": "Copy and hotspot contract for the second block lesson. JSON Schema is the authority path; the child app must not invent a parallel parser.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "sittingId",
+    "throughLine",
+    "phase",
+    "rung",
+    "sittingNumber",
+    "overture",
+    "prompt",
+    "tryAgain",
+    "secondMissHint",
+    "adultRevealLabel",
+    "showAllNamesLabel",
+    "backLabel",
+    "motion",
+    "safety",
+    "license",
+    "hotspots"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "0.1.0"
+    },
+    "sittingId": {
+      "type": "string",
+      "const": "sitting-widen-2-lights"
+    },
+    "throughLine": {
+      "type": "string",
+      "const": "Lights"
+    },
+    "phase": {
+      "type": "string",
+      "const": "widen"
+    },
+    "rung": {
+      "type": "integer",
+      "const": 1
+    },
+    "sittingNumber": {
+      "type": "integer",
+      "const": 2
+    },
+    "overture": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 240
+    },
+    "prompt": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 240
+    },
+    "tryAgain": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "secondMissHint": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 240
+    },
+    "adultRevealLabel": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "showAllNamesLabel": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "backLabel": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "motion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["throughLinePulse"],
+      "properties": {
+        "throughLinePulse": {
+          "type": "string",
+          "const": "unless-reduce-motion"
+        }
+      }
+    },
+    "safety": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["approachLiveGear"],
+      "properties": {
+        "approachLiveGear": {
+          "type": "string",
+          "const": "never"
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 500
+        }
+      }
+    },
+    "license": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["codeCompatible", "assetKind"],
+      "properties": {
+        "codeCompatible": {
+          "type": "string",
+          "const": "MIT-clean"
+        },
+        "assetKind": {
+          "type": "string",
+          "const": "original-writing"
+        }
+      }
+    },
+    "hotspots": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 16,
+      "items": {
+        "$ref": "#/$defs/hotspot"
+      }
+    }
+  },
+  "allOf": [
+    {
+      "properties": {
+        "hotspots": {
+          "type": "array",
+          "contains": {
+            "type": "object",
+            "required": ["id", "role"],
+            "properties": {
+              "id": { "const": "obj-utility-pole" },
+              "role": { "const": "through-line" }
+            }
+          }
+        }
+      }
+    },
+    {
+      "properties": {
+        "hotspots": {
+          "type": "array",
+          "contains": {
+            "type": "object",
+            "required": ["id", "role"],
+            "properties": {
+              "id": { "const": "obj-overhead-conductor" },
+              "role": { "const": "through-line" }
+            }
+          }
+        }
+      }
+    },
+    {
+      "properties": {
+        "hotspots": {
+          "type": "array",
+          "contains": {
+            "type": "object",
+            "required": ["id", "role"],
+            "properties": {
+              "id": { "const": "obj-distribution-transformer" },
+              "role": { "const": "through-line" }
+            }
+          }
+        }
+      }
+    },
+    {
+      "properties": {
+        "hotspots": {
+          "type": "array",
+          "contains": {
+            "type": "object",
+            "required": ["id", "role"],
+            "properties": {
+              "id": { "const": "obj-traffic-signal" },
+              "role": { "const": "off-need" }
+            }
+          }
+        }
+      }
+    },
+    {
+      "properties": {
+        "hotspots": {
+          "type": "array",
+          "contains": {
+            "type": "object",
+            "required": ["id", "role"],
+            "properties": {
+              "id": { "const": "obj-shop" },
+              "role": { "const": "off-need" }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "hotspot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "role", "displayName", "inTabOrder", "visual", "layout"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^obj-[a-z0-9-]+$",
+          "maxLength": 64
+        },
+        "role": {
+          "type": "string",
+          "enum": ["through-line", "off-need"]
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "gloss": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "functionSummary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "inTabOrder": {
+          "type": "boolean"
+        },
+        "visual": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["contrast", "pattern"],
+          "properties": {
+            "contrast": {
+              "type": "string",
+              "enum": ["high", "low"]
+            },
+            "pattern": {
+              "type": "string",
+              "enum": ["solid", "dashed-quiet"]
+            }
+          }
+        },
+        "layout": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["xPercent", "yPercent", "widthPercent", "heightPercent"],
+          "properties": {
+            "xPercent": { "type": "number", "minimum": 0, "maximum": 100 },
+            "yPercent": { "type": "number", "minimum": 0, "maximum": 100 },
+            "widthPercent": { "type": "number", "minimum": 4, "maximum": 80 },
+            "heightPercent": { "type": "number", "minimum": 6, "maximum": 40 }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "role": { "const": "through-line" } },
+            "required": ["role"]
+          },
+          "then": {
+            "required": ["gloss", "functionSummary"],
+            "properties": {
+              "gloss": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "functionSummary": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 500
+              },
+              "inTabOrder": { "const": true },
+              "visual": {
+                "type": "object",
+                "properties": {
+                  "contrast": { "const": "high" },
+                  "pattern": { "const": "solid" }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "role": { "const": "off-need" } },
+            "required": ["role"]
+          },
+          "then": {
+            "properties": {
+              "inTabOrder": { "const": false },
+              "visual": {
+                "type": "object",
+                "properties": {
+                  "contrast": { "const": "low" },
+                  "pattern": { "const": "dashed-quiet" }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

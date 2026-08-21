@@ -1,15 +1,16 @@
 # CLAUDE.md — finished work, safety, engineering
 
-**This document owns** what counts as finished work; safety rules S1–S9; engineering rules E1–E11; and the scan style for chat replies to the owner.
+**This document owns** what counts as finished work; safety rules S1–S9; engineering rules E1–E12; and the scan style for chat replies to the owner.
 **It does not own** product behaviour (`SPEC.md`); the gate contract (`docs/testing-gauntlet.md`); or agent practice (`AGENTS.md`).
 
 ## What counts as finished work
 
-The product is the working game. This slice's product is the guard rails plus a placeholder shell a later agent can fill. Tests and documents exist to protect the game; they are never the goal by themselves.
+The product is the working game. This slice lands guard rails plus widen sittings 1–2 (Get across, Lights) playable on the busy block; their kid-facing copy still waits on the human ROLE-EDITOR gate (`F-lessons` in `docs/open-faults.md`); later sittings still fill in.
+Tests and documents exist to protect the game; they are never the goal by themselves.
 
 Do not create status files, progress logs, or session summaries. Update the single document that already owns the fact. A new governing file needs the same owner-visible approval as a new dependency.
 
-Honesty is absolute: never edit a test so failing behaviour looks like it passes; never present a stub as proof the real feature works; never call work done while any part is unfinished.
+Honesty is absolute: never edit a test so failing behaviour looks like it passes; never present a stub as proof the real feature works; never call work done while any part is unfinished. Paper-over of a red gate (specification gaming, oracle degradation, vacuous gate) is named and banned in `docs/testing-gauntlet.md`.
 
 Nobody — human or agent — may call a change finished, a build ready, or a check all green until the drift-check procedure in `.claude/skills/drift-check/SKILL.md` has run and every coverage number is the whole of its population.
 

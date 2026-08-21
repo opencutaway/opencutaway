@@ -1,0 +1,162 @@
+{
+  "schemaVersion": "0.1.0",
+  "sittingId": "sitting-widen-1-get-across",
+  "throughLine": "Get across",
+  "phase": "widen",
+  "rung": 1,
+  "sittingNumber": 1,
+  "overture": "This is our town. We notice one need at a time.",
+  "prompt": "Find the street object that helps people get across this block.",
+  "tryAgain": "Try again.",
+  "secondMissHint": "This is the street object for getting across.",
+  "adultRevealLabel": "Reveal the crossing objects",
+  "showAllNamesLabel": "Show all names",
+  "backLabel": "Back to title",
+  "motion": {
+    "throughLinePulse": "unless-reduce-motion"
+  },
+  "safety": {
+    "approachLiveGear": "never",
+    "notes": "Teach crossing from this drawing only. Never send anyone toward live tracks or a live signal."
+  },
+  "license": {
+    "codeCompatible": "MIT-clean",
+    "assetKind": "original-writing"
+  },
+  "hotspots": [
+    {
+      "id": "obj-traffic-signal",
+      "role": "through-line",
+      "displayName": "Traffic signal",
+      "gloss": "the lights that tell traffic when to stop or go",
+      "functionSummary": "It tells drivers and people walking when it is their turn to move.",
+      "inTabOrder": true,
+      "visual": {
+        "contrast": "high",
+        "pattern": "solid"
+      },
+      "layout": {
+        "xPercent": 50.8,
+        "yPercent": 35.5,
+        "widthPercent": 7.6,
+        "heightPercent": 17.8
+      }
+    },
+    {
+      "id": "obj-crosswalk",
+      "role": "through-line",
+      "displayName": "Crosswalk",
+      "gloss": "the marked place to walk across the street",
+      "functionSummary": "It marks where people cross so drivers know to watch for them.",
+      "inTabOrder": true,
+      "visual": {
+        "contrast": "high",
+        "pattern": "solid"
+      },
+      "layout": {
+        "xPercent": 42,
+        "yPercent": 53.5,
+        "widthPercent": 16,
+        "heightPercent": 12.3
+      }
+    },
+    {
+      "id": "obj-crossing-gates",
+      "role": "through-line",
+      "displayName": "Crossing gates",
+      "gloss": "the arms that lower when a train is coming",
+      "functionSummary": "They close the street while a train uses the crossing.",
+      "inTabOrder": true,
+      "visual": {
+        "contrast": "high",
+        "pattern": "solid"
+      },
+      "layout": {
+        "xPercent": 43,
+        "yPercent": 66,
+        "widthPercent": 12,
+        "heightPercent": 12.5
+      }
+    },
+    {
+      "id": "obj-shop",
+      "role": "off-need",
+      "displayName": "Shop",
+      "inTabOrder": false,
+      "visual": {
+        "contrast": "low",
+        "pattern": "dashed-quiet"
+      },
+      "layout": {
+        "xPercent": 24,
+        "yPercent": 3.5,
+        "widthPercent": 18.5,
+        "heightPercent": 28
+      }
+    },
+    {
+      "id": "obj-mailbox",
+      "role": "off-need",
+      "displayName": "Mailbox",
+      "inTabOrder": false,
+      "visual": {
+        "contrast": "low",
+        "pattern": "dashed-quiet"
+      },
+      "layout": {
+        "xPercent": 28.4,
+        "yPercent": 32,
+        "widthPercent": 7.6,
+        "heightPercent": 11
+      }
+    },
+    {
+      "id": "obj-fire-hydrant",
+      "role": "off-need",
+      "displayName": "Fire hydrant",
+      "inTabOrder": false,
+      "visual": {
+        "contrast": "low",
+        "pattern": "dashed-quiet"
+      },
+      "layout": {
+        "xPercent": 36.2,
+        "yPercent": 33.5,
+        "widthPercent": 7.4,
+        "heightPercent": 11
+      }
+    },
+    {
+      "id": "obj-utility-pole",
+      "role": "off-need",
+      "displayName": "Utility pole",
+      "inTabOrder": false,
+      "visual": {
+        "contrast": "low",
+        "pattern": "dashed-quiet"
+      },
+      "layout": {
+        "xPercent": 43.8,
+        "yPercent": 18.5,
+        "widthPercent": 6.6,
+        "heightPercent": 23.4
+      }
+    },
+    {
+      "id": "obj-railroad-tracks",
+      "role": "off-need",
+      "displayName": "Railroad tracks",
+      "inTabOrder": false,
+      "visual": {
+        "contrast": "low",
+        "pattern": "dashed-quiet"
+      },
+      "layout": {
+        "xPercent": 8,
+        "yPercent": 78.6,
+        "widthPercent": 50,
+        "heightPercent": 11
+      }
+    }
+  ]
+}

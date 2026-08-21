@@ -1,10 +1,8 @@
-import { execFileSync } from 'node:child_process'
-import { readFileSync } from 'node:fs'
-import path from 'node:path'
 import { describe, expect, it } from 'vitest'
 import {
   findPiiInText,
-  shouldScanRelativePath
+  shouldScanRelativePath,
+  scanPiiInTree
 } from '../scripts/lib/pii-scan.mjs'
 import { repoRoot } from './helpers/repo-files.ts'
 
@@ -21,25 +19,10 @@ describe('PII scrub', () => {
   it('skips lockfiles', () => {
     expect(shouldScanRelativePath('package-lock.json')).toBe(false)
     expect(shouldScanRelativePath('docs/PRIVACY.md')).toBe(true)
+    expect(shouldScanRelativePath('node_modules/pkg/index.js')).toBe(false)
   })
 
   it('finds no PII markers in files git would track', () => {
-    const output = execFileSync(
-      'git',
-      ['ls-files', '-co', '--exclude-standard'],
-      { cwd: repoRoot, encoding: 'utf8' }
-    )
-    const findings: { file: string; hits: string[] }[] = []
-    for (const relativePath of output.split(/\r?\n/).filter(Boolean)) {
-      if (!shouldScanRelativePath(relativePath)) {
-        continue
-      }
-      const text = readFileSync(path.join(repoRoot, relativePath), 'utf8')
-      const hits = findPiiInText(text)
-      if (hits.length > 0) {
-        findings.push({ file: relativePath, hits })
-      }
-    }
-    expect(findings).toEqual([])
+    expect(scanPiiInTree(repoRoot)).toEqual([])
   })
 })

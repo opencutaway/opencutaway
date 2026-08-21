@@ -86,7 +86,7 @@ HISTORY ceiling: 0
 | OWN-GITATTRIBUTES | `.gitattributes` | SOURCE | LF and binaries |
 | OWN-INDEX-HTML | `index.html` | SOURCE | Vite entry |
 | OWN-TSCONFIG | `tsconfig.json` | SOURCE | TypeScript |
-| OWN-VITE-CONFIG | `vite.config.ts` | SOURCE | Vite + vitest |
+| OWN-VITE-CONFIG | `vite.config.ts` | SOURCE | Vite + vitest; allowOnly false |
 | OWN-GATE-BASELINE | `.claude/gate-baseline.json` | GATE | Floors and ceilings |
 | OWN-DRIFT-CHECK-SKILL | `.claude/skills/drift-check/SKILL.md` | OWNER | Drift-check procedure |
 | OWN-TESTING-GAUNTLET | `docs/testing-gauntlet.md` | OWNER | Gate contract |
@@ -107,7 +107,8 @@ HISTORY ceiling: 0
 | OWN-GLOB-E2E | `e2e/**` | TEST | Playwright player-facing specs |
 | OWN-PLAYWRIGHT-CONFIG | `playwright.config.ts` | TEST | Playwright runner |
 | OWN-GLOB-SCRIPTS | `scripts/**` | GATE | PII and client scans |
-| OWN-GLOB-TOOLS | `tools/**` | GATE | Maps and floors |
+| OWN-GATE-INTEGRITY | `tools/check-gate-integrity.mjs` | GATE | G-unit paper-over scan (GIP-C5); not a 12th named gate |
+| OWN-GLOB-TOOLS | `tools/**` | GATE | Maps, floors, and other gate tools |
 | OWN-GLOB-WORKFLOWS | `workflows/**` | DATA | Build-time graphs |
 | OWN-GLOB-ASSETS | `assets/**` | DATA | Drawings and photos later |
 | OWN-GLOB-COSMETICS | `cosmetics/**` | DATA | Unfrozen stub |
@@ -156,12 +157,15 @@ HISTORY ceiling: 0
 | `docs/level-spine.md` | OWN-LEVEL-SPINE | OWNER | Curriculum shape and numbering |
 | `docs/open-faults.md` | OWN-OPEN-FAULTS | OWNER | Open gaps |
 | `docs/reviews/CTX-BOOTSTRAP-DRIFT.md` | OWN-GLOB-REVIEWS | DOC | Independent review records |
+| `docs/reviews/CTX-REVIEW-SITTINGS-GIP.md` | OWN-GLOB-REVIEWS | DOC | Independent review records |
 | `docs/reviews/README.md` | OWN-REVIEWS-README | DOC | Review record home |
 | `docs/settled.md` | OWN-SETTLED | OWNER | Closed questions |
 | `docs/testing-gauntlet.md` | OWN-TESTING-GAUNTLET | OWNER | Gate contract |
 | `docs/tutorial-manifest.md` | OWN-GEN-TUTORIAL-MANIFEST | GENERATED | Written by tools/tutorial-manifest.mjs |
 | `e2e/README.md` | OWN-GLOB-E2E | TEST | Playwright player-facing specs |
 | `e2e/fixtures/player.ts` | OWN-GLOB-E2E | TEST | Playwright player-facing specs |
+| `e2e/helpers/adult-sitting-controls.ts` | OWN-GLOB-E2E | TEST | Playwright player-facing specs |
+| `e2e/helpers/hotspot-reach.ts` | OWN-GLOB-E2E | TEST | Playwright player-facing specs |
 | `e2e/pages/title-screen.ts` | OWN-GLOB-E2E | TEST | Playwright player-facing specs |
 | `e2e/pages/widen-sitting-1.ts` | OWN-GLOB-E2E | TEST | Playwright player-facing specs |
 | `e2e/pages/widen-sitting-2.ts` | OWN-GLOB-E2E | TEST | Playwright player-facing specs |
@@ -204,9 +208,11 @@ HISTORY ceiling: 0
 | `src/vite-env.d.ts` | OWN-GLOB-SRC | SOURCE | Offline Preact shell |
 | `tests/client-gates.test.ts` | OWN-GLOB-TESTS | TEST | Vitest and registry |
 | `tests/forbidden-dependencies.test.ts` | OWN-GLOB-TESTS | TEST | Vitest and registry |
+| `tests/gate-integrity.test.ts` | OWN-GLOB-TESTS | TEST | Vitest and registry |
 | `tests/helpers/repo-files.ts` | OWN-GLOB-TESTS | TEST | Vitest and registry |
 | `tests/helpers/schema.ts` | OWN-GLOB-TESTS | TEST | Vitest and registry |
 | `tests/hit-target.test.ts` | OWN-GLOB-TESTS | TEST | Vitest and registry |
+| `tests/hotspot-layout.test.ts` | OWN-GLOB-TESTS | TEST | Vitest and registry |
 | `tests/pii-scan.test.ts` | OWN-GLOB-TESTS | TEST | Vitest and registry |
 | `tests/registry-coverage.test.ts` | OWN-GLOB-TESTS | TEST | Vitest and registry |
 | `tests/registry.json` | OWN-GEN-TEST-REGISTRY | GENERATED | Written by scripts/write-test-registry.mjs |
@@ -219,19 +225,20 @@ HISTORY ceiling: 0
 | `tests/widen-sitting-1.test.ts` | OWN-GLOB-TESTS | TEST | Vitest and registry |
 | `tests/widen-sitting-2.test.ts` | OWN-GLOB-TESTS | TEST | Vitest and registry |
 | `tests/workflow-graph.test.ts` | OWN-GLOB-TESTS | TEST | Vitest and registry |
-| `tools/blast-radius.mjs` | OWN-GLOB-TOOLS | GATE | Maps and floors |
-| `tools/check-floors.mjs` | OWN-GLOB-TOOLS | GATE | Maps and floors |
-| `tools/check-governing.mjs` | OWN-GLOB-TOOLS | GATE | Maps and floors |
-| `tools/check-lockstep.mjs` | OWN-GLOB-TOOLS | GATE | Maps and floors |
-| `tools/check-schemas.mjs` | OWN-GLOB-TOOLS | GATE | Maps and floors |
-| `tools/code-map.mjs` | OWN-GLOB-TOOLS | GATE | Maps and floors |
-| `tools/effect-map.mjs` | OWN-GLOB-TOOLS | GATE | Maps and floors |
-| `tools/feature-map.mjs` | OWN-GLOB-TOOLS | GATE | Maps and floors |
-| `tools/file-map.mjs` | OWN-GLOB-TOOLS | GATE | Maps and floors |
-| `tools/pii-lint.mjs` | OWN-GLOB-TOOLS | GATE | Maps and floors |
-| `tools/tutorial-manifest.mjs` | OWN-GLOB-TOOLS | GATE | Maps and floors |
+| `tools/blast-radius.mjs` | OWN-GLOB-TOOLS | GATE | Maps, floors, and other gate tools |
+| `tools/check-floors.mjs` | OWN-GLOB-TOOLS | GATE | Maps, floors, and other gate tools |
+| `tools/check-gate-integrity.mjs` | OWN-GATE-INTEGRITY | GATE | G-unit paper-over scan (GIP-C5); not a 12th named gate |
+| `tools/check-governing.mjs` | OWN-GLOB-TOOLS | GATE | Maps, floors, and other gate tools |
+| `tools/check-lockstep.mjs` | OWN-GLOB-TOOLS | GATE | Maps, floors, and other gate tools |
+| `tools/check-schemas.mjs` | OWN-GLOB-TOOLS | GATE | Maps, floors, and other gate tools |
+| `tools/code-map.mjs` | OWN-GLOB-TOOLS | GATE | Maps, floors, and other gate tools |
+| `tools/effect-map.mjs` | OWN-GLOB-TOOLS | GATE | Maps, floors, and other gate tools |
+| `tools/feature-map.mjs` | OWN-GLOB-TOOLS | GATE | Maps, floors, and other gate tools |
+| `tools/file-map.mjs` | OWN-GLOB-TOOLS | GATE | Maps, floors, and other gate tools |
+| `tools/pii-lint.mjs` | OWN-GLOB-TOOLS | GATE | Maps, floors, and other gate tools |
+| `tools/tutorial-manifest.mjs` | OWN-GLOB-TOOLS | GATE | Maps, floors, and other gate tools |
 | `tsconfig.json` | OWN-TSCONFIG | SOURCE | TypeScript |
-| `vite.config.ts` | OWN-VITE-CONFIG | SOURCE | Vite + vitest |
+| `vite.config.ts` | OWN-VITE-CONFIG | SOURCE | Vite + vitest; allowOnly false |
 | `workflows/README.md` | OWN-GLOB-WORKFLOWS | DATA | Build-time graphs |
 | `workflows/content-authoring.example.yaml` | OWN-GLOB-WORKFLOWS | DATA | Build-time graphs |
 

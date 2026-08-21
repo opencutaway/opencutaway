@@ -1,8 +1,15 @@
 {
-  "schemaVersion": "0.1.0",
+  "schemaVersion": "0.3.0",
   "screenId": "title",
   "title": "Open Cutaway",
-  "blurb": "A visual game about how infrastructure works. Lessons are not in this build yet. Progress stays on this device.",
+  "blurb": "A visual game about how infrastructure works. Start on the block with Get across or Lights. Progress stays on this device.",
   "actors": ["child", "adult"],
-  "lessonsShipped": false
+  "learnControl": {
+    "label": "Get across",
+    "sittingId": "sitting-widen-1-get-across"
+  },
+  "lightsControl": {
+    "label": "Lights",
+    "sittingId": "sitting-widen-2-lights"
+  }
 }

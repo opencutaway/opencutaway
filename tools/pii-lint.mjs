@@ -2,37 +2,21 @@
 /**
  * PII and ethos gates. Negative controls live in --self-test.
  */
-import { execFileSync } from 'node:child_process'
-import { readFile } from 'node:fs/promises'
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
-import { findPiiInText, shouldScanRelativePath } from '../scripts/lib/pii-scan.mjs'
-import { findForbiddenTokens } from '../scripts/lib/client-gates.mjs'
+import {
+  findPiiInText,
+  scanPiiInTree
+} from '../scripts/lib/pii-scan.mjs'
+import {
+  findForbiddenTokens,
+  forbiddenClientTokens
+} from '../scripts/lib/client-gates.mjs'
 import { scanClientTree } from '../scripts/lib/scan-client-tree.mjs'
 import { repoRoot } from './file-map.mjs'
 
-function listCandidateFiles(root = repoRoot) {
-  const output = execFileSync(
-    'git',
-    ['ls-files', '-co', '--exclude-standard'],
-    { cwd: root, encoding: 'utf8' }
-  )
-  return output
-    .split(/\r?\n/)
-    .filter(Boolean)
-    .filter(shouldScanRelativePath)
-}
-
 export async function scanPii(root = repoRoot) {
-  const findings = []
-  for (const relativePath of listCandidateFiles(root)) {
-    const text = await readFile(path.join(root, relativePath), 'utf8')
-    const hits = findPiiInText(text)
-    if (hits.length > 0) {
-      findings.push({ file: relativePath, hits })
-    }
-  }
-  return findings
+  return scanPiiInTree(root)
 }
 
 export async function scanEthos(root = repoRoot) {
@@ -52,6 +36,17 @@ export function runSelfTest() {
   if (!findForbiddenTokens(token).includes('getUserMedia')) {
     failures.push('ethos token control silent')
   }
+  const net = ['fe', 'tch', '(url)'].join('')
+  if (!findForbiddenTokens(net).includes('fetch(')) {
+    failures.push('ethos network control silent')
+  }
+  const store = ['local', 'Storage', '.setItem'].join('')
+  if (!findForbiddenTokens(store).includes('localStorage')) {
+    failures.push('ethos storage control silent')
+  }
+  if (findForbiddenTokens('prefetchData(url)').length !== 0) {
+    failures.push('ethos false positive on prefetch')
+  }
   if (findPiiInText('no markers here').length !== 0) {
     failures.push('pii false positive on clean text')
   }
@@ -67,7 +62,7 @@ async function main() {
       process.exitCode = 1
       return
     }
-    console.log('pii-lint self-test: 5/5 controls')
+    console.log('pii-lint self-test: 8/8 controls')
     return
   }
   if (arg === '--ethos') {
@@ -75,7 +70,9 @@ async function main() {
     for (const finding of findings) {
       console.error(`${finding.file}: ${finding.hits.join(', ')}`)
     }
-    console.log(`ethos: ${findings.length} problems`)
+    console.log(
+      `ethos: ${findings.length} problems over ${forbiddenClientTokens().length} tokens`
+    )
     if (findings.length > 0) process.exitCode = 1
     return
   }

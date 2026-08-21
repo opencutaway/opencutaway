@@ -33,6 +33,7 @@ node tools/tutorial-manifest.mjs --check && node tools/tutorial-manifest.mjs --s
 node tools/check-lockstep.mjs && node tools/check-lockstep.mjs --self-test
 node tools/check-schemas.mjs && node tools/check-schemas.mjs --self-test
 node tools/check-governing.mjs && node tools/check-governing.mjs --self-test
+node tools/check-gate-integrity.mjs && node tools/check-gate-integrity.mjs --self-test
 node tools/pii-lint.mjs && node tools/pii-lint.mjs --self-test && node tools/pii-lint.mjs --ethos
 node tools/check-floors.mjs
 npm run check
@@ -59,6 +60,7 @@ Drift check — <date>
 | Effect map (G-effect) | <n> tests over <n> files, <n> problems |
 | Schema inventory (G-schema) | <n> schemas, <n> problems |
 | Governing (G-gov) | <n> files, <n> strays |
+| Gate integrity (G-unit) | <n> problems over <n> files · <n>/<n> controls |
 | PII / ethos | <n> problems |
 | Floors | live vs baseline |
 | npm run check | exit <n> |
