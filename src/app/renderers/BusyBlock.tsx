@@ -543,7 +543,7 @@ export function BusyBlock({
         class="busy-block-art"
         viewBox="0 0 960 540"
         role="img"
-        aria-label="An isometric 16-bit town block with a shop, a house, jobs, a street, a utility pole, a transformer, overhead wires, a crosswalk, a traffic signal, and railroad tracks."
+        aria-label="An isometric town block: a shop, a house, people at their jobs, a street with a crosswalk and a traffic signal, a mailbox, a fire hydrant, a utility pole carrying an overhead conductor and a distribution transformer, crossing gates, and railroad tracks."
       >
         <defs>
           <pattern id="dither-grass" width="4" height="4" patternUnits="userSpaceOnUse">

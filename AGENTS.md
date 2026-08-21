@@ -17,7 +17,7 @@ Collaboration records, ownership fields, and review notes MUST use role or conte
 6. generated `docs/file-map.md`
 7. generated `docs/code-map.md`, `docs/feature-map.md`, `docs/tutorial-manifest.md`
 
-Then the file you are about to change. Safety and engineering rules are in `CLAUDE.md` only.
+Then the file you are about to change. Safety and engineering rules are in `CLAUDE.md` only. Any visual work — art, sprites, stylesheet colours, animation — also reads `docs/art-bible.md` and `content/art/tokens.json` first.
 
 ## Six drift parts
 

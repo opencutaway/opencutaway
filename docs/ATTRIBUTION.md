@@ -1,9 +1,9 @@
 # Asset attribution
 
-**This document owns** the per-asset attribution table for committed photos and third-party graphics.
+**This document owns** the per-asset attribution table for committed photos, audio, and third-party graphics.
 **It does not own** drawing style or the do-not-copy line for inspiration books.
 
-Every photo (and any third-party graphic) committed later needs one row. Drawings that are original human-traced SVG still get a provenance path; they do not need a third-party license row.
+Every photo, audio file, and third-party graphic committed later needs one row. Drawings that are original human-traced SVG still get a provenance path; they do not need a third-party license row.
 
 v0 photos: US public domain or CC0 only. No NC. No unlicensed web scrapes. No closed-model rasters presented as original MIT art.
 

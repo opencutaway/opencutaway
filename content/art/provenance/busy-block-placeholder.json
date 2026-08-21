@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "0.1.0",
+  "assetId": "TOWN_BUSY_BLOCK_OVERVIEW_IDLE_v001",
+  "file": "src/app/renderers/BusyBlock.tsx",
+  "kind": "svg-placeholder",
+  "createdOn": "2026-08-20",
+  "creator": "ROLE-IMPLEMENTER",
+  "reviewer": "ROLE-REVIEWER",
+  "tools": ["hand-authored SVG primitives in TSX"],
+  "promptRecord": "none",
+  "references": [
+    {
+      "kind": "none",
+      "note": "original composition; no copied tiles, sprites, or maps",
+      "licence": "MIT-clean"
+    }
+  ],
+  "licence": "MIT-clean",
+  "humanChanges": "",
+  "technicalReview": {
+    "result": "pass",
+    "record": "docs/reviews/CTX-REVIEW-SITTINGS-GIP.md (licensing pass: original SVG)"
+  },
+  "originalityReview": {
+    "result": "pass",
+    "record": "docs/reviews/CTX-REVIEW-SITTINGS-GIP.md (licensing pass: original SVG)"
+  },
+  "fileHash": {
+    "algorithm": "sha256",
+    "hex": "2729830554cf32afeee7dfc69f36d3d3f57f9d9a613aa3118a5216ab9eb748ac"
+  }
+}

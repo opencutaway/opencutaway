@@ -128,6 +128,24 @@ export const FILE_META = {
     mutantFamily: 'none',
     evidence: 'vitest',
     registryIds: ['TEST-HOTSPOT-LAYOUT']
+  },
+  'tests/art-tokens.test.ts': {
+    protects: 'The art tokens validate against their schema, carry all 23 palette anchors, and the placeholder renderer constants and stylesheet colours agree with them.',
+    doesNotProve: 'That real art follows the bible; that the placeholder is on the real-art grid (it is exempt by name).',
+    oracle: 'Ajv true/false with literal error paths; literal renderer constants 72, 36, 960x540, 720; literal stylesheet hex values.',
+    platform: 'Node vitest',
+    mutantFamily: 'none',
+    evidence: 'vitest',
+    registryIds: ['TEST-ART-TOKENS']
+  },
+  'tests/art-provenance.test.ts': {
+    protects: 'Every recorded visual asset has a provenance record with role IDs only, a licence, both reviews, and a file hash that matches the asset bytes.',
+    doesNotProve: 'That the reviews were sound; that un-recorded assets do not exist.',
+    oracle: 'Ajv true/false with literal error paths; sha256 of the asset file equals the recorded hex.',
+    platform: 'Node vitest',
+    mutantFamily: 'none',
+    evidence: 'vitest',
+    registryIds: ['TEST-ART-PROVENANCE']
   }
 }
 

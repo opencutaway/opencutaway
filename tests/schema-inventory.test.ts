@@ -14,6 +14,8 @@ function runCheckSchemas(...args: string[]) {
 describe('Ajv schema inventory', () => {
   it('lists every committed JSON Schema file', () => {
     expect(listSchemaFiles()).toEqual([
+      'schema/art-provenance.schema.json',
+      'schema/art-tokens.schema.json',
       'schema/infrastructure-object-card.schema.json',
       'schema/local-profile.schema.json',
       'schema/sitting-widen-1.schema.json',
@@ -118,7 +120,7 @@ describe('check-schemas tool', () => {
   it('maps every schema file to a code row and finds no problems', () => {
     const run = runCheckSchemas()
     expect(run.stderr).toBe('')
-    expect(run.stdout.trim()).toBe('schema inventory: 7 schemas, 7 mapped, 0 problems')
+    expect(run.stdout.trim()).toBe('schema inventory: 9 schemas, 9 mapped, 0 problems')
     expect(run.status).toBe(0)
   })
 

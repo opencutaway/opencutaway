@@ -1,7 +1,7 @@
 # CLAUDE.md — finished work, safety, engineering
 
 **This document owns** what counts as finished work; safety rules S1–S9; engineering rules E1–E12; and the scan style for chat replies to the owner.
-**It does not own** product behaviour (`SPEC.md`); the gate contract (`docs/testing-gauntlet.md`); or agent practice (`AGENTS.md`).
+**It does not own** product behaviour (`SPEC.md`); the gate contract (`docs/testing-gauntlet.md`); the look (`docs/art-bible.md`); or agent practice (`AGENTS.md`).
 
 ## What counts as finished work
 

@@ -5,7 +5,7 @@
 
 [Open Cutaway](https://github.com/opencutaway/opencutaway) is a visual infrastructure-literacy game: street objects, system chains, and the industrial landscape a child may never visit. It is for ages 7–12 with an adult co-player. The shipped app is an offline Preact + Vite client; progress stays on the device. No camera, location, cloud accounts, ads, or analytics. Forever freeware.
 
-Tone and world draw from Macaulay’s *Underground*, Hayes’s *Infrastructure*, and Scarry’s *What Do People Do All Day?* (occupational density only). The busy block is isometric 16-bit in the tone of 1990s SNES JRPG towns. Do not copy those books or those games. See [docs/inspiration.md](docs/inspiration.md).
+Tone and world draw from Macaulay’s *Underground*, Hayes’s *Infrastructure*, and Scarry’s *What Do People Do All Day?* (occupational density only). The busy block is a pixel-constructed isometric illustration defined by the rules in [docs/art-bible.md](docs/art-bible.md), not by named games. Do not copy those books or any game. See [docs/inspiration.md](docs/inspiration.md).
 
 ## Status
 

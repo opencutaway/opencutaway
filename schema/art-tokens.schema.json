@@ -1,0 +1,740 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opencutaway.github.io/schema/art-tokens.schema.json",
+  "title": "Art tokens",
+  "description": "Machine-readable values of the art bible (docs/art-bible.md). Renderer constants and stylesheet colours are gated against this file; the bible prose owns the reasons, this file owns the numbers.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "source",
+    "projection",
+    "canvas",
+    "display",
+    "legacyPlaceholder",
+    "objectScale",
+    "zoom",
+    "depthBands",
+    "occlusion",
+    "pixel",
+    "saturation",
+    "lighting",
+    "palette",
+    "processCoding",
+    "touch",
+    "timing",
+    "animation",
+    "text",
+    "ui",
+    "layers",
+    "objectStates",
+    "naming",
+    "productionGates"
+  ],
+  "properties": {
+    "schemaVersion": { "type": "string", "const": "0.1.0" },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "version", "date", "owner"],
+      "properties": {
+        "title": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "version": { "type": "string", "const": "1.2" },
+        "date": { "$ref": "#/$defs/isoDate" },
+        "owner": {
+          "type": "string",
+          "const": "docs/art-bible.md",
+          "description": "the document that owns the rules these values implement; this file is the authoritative home of the values themselves"
+        }
+      }
+    },
+    "projection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "groundDiamondPx",
+        "axisDegrees",
+        "elevationUnitPx",
+        "halfElevationUnitPx",
+        "perspective",
+        "cameraRotation",
+        "mirroredScenes",
+        "visibleFaces",
+        "keyLight"
+      ],
+      "properties": {
+        "type": { "type": "string", "enum": ["dimetric-2-1"] },
+        "groundDiamondPx": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["width", "height"],
+          "properties": {
+            "width": { "type": "integer", "const": 64 },
+            "height": { "type": "integer", "const": 32 }
+          }
+        },
+        "axisDegrees": { "type": "number", "const": 26.565 },
+        "elevationUnitPx": { "type": "integer", "const": 16 },
+        "halfElevationUnitPx": { "type": "integer", "const": 8 },
+        "perspective": { "type": "boolean", "const": false },
+        "cameraRotation": { "type": "boolean", "const": false },
+        "mirroredScenes": { "type": "boolean", "const": false },
+        "visibleFaces": {
+          "type": "array",
+          "const": ["lower-left", "lower-right"]
+        },
+        "keyLight": { "type": "string", "const": "upper-left" }
+      }
+    },
+    "canvas": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "logicalPx",
+        "exportScales",
+        "environmentScaling",
+        "uiRendering",
+        "safeRegionPx"
+      ],
+      "properties": {
+        "logicalPx": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["width", "height"],
+          "properties": {
+            "width": { "type": "integer", "const": 1024 },
+            "height": { "type": "integer", "const": 768 }
+          }
+        },
+        "exportScales": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["standard", "permitted"],
+          "properties": {
+            "standard": { "type": "integer", "const": 2 },
+            "permitted": { "type": "integer", "const": 3 }
+          }
+        },
+        "environmentScaling": { "type": "string", "enum": ["nearest-neighbour"] },
+        "uiRendering": { "type": "string", "enum": ["native"] },
+        "safeRegionPx": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["x", "y"],
+          "properties": {
+            "x": { "$ref": "#/$defs/intRange" },
+            "y": { "$ref": "#/$defs/intRange" }
+          }
+        }
+      }
+    },
+    "display": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["primary", "supported", "narrowScreens", "pageScrollsSideways"],
+      "properties": {
+        "primary": { "type": "string", "enum": ["ipad-landscape"] },
+        "supported": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": { "type": "string", "enum": ["phone", "desktop"] }
+        },
+        "narrowScreens": { "type": "string", "enum": ["fit-width-then-pan"] },
+        "pageScrollsSideways": { "type": "boolean", "const": false }
+      }
+    },
+    "legacyPlaceholder": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file", "viewBox", "tilePx", "minBlockWidthCssPx", "status", "fault"],
+      "properties": {
+        "file": { "type": "string", "const": "src/app/renderers/BusyBlock.tsx" },
+        "viewBox": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["width", "height"],
+          "properties": {
+            "width": { "type": "integer", "const": 960 },
+            "height": { "type": "integer", "const": 540 }
+          }
+        },
+        "tilePx": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["width", "height"],
+          "properties": {
+            "width": { "type": "integer", "const": 72 },
+            "height": { "type": "integer", "const": 36 }
+          }
+        },
+        "minBlockWidthCssPx": { "type": "integer", "const": 720 },
+        "status": { "type": "string", "enum": ["exempt-until-redrawn"] },
+        "fault": { "type": "string", "pattern": "^F-[a-z0-9-]+$" }
+      }
+    },
+    "objectScale": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["overview", "inspection", "quietBuffer", "enlargementPct"],
+      "properties": {
+        "overview": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["frameWidthPct", "frameAreaPct"],
+          "properties": {
+            "frameWidthPct": { "$ref": "#/$defs/pctRange" },
+            "frameAreaPct": { "$ref": "#/$defs/pctRange" }
+          }
+        },
+        "inspection": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["usableAreaPct", "usableAreaMaxPct"],
+          "properties": {
+            "usableAreaPct": { "$ref": "#/$defs/pctRange" },
+            "usableAreaMaxPct": { "$ref": "#/$defs/pct" }
+          }
+        },
+        "quietBuffer": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["widthPct", "severalTargetsWidthPct"],
+          "properties": {
+            "widthPct": { "$ref": "#/$defs/pct" },
+            "severalTargetsWidthPct": { "$ref": "#/$defs/pct" }
+          }
+        },
+        "enlargementPct": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["principal", "smallComponent", "gapIncrease", "flowPathWiden"],
+          "properties": {
+            "principal": { "$ref": "#/$defs/numberRange" },
+            "smallComponent": { "$ref": "#/$defs/numberRange" },
+            "gapIncrease": { "$ref": "#/$defs/numberRange" },
+            "flowPathWiden": { "$ref": "#/$defs/numberRange" }
+          }
+        }
+      }
+    },
+    "zoom": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "transitionMs",
+        "translationMaxFrameWidthPct",
+        "scale",
+        "liftLogicalPx",
+        "backgroundValueDropPoints",
+        "backgroundSaturationDropPct"
+      ],
+      "properties": {
+        "transitionMs": { "$ref": "#/$defs/msRange" },
+        "translationMaxFrameWidthPct": { "$ref": "#/$defs/pct" },
+        "scale": { "$ref": "#/$defs/numberRange" },
+        "liftLogicalPx": { "$ref": "#/$defs/intRange" },
+        "backgroundValueDropPoints": { "$ref": "#/$defs/numberRange" },
+        "backgroundSaturationDropPct": { "$ref": "#/$defs/pctRange" }
+      }
+    },
+    "depthBands": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["foregroundMaxFramePct", "middleGroundHighContrastEdgesPct"],
+      "properties": {
+        "foregroundMaxFramePct": { "$ref": "#/$defs/pct" },
+        "middleGroundHighContrastEdgesPct": { "$ref": "#/$defs/pctRange" }
+      }
+    },
+    "occlusion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["overviewMaxSilhouettePct", "neverCovers"],
+      "properties": {
+        "overviewMaxSilhouettePct": { "$ref": "#/$defs/pct" },
+        "neverCovers": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "tap-region",
+              "named-component",
+              "flow-endpoint",
+              "safety-feature",
+              "animation-result"
+            ]
+          }
+        }
+      }
+    },
+    "pixel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "exportBlockPx",
+        "clusterPx",
+        "valueSteps",
+        "darkEdgeAccent",
+        "ditherBridgeMaxPx",
+        "antiAliasMaxPx"
+      ],
+      "properties": {
+        "exportBlockPx": { "type": "integer", "const": 2 },
+        "clusterPx": { "$ref": "#/$defs/intRange" },
+        "valueSteps": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["major", "minor"],
+          "properties": {
+            "major": { "$ref": "#/$defs/intRange" },
+            "minor": { "$ref": "#/$defs/intRange" }
+          }
+        },
+        "darkEdgeAccent": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["thicknessPx", "maxPerimeterPct", "uniformBlackOutline"],
+          "properties": {
+            "thicknessPx": { "type": "integer", "const": 1 },
+            "maxPerimeterPct": { "$ref": "#/$defs/pct" },
+            "uniformBlackOutline": { "type": "boolean", "const": false }
+          }
+        },
+        "ditherBridgeMaxPx": { "type": "integer", "minimum": 1, "maximum": 16 },
+        "antiAliasMaxPx": { "type": "integer", "const": 1 }
+      }
+    },
+    "saturation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "principalPct",
+        "immediateContextPct",
+        "backgroundPct",
+        "inspectionBackgroundPct",
+        "processHighlightMaxPct",
+        "processHighlightScope"
+      ],
+      "properties": {
+        "principalPct": { "type": "integer", "const": 100 },
+        "immediateContextPct": { "$ref": "#/$defs/pctRange" },
+        "backgroundPct": { "$ref": "#/$defs/pctRange" },
+        "inspectionBackgroundPct": { "$ref": "#/$defs/pctRange" },
+        "processHighlightMaxPct": { "type": "integer", "minimum": 100, "maximum": 115 },
+        "processHighlightScope": { "type": "string", "enum": ["active-path-only"] }
+      }
+    },
+    "lighting": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "fill",
+        "weatherVariants",
+        "timeOfDayVariants",
+        "contactShadowPx",
+        "smallObjectShadowPx"
+      ],
+      "properties": {
+        "key": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["direction", "temperature"],
+          "properties": {
+            "direction": { "type": "string", "const": "upper-left" },
+            "temperature": { "type": "string", "enum": ["mildly-warm"] }
+          }
+        },
+        "fill": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["temperature", "character"],
+          "properties": {
+            "temperature": { "type": "string", "enum": ["cool"] },
+            "character": { "type": "string", "enum": ["soft"] }
+          }
+        },
+        "weatherVariants": { "type": "boolean", "const": false },
+        "timeOfDayVariants": { "type": "boolean", "const": false },
+        "contactShadowPx": { "$ref": "#/$defs/intRange" },
+        "smallObjectShadowPx": { "$ref": "#/$defs/intRange" }
+      }
+    },
+    "palette": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["anchors", "materialRamp"],
+      "properties": {
+        "anchors": {
+          "type": "array",
+          "minItems": 23,
+          "maxItems": 23,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/paletteAnchor" }
+        },
+        "materialRamp": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["steps", "values", "accentsMax"],
+          "properties": {
+            "steps": { "$ref": "#/$defs/intRange" },
+            "values": {
+              "type": "array",
+              "minItems": 5,
+              "maxItems": 5,
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": ["deep-shadow", "contact-or-seam", "base", "light-plane", "highlight"]
+              }
+            },
+            "accentsMax": { "type": "integer", "const": 2 }
+          }
+        }
+      }
+    },
+    "processCoding": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/processCode" },
+      "allOf": [
+        { "contains": { "type": "object", "properties": { "process": { "const": "water" } }, "required": ["process"] } },
+        { "contains": { "type": "object", "properties": { "process": { "const": "electricity" } }, "required": ["process"] } },
+        { "contains": { "type": "object", "properties": { "process": { "const": "mechanical-load" } }, "required": ["process"] } },
+        { "contains": { "type": "object", "properties": { "process": { "const": "data-control" } }, "required": ["process"] } },
+        { "contains": { "type": "object", "properties": { "process": { "const": "vehicle-pedestrian-path" } }, "required": ["process"] } }
+      ]
+    },
+    "touch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "minHitCssPx",
+        "minHitOwner",
+        "preferredPrimaryCssPx",
+        "childControlHeightCssPx",
+        "adjacentSeparationMinCssPx",
+        "invisiblePaddingBeyondSprite",
+        "tooSmallParts"
+      ],
+      "properties": {
+        "minHitCssPx": { "type": "integer", "const": 44 },
+        "minHitOwner": { "type": "string", "const": "CLAUDE.md S9" },
+        "preferredPrimaryCssPx": { "type": "integer", "minimum": 44, "maximum": 96 },
+        "childControlHeightCssPx": { "$ref": "#/$defs/intRange" },
+        "adjacentSeparationMinCssPx": { "type": "integer", "minimum": 1, "maximum": 32 },
+        "invisiblePaddingBeyondSprite": { "type": "boolean", "const": true },
+        "tooSmallParts": {
+          "type": "string",
+          "enum": ["tap-parent-then-expose-larger-targets-in-inspection"]
+        }
+      }
+    },
+    "timing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "unit",
+        "tapAcknowledgement",
+        "tapAcknowledgementBeginsWithin",
+        "selectionEffectMax",
+        "separationMs",
+        "overviewToInspection",
+        "inspectionSettle",
+        "coverOrComponentOpening",
+        "localProcess",
+        "systemConnection",
+        "return",
+        "ambientLoop",
+        "completionPause"
+      ],
+      "properties": {
+        "unit": { "type": "string", "const": "ms" },
+        "tapAcknowledgement": { "$ref": "#/$defs/msRange" },
+        "tapAcknowledgementBeginsWithin": { "type": "integer", "minimum": 1, "maximum": 140 },
+        "selectionEffectMax": { "type": "integer", "minimum": 1, "maximum": 450 },
+        "separationMs": { "$ref": "#/$defs/msRange" },
+        "overviewToInspection": { "$ref": "#/$defs/msRange" },
+        "inspectionSettle": { "$ref": "#/$defs/msRange" },
+        "coverOrComponentOpening": { "$ref": "#/$defs/msRange" },
+        "localProcess": { "$ref": "#/$defs/msRange" },
+        "systemConnection": { "$ref": "#/$defs/msRange" },
+        "return": { "$ref": "#/$defs/msRange" },
+        "ambientLoop": { "$ref": "#/$defs/msRange" },
+        "completionPause": { "$ref": "#/$defs/msRange" }
+      }
+    },
+    "animation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "distinctFramesPerSecond",
+        "interpolationAllowed",
+        "indicators",
+        "ambientBudget"
+      ],
+      "properties": {
+        "distinctFramesPerSecond": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["decorativeCharacter", "waterAndProcessFlow"],
+          "properties": {
+            "decorativeCharacter": { "$ref": "#/$defs/intRange" },
+            "waterAndProcessFlow": { "$ref": "#/$defs/intRange" }
+          }
+        },
+        "interpolationAllowed": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": { "type": "string", "enum": ["mechanical-rotation", "transitions"] }
+        },
+        "indicators": { "type": "string", "enum": ["discrete-timed-states"] },
+        "ambientBudget": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "pedestriansOrWorkers",
+            "movingVehicles",
+            "animalGroups",
+            "environmentalLoops",
+            "secondaryAction",
+            "note"
+          ],
+          "properties": {
+            "pedestriansOrWorkers": { "$ref": "#/$defs/intRange" },
+            "movingVehicles": { "$ref": "#/$defs/intRange" },
+            "animalGroups": { "$ref": "#/$defs/intRange" },
+            "environmentalLoops": { "$ref": "#/$defs/intRange" },
+            "secondaryAction": { "type": "integer", "const": 1 },
+            "note": { "type": "string", "pattern": "^Q3: .*motion only.*", "maxLength": 400 }
+          }
+        }
+      }
+    },
+    "text": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "objectTitleWords",
+        "componentLabelWords",
+        "captionMaxWords",
+        "captionLineMaxChars",
+        "captionCssPx",
+        "labelCssPx",
+        "buttonCssPx",
+        "contrastNormalMin",
+        "contrastLargeMin",
+        "captionsForAllNarration",
+        "audioRequired",
+        "reducedMotion"
+      ],
+      "properties": {
+        "objectTitleWords": { "$ref": "#/$defs/intRange" },
+        "componentLabelWords": { "$ref": "#/$defs/intRange" },
+        "captionMaxWords": { "type": "integer", "minimum": 1, "maximum": 18 },
+        "captionLineMaxChars": { "type": "integer", "minimum": 1, "maximum": 55 },
+        "captionCssPx": { "$ref": "#/$defs/intRange" },
+        "labelCssPx": { "$ref": "#/$defs/intRange" },
+        "buttonCssPx": { "$ref": "#/$defs/intRange" },
+        "contrastNormalMin": { "type": "number", "minimum": 4.5 },
+        "contrastLargeMin": { "type": "number", "minimum": 3 },
+        "captionsForAllNarration": { "type": "boolean", "const": true },
+        "audioRequired": { "type": "boolean", "const": false },
+        "reducedMotion": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": ["fades", "staged-reveals", "sequential-emphasis"]
+          }
+        }
+      }
+    },
+    "ui": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stylesheet",
+        "pageBackground",
+        "ink",
+        "focusRing",
+        "focusRingWidthCssPx",
+        "focusRingNote",
+        "throughLineOutline",
+        "quietOutline",
+        "foundOutline",
+        "controlFocusRing",
+        "controlFocusRingWidthCssPx",
+        "blockBorder",
+        "blockBackground",
+        "quietNameInk",
+        "quietNameBackground",
+        "cardBackground"
+      ],
+      "properties": {
+        "stylesheet": { "type": "string", "const": "src/index.css" },
+        "pageBackground": { "$ref": "#/$defs/cssHex" },
+        "ink": { "$ref": "#/$defs/cssHex" },
+        "focusRing": { "$ref": "#/$defs/cssHex" },
+        "focusRingWidthCssPx": { "type": "integer", "minimum": 3, "maximum": 6 },
+        "focusRingNote": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "throughLineOutline": { "$ref": "#/$defs/cssHex" },
+        "quietOutline": { "$ref": "#/$defs/cssHex" },
+        "foundOutline": { "$ref": "#/$defs/cssHex" },
+        "controlFocusRing": { "$ref": "#/$defs/cssHex" },
+        "controlFocusRingWidthCssPx": { "type": "integer", "minimum": 3, "maximum": 6 },
+        "blockBorder": { "$ref": "#/$defs/cssHex" },
+        "blockBackground": { "$ref": "#/$defs/cssHex" },
+        "quietNameInk": { "$ref": "#/$defs/cssHex" },
+        "quietNameBackground": { "$ref": "#/$defs/cssHex" },
+        "cardBackground": { "$ref": "#/$defs/cssHex" }
+      }
+    },
+    "layers": {
+      "type": "array",
+      "minItems": 21,
+      "maxItems": 21,
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^[A-Z]+(_[A-Z]+)*(_\\[NAME\\])?$" }
+    },
+    "objectStates": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^[A-Z]+(_[A-Z0-9]+)*$" }
+    },
+    "naming": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pattern", "example"],
+      "properties": {
+        "pattern": {
+          "type": "string",
+          "const": "[LOCATION]_[OBJECT]_[VIEW]_[STATE]_[VERSION]"
+        },
+        "example": { "$ref": "#/$defs/assetId" }
+      }
+    },
+    "productionGates": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "function",
+          "silhouette",
+          "composition",
+          "interaction",
+          "cutaway",
+          "animation",
+          "originality",
+          "export"
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "isoDate": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+    "hex": { "type": "string", "pattern": "^#[0-9A-F]{6}$" },
+    "cssHex": { "type": "string", "pattern": "^#[0-9a-f]{6}$" },
+    "assetId": {
+      "type": "string",
+      "pattern": "^[A-Z0-9]+(_[A-Z0-9]+)+_v[0-9]{3}$",
+      "maxLength": 80
+    },
+    "pct": { "type": "number", "minimum": 0, "maximum": 100 },
+    "numberRange": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": { "type": "number", "minimum": 0 }
+    },
+    "intRange": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": { "type": "integer", "minimum": 0 }
+    },
+    "pctRange": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": { "type": "number", "minimum": 0, "maximum": 100 }
+    },
+    "msRange": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": { "type": "integer", "minimum": 1, "maximum": 10000 }
+    },
+    "paletteAnchor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "hex", "role"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z]+(-[a-z]+)*$", "maxLength": 40 },
+        "name": { "type": "string", "minLength": 1, "maxLength": 40 },
+        "hex": { "$ref": "#/$defs/hex" },
+        "role": { "type": "string", "enum": ["material", "instructional", "light"] }
+      }
+    },
+    "processCode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "process",
+        "colourFamily",
+        "anchor",
+        "motion",
+        "pairedWithMotion",
+        "colourAlone",
+        "endsWithDemonstration"
+      ],
+      "properties": {
+        "process": {
+          "type": "string",
+          "enum": [
+            "water",
+            "electricity",
+            "mechanical-load",
+            "data-control",
+            "vehicle-pedestrian-path"
+          ]
+        },
+        "colourFamily": {
+          "type": "string",
+          "enum": ["cyan-blue", "violet", "amber-gold", "pale-neutral", "muted-warm-white"]
+        },
+        "anchor": {
+          "type": "string",
+          "enum": [
+            "instructional-cyan",
+            "electrical-violet",
+            "signal-amber",
+            "soft-highlight",
+            "warm-light"
+          ]
+        },
+        "motion": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "pairedWithMotion": { "type": "boolean", "const": true },
+        "colourAlone": { "type": "boolean", "const": false },
+        "endsWithDemonstration": { "type": "boolean", "const": true }
+      }
+    }
+  }
+}

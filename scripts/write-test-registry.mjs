@@ -1077,6 +1077,107 @@ const tests = {
     },
     requirement_ids: ['REQ_DOD', 'REQ_AGE_COPLAY']
   }),
+  'TEST-ART-TOKENS': testRecord({
+    identity: {
+      test_id: 'TEST-ART-TOKENS',
+      title: 'Art tokens validate and the renderer and stylesheet agree with them',
+      objective:
+        'content/art/tokens.json satisfies schema/art-tokens.schema.json, carries all 23 palette anchors, names the placeholder exemption, and the placeholder renderer constants and stylesheet colours match the recorded values.'
+    },
+    classification: {
+      execution_mode: 'automated',
+      priority: 'high',
+      severity_if_failed: 'medium',
+      test_layer: 'unit',
+      test_types: ['TC-FUNCTIONAL-UNIT', 'TC-FUNCTIONAL-CONTRACT', 'TC-BEHAVIOUR-POSITIVE', 'TC-BEHAVIOUR-NEGATIVE']
+    },
+    steps: ['Run tests/art-tokens.test.ts via npm test.'],
+    evidence_retained: ['vitest output'],
+    execution_trigger: 'npm test',
+    pipeline_stage: 'local-verification',
+    oracle: {
+      expected_failure_mode: 'Ajv false with a literal error path, or a renderer/stylesheet literal missing.',
+      expected_logs_events_and_alerts: na('No telemetry in this product.'),
+      expected_outputs: [
+        'Ajv true for content/art/tokens.json',
+        '23 palette anchors with uppercase hex, every hex pinned',
+        'Renderer constants 72, 36, 960x540 and minimum block width 720 match legacyPlaceholder',
+        'Stylesheet contains the ui colours and the 4px focus ring'
+      ],
+      expected_state_changes: na('No durable state.'),
+      prohibited_side_effects: ['No silent drift between tokens, renderer, and stylesheet'],
+      required_invariants: ['Every palette hex in docs/art-bible.md is a token anchor and every interface hex there is a ui token; the stylesheet hex set equals the ui token set']
+    },
+    initial_state: 'content/art/tokens.json, src/app/renderers/BusyBlock.tsx, src/index.css present.',
+    required_failure_diagnostics: ['Ajv error path or the missing literal'],
+    self_validating: true,
+    scope: {
+      component: 'content/art/tokens.json and schema/art-tokens.schema.json',
+      exclusions: ['Real art conformance', 'Placeholder geometry migration'],
+      included_behaviour: ['Schema', 'Palette completeness', 'Renderer agreement', 'Stylesheet agreement'],
+      supported_platforms: ['Node.js >=22'],
+      supported_versions: ['0.0.0']
+    },
+    test_data: {
+      boundary_values: ['22 and 24 anchors rejected, 23 accepted', 'saturation 100 vs 101', 'bad hex'],
+      classification: 'synthetic',
+      generation_method: 'Committed tokens plus planted mutations.',
+      inputs: ['content/art/tokens.json'],
+      retention_and_cleanup: na('No retained test data.'),
+      source: 'synthetic'
+    },
+    requirement_ids: ['REQ_DOD', 'REQ_CODE_QUALITY']
+  }),
+  'TEST-ART-PROVENANCE': testRecord({
+    identity: {
+      test_id: 'TEST-ART-PROVENANCE',
+      title: 'Visual assets carry a provenance record whose hash matches the file',
+      objective:
+        'Each provenance record satisfies schema/art-provenance.schema.json with role IDs only, a licence, technical and originality reviews, and a sha256 that equals the asset bytes.'
+    },
+    classification: {
+      execution_mode: 'automated',
+      priority: 'high',
+      severity_if_failed: 'medium',
+      test_layer: 'unit',
+      test_types: ['TC-FUNCTIONAL-UNIT', 'TC-FUNCTIONAL-CONTRACT', 'TC-BEHAVIOUR-NEGATIVE', 'TC-STATIC-PRIVACY-REVIEW']
+    },
+    steps: ['Run tests/art-provenance.test.ts via npm test.'],
+    evidence_retained: ['vitest output'],
+    execution_trigger: 'npm test',
+    pipeline_stage: 'local-verification',
+    oracle: {
+      expected_failure_mode: 'Ajv false with a literal error path, or a hash mismatch after the asset changed.',
+      expected_logs_events_and_alerts: na('No telemetry in this product.'),
+      expected_outputs: [
+        'Ajv true for content/art/provenance/busy-block-placeholder.json',
+        'sha256 of src/app/renderers/BusyBlock.tsx equals the recorded hex',
+        'A personal name as creator is rejected'
+      ],
+      expected_state_changes: na('No durable state.'),
+      prohibited_side_effects: ['No personal names in provenance', 'No prompt text in the repository'],
+      required_invariants: ['Role IDs only (S7)']
+    },
+    initial_state: 'Provenance record and the asset file present.',
+    required_failure_diagnostics: ['Ajv error path or the two hashes'],
+    self_validating: true,
+    scope: {
+      component: 'content/art/provenance/ and schema/art-provenance.schema.json',
+      exclusions: ['Quality of the reviews themselves'],
+      included_behaviour: ['Schema', 'Hash agreement', 'Role-ID-only fields'],
+      supported_platforms: ['Node.js >=22'],
+      supported_versions: ['0.0.0']
+    },
+    test_data: {
+      boundary_values: ['63- vs 64-character hash', 'ROLE- prefix present vs absent'],
+      classification: 'synthetic',
+      generation_method: 'Committed record plus planted mutations.',
+      inputs: ['content/art/provenance/busy-block-placeholder.json'],
+      retention_and_cleanup: na('No retained test data.'),
+      source: 'synthetic'
+    },
+    requirement_ids: ['REQ_DOD', 'REQ_PRIVACY_A1']
+  }),
   'TEST-E2E-WIDEN-2': testRecord({
     identity: {
       test_id: 'TEST-E2E-WIDEN-2',

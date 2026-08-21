@@ -76,7 +76,7 @@ HISTORY ceiling: 0
 | OWN-GEN-TEST-REGISTRY | `tests/registry.json` | GENERATED | Written by scripts/write-test-registry.mjs |
 | OWN-CLAUDE | `CLAUDE.md` | OWNER | Finished work, S-rules, E-rules |
 | OWN-AGENTS | `AGENTS.md` | OWNER | Agent practice |
-| OWN-SPEC | `SPEC.md` | OWNER | Game behaviour and shipped look |
+| OWN-SPEC | `SPEC.md` | OWNER | Game behaviour and runtime freeze |
 | OWN-README | `README.md` | OWNER | Front door and pointers |
 | OWN-CHANGELOG | `CHANGELOG.md` | DOC | Parent-facing history |
 | OWN-LICENSE | `LICENSE` | DOC | MIT |
@@ -93,7 +93,8 @@ HISTORY ceiling: 0
 | OWN-SETTLED | `docs/settled.md` | OWNER | Closed questions |
 | OWN-OPEN-FAULTS | `docs/open-faults.md` | OWNER | Open gaps |
 | OWN-PRIVACY | `docs/PRIVACY.md` | OWNER | Commit scrub |
-| OWN-INSPIRATION | `docs/inspiration.md` | OWNER | Do-not-copy books and 16-bit isometric tone |
+| OWN-INSPIRATION | `docs/inspiration.md` | OWNER | Do-not-copy sources |
+| OWN-ART-BIBLE | `docs/art-bible.md` | OWNER | Look, pixel construction, palette, animation, asset pipeline, originality |
 | OWN-CANDIDATES | `docs/candidates.md` | OWNER | Unfrozen object notes |
 | OWN-LEVEL-SPINE | `docs/level-spine.md` | OWNER | Curriculum shape and numbering |
 | OWN-ATTRIBUTION | `docs/ATTRIBUTION.md` | OWNER | Per-asset rows |
@@ -101,6 +102,7 @@ HISTORY ceiling: 0
 | OWN-GLOB-REVIEWS | `docs/reviews/**` | DOC | Independent review records |
 | OWN-GLOB-CURSOR-RULES | `.cursor/rules/**` | DOC | Agent hard-stops |
 | OWN-GLOB-SCHEMA | `schema/**` | DATA | JSON Schema |
+| OWN-GLOB-ART | `content/art/**` | DATA | Art tokens (authoritative values; rules in docs/art-bible.md) and provenance records |
 | OWN-GLOB-CONTENT | `content/**` | DATA | Schema examples, UI contracts, sitting copy |
 | OWN-GLOB-SRC | `src/**` | SOURCE | Offline Preact shell |
 | OWN-GLOB-TESTS | `tests/**` | TEST | Vitest and registry |
@@ -132,12 +134,14 @@ HISTORY ceiling: 0
 | `CLAUDE.md` | OWN-CLAUDE | OWNER | Finished work, S-rules, E-rules |
 | `LICENSE` | OWN-LICENSE | DOC | MIT |
 | `README.md` | OWN-README | OWNER | Front door and pointers |
-| `SPEC.md` | OWN-SPEC | OWNER | Game behaviour and shipped look |
+| `SPEC.md` | OWN-SPEC | OWNER | Game behaviour and runtime freeze |
 | `assets/drawings/.gitkeep` | OWN-GLOB-ASSETS | DATA | Drawings and photos later |
 | `assets/drawings/README.md` | OWN-GLOB-ASSETS | DATA | Drawings and photos later |
 | `assets/photos/.gitkeep` | OWN-GLOB-ASSETS | DATA | Drawings and photos later |
 | `assets/photos/README.md` | OWN-GLOB-ASSETS | DATA | Drawings and photos later |
 | `content/README.md` | OWN-GLOB-CONTENT | DATA | Schema examples, UI contracts, sitting copy |
+| `content/art/provenance/busy-block-placeholder.json` | OWN-GLOB-ART | DATA | Art tokens (authoritative values; rules in docs/art-bible.md) and provenance records |
+| `content/art/tokens.json` | OWN-GLOB-ART | DATA | Art tokens (authoritative values; rules in docs/art-bible.md) and provenance records |
 | `content/examples/local-profile.example.json` | OWN-GLOB-CONTENT | DATA | Schema examples, UI contracts, sitting copy |
 | `content/examples/object-card.example.json` | OWN-GLOB-CONTENT | DATA | Schema examples, UI contracts, sitting copy |
 | `content/examples/system-chain.example.json` | OWN-GLOB-CONTENT | DATA | Schema examples, UI contracts, sitting copy |
@@ -148,12 +152,13 @@ HISTORY ceiling: 0
 | `cosmetics/README.md` | OWN-GLOB-COSMETICS | DATA | Unfrozen stub |
 | `docs/ATTRIBUTION.md` | OWN-ATTRIBUTION | OWNER | Per-asset rows |
 | `docs/PRIVACY.md` | OWN-PRIVACY | OWNER | Commit scrub |
+| `docs/art-bible.md` | OWN-ART-BIBLE | OWNER | Look, pixel construction, palette, animation, asset pipeline, originality |
 | `docs/candidates.md` | OWN-CANDIDATES | OWNER | Unfrozen object notes |
 | `docs/code-map.md` | OWN-GEN-CODE-MAP | GENERATED | Written by tools/code-map.mjs |
 | `docs/effect-map.md` | OWN-GEN-EFFECT-MAP | GENERATED | Written by tools/effect-map.mjs |
 | `docs/feature-map.md` | OWN-GEN-FEATURE-MAP | GENERATED | Written by tools/feature-map.mjs |
 | `docs/file-map.md` | OWN-GEN-FILE-MAP | GENERATED | Written by this tool |
-| `docs/inspiration.md` | OWN-INSPIRATION | OWNER | Do-not-copy books and 16-bit isometric tone |
+| `docs/inspiration.md` | OWN-INSPIRATION | OWNER | Do-not-copy sources |
 | `docs/level-spine.md` | OWN-LEVEL-SPINE | OWNER | Curriculum shape and numbering |
 | `docs/open-faults.md` | OWN-OPEN-FAULTS | OWNER | Open gaps |
 | `docs/reviews/CTX-BOOTSTRAP-DRIFT.md` | OWN-GLOB-REVIEWS | DOC | Independent review records |
@@ -180,6 +185,8 @@ HISTORY ceiling: 0
 | `printables/.gitkeep` | OWN-GLOB-PRINTABLES | DATA | Later print sheets |
 | `printables/README.md` | OWN-GLOB-PRINTABLES | DATA | Later print sheets |
 | `profiles/.gitkeep` | OWN-GLOB-PROFILES | DATA | Keep file only; JSON gitignored |
+| `schema/art-provenance.schema.json` | OWN-GLOB-SCHEMA | DATA | JSON Schema |
+| `schema/art-tokens.schema.json` | OWN-GLOB-SCHEMA | DATA | JSON Schema |
 | `schema/infrastructure-object-card.schema.json` | OWN-GLOB-SCHEMA | DATA | JSON Schema |
 | `schema/local-profile.schema.json` | OWN-GLOB-SCHEMA | DATA | JSON Schema |
 | `schema/sitting-widen-1.schema.json` | OWN-GLOB-SCHEMA | DATA | JSON Schema |
@@ -206,6 +213,8 @@ HISTORY ceiling: 0
 | `src/index.css` | OWN-GLOB-SRC | SOURCE | Offline Preact shell |
 | `src/main.tsx` | OWN-GLOB-SRC | SOURCE | Offline Preact shell |
 | `src/vite-env.d.ts` | OWN-GLOB-SRC | SOURCE | Offline Preact shell |
+| `tests/art-provenance.test.ts` | OWN-GLOB-TESTS | TEST | Vitest and registry |
+| `tests/art-tokens.test.ts` | OWN-GLOB-TESTS | TEST | Vitest and registry |
 | `tests/client-gates.test.ts` | OWN-GLOB-TESTS | TEST | Vitest and registry |
 | `tests/forbidden-dependencies.test.ts` | OWN-GLOB-TESTS | TEST | Vitest and registry |
 | `tests/gate-integrity.test.ts` | OWN-GLOB-TESTS | TEST | Vitest and registry |
@@ -241,4 +250,6 @@ HISTORY ceiling: 0
 | `vite.config.ts` | OWN-VITE-CONFIG | SOURCE | Vite + vitest; allowOnly false |
 | `workflows/README.md` | OWN-GLOB-WORKFLOWS | DATA | Build-time graphs |
 | `workflows/content-authoring.example.yaml` | OWN-GLOB-WORKFLOWS | DATA | Build-time graphs |
+| `workflows/prompts/street-geometry-review.md` | OWN-GLOB-WORKFLOWS | DATA | Build-time graphs |
+| `workflows/prompts/street-scene-generation.md` | OWN-GLOB-WORKFLOWS | DATA | Build-time graphs |
 

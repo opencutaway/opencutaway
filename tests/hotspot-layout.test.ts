@@ -77,6 +77,35 @@ describe('hotspot layout keeps every target reachable (S9)', () => {
     expect((busy.match(/^ *<g>$/gm) ?? []).length).toBe(14)
   })
 
+  it('describes the block to assistive technology by card names, without development jargon', () => {
+    const busy = readRepoText('src/app/renderers/BusyBlock.tsx')
+    const match = busy.match(/aria-label="([^"]+)"/)
+    expect(match).not.toBeNull()
+    const label = (match as RegExpMatchArray)[1].toLowerCase()
+    const names = new Set(
+      [...WIDEN_SITTING_1.hotspots, ...WIDEN_SITTING_2.hotspots].map((hotspot) =>
+        hotspot.displayName.toLowerCase()
+      )
+    )
+    expect([...names].sort()).toEqual([
+      'crossing gates',
+      'crosswalk',
+      'distribution transformer',
+      'fire hydrant',
+      'mailbox',
+      'overhead conductor',
+      'railroad tracks',
+      'shop',
+      'traffic signal',
+      'utility pole'
+    ])
+    for (const name of names) {
+      expect(label.includes(name), name).toBe(true)
+    }
+    expect(label.includes('16-bit')).toBe(false)
+    expect(label.includes('svg')).toBe(false)
+  })
+
   it('accepts boxes that merely touch', () => {
     expect(
       findHotspotLayoutProblems([box('obj-a', 10, 10, 10, 12), box('obj-b', 20, 10, 10, 12)], RULE_720)

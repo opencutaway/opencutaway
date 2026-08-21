@@ -130,6 +130,28 @@ export const CODE_ROWS = [
     instances: ['workflows/content-authoring.example.yaml'],
     e2eSpecs: [],
     publishes: 'Build-time content-authoring graph; never imported from src/'
+  },
+  {
+    id: 'CODE-ART-TOKENS',
+    factId: 'DATA-ART-TOKENS',
+    kind: 'config',
+    produces: ['content/art/tokens.json'],
+    consumes: ['docs/art-bible.md', 'src/app/renderers/BusyBlock.tsx', 'src/index.css'],
+    validates: 'schema/art-tokens.schema.json',
+    instances: ['content/art/tokens.json'],
+    e2eSpecs: [],
+    publishes: 'Machine-readable art values; the gate checks renderer constants and stylesheet colours against them'
+  },
+  {
+    id: 'CODE-ART-PROVENANCE',
+    factId: 'DATA-ART-PROVENANCE',
+    kind: 'build-time',
+    produces: ['content/art/provenance/busy-block-placeholder.json'],
+    consumes: ['docs/art-bible.md'],
+    validates: 'schema/art-provenance.schema.json',
+    instances: ['content/art/provenance/busy-block-placeholder.json'],
+    e2eSpecs: [],
+    publishes: 'One provenance record per final visual asset: role IDs, licence, reviews, file hash'
   }
 ]
 

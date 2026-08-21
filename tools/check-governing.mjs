@@ -16,6 +16,7 @@ export const GOVERNING_FILES = [
   'docs/settled.md',
   'docs/open-faults.md',
   'docs/PRIVACY.md',
+  'docs/art-bible.md',
   '.claude/skills/drift-check/SKILL.md'
 ]
 
