@@ -780,22 +780,24 @@ After every three completed principal objects:
 5. identify the strongest outlier;
 6. revise the outlier before adding more assets.
 
-## Subject list (mapping open)
+## Subjects on the spine
 
-The source specification sketches ten subjects that its first lessons may use. The curriculum of this game is the eleven needs and rungs of `docs/level-spine.md` (three rungs is the default, not a law); how these subjects map onto those needs and rungs is an open question, `F-art-subjects` in `docs/open-faults.md`. The list is kept here as art-side subject matter, not as a lesson order.
+The curriculum is the eleven needs and their rungs in `docs/level-spine.md` (three rungs is the default, not a law). The ten subjects the source specification sketched are not a second curriculum: each is a named object or scene on one of those needs, at the rung the spine gives it. Scene blueprints are commissioned per need and rung, and the mechanism and system-connection columns below are the art brief for each. Needs with no subject here (Lights at the nearest rung, Heat/cool, Mail, Goods at the nearest rung, Comms) get their blueprints from the spine directly.
 
-| Subject | Local mechanism | Brief system connection |
-|---|---|---|
-| Traffic signal and pedestrian crossing | Lenses, push button, controller sequence | Detection and coordinated right-of-way |
-| Storm sewer inlet | Grate, catch basin, sump, outlet pipe | Street runoff to outfall or treatment |
-| Stormwater outfall | Pipe, headwall, energy dissipation | Connection back to streets and drains |
-| Bridge | Deck, girder or cable, bearing, pier or abutment | Load path to foundations and ground |
-| Railway crossing | Detection, lights, bell, gate sequence | Train movement and road safety |
-| Intermodal transfer | Lifting and moving one container | Ship, storage, rail, and truck chain |
-| Fire hydrant and water main | Main, branch, valve, hydrant barrel | Reservoir, treatment, pressure system |
-| Sanitary sewer and manhole | Gravity channel, pipe junction, access | Collection to treatment facility |
-| Hydroelectric facility | Intake, penstock, turbine, generator | Water path and electrical delivery |
-| Municipal waste facility | Weighing, transfer, sorting, placement | Collection to processing or final disposal |
+| Subject | Need | Rung | Local mechanism | Brief system connection |
+|---|---|---|---|---|
+| Traffic signal and pedestrian crossing | Get across | nearest (built) | Lenses, push button, controller sequence | Detection and coordinated right-of-way |
+| Railway crossing | Get across | nearest (built) | Detection, lights, bell, gate sequence | Train movement and road safety |
+| Bridge | Get across | carrier | Deck, girder or cable, bearing, pier or abutment | Load path to foundations and ground |
+| Storm sewer inlet | Rain | nearest | Grate, catch basin, sump, outlet pipe | Street runoff to the combined trunk |
+| Stormwater outfall | Rain | carrier to facility | Pipe, headwall, energy dissipation | The combined trunk's end, back to streets and drains |
+| Fire hydrant and water main | Drink | nearest to carrier | Main, branch, valve, hydrant barrel (potable only) | Reservoir, treatment, pressure system |
+| Sanitary sewer and manhole | Flush | nearest to carrier | Gravity channel, pipe junction, access | House lateral to the combined trunk, then treatment |
+| Intermodal transfer | Goods | carrier (port and rail) | Lifting and moving one container | Ship, storage, rail, and truck chain |
+| Hydroelectric facility | Lights | facility | Intake, penstock, turbine, generator | Water path and electrical delivery; the dam sits upriver |
+| Municipal waste facility | Trash | facility | Weighing, transfer, sorting, placement | Collection to the transfer station and MRF campus |
+
+Mapping closed by the owner (`docs/settled.md`, Q-art-subjects-2026-08-21).
 
 ## Shipped placeholder
 
