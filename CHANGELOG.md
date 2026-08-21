@@ -51,4 +51,4 @@ Keep personal names out of this file.
 
 - ROLE-EDITOR read every kid-facing string on the title screen and in both sittings: 40 of 43 pass as written.
 - The first need is named **Cross the Street** on screen; the title blurb now says progress always stays on this device. Internal ids keep their slugs.
-- Record: `docs/reviews/CTX-EDITOR-SITTINGS-1-2.md`; editor confirmation of the rendered screens is the last step before the sittings count as shipped.
+- Record: `docs/reviews/CTX-EDITOR-SITTINGS-1-2.md`; the editor confirmed the rendered screens, so sittings 1–2 are **shipped** (with placeholder art).

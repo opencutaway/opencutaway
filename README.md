@@ -9,12 +9,12 @@ Tone and world draw from Macaulay’s *Underground*, Hayes’s *Infrastructure*,
 
 ## Status
 
-This slice makes the title plus **widen sittings 1–2 (Cross the Street, Lights)** playable on one busy block; their kid-facing copy is still waiting on the human copy gate. Later sittings, Challenge, and Life list are not playable yet.
+This slice ships the title plus **widen sittings 1–2 (Cross the Street, Lights)** on one busy block; their kid-facing copy has passed the human copy gate. Later sittings, Challenge, and Life list are not playable yet.
 
 | Mode | Status |
 | --- | --- |
-| Title | Placeholder playable: the name and **Cross the Street** plus **Lights** controls |
-| Learn | Sittings 1–2 playable, copy gate open: find the through-line object, read the real name and what it does |
+| Title | Shipped with placeholder art: the name and **Cross the Street** plus **Lights** controls |
+| Learn | Sittings 1–2 shipped: find the through-line object, read the real name and what it does |
 | Challenge | Not playable yet |
 | Life list | Not playable yet |
 

@@ -4,7 +4,7 @@ Declarative execution graphs for Cursor and other developers. They are **not** p
 
 Kid-facing copy and images require a human gate. Cycles are capped. Child copy must not loop unattended.
 
-Widen sittings 1–2 (`content/sittings/widen-1-get-across.json`, `content/sittings/widen-2-lights.json`) use original short copy and an original SVG. They have **not** passed `kid-facing-copy-gate`. Do not treat those sittings as copy-complete until ROLE-EDITOR records a pass. Do not auto-approve the gate.
+Widen sittings 1–2 (`content/sittings/widen-1-get-across.json`, `content/sittings/widen-2-lights.json`) use original short copy and an original SVG. They passed `kid-facing-copy-gate` on 2026-08-21 (`docs/reviews/CTX-EDITOR-SITTINGS-1-2.md`). Any later change to a kid-facing string reopens the gate; do not auto-approve it.
 
 See `content-authoring.example.yaml` and `schema/workflow-graph.schema.json`.
 

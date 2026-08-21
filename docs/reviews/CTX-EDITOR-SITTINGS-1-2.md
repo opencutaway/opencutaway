@@ -12,7 +12,7 @@
 | Date | 2026-08-21 |
 | Scope | `content/ui/title-screen.json`, `content/sittings/widen-1-get-across.json`, `content/sittings/widen-2-lights.json` — 43 strings after de-duplication |
 | Rules read against | `CLAUDE.md` S1 (real name, short gloss, never demean), S3; `docs/level-spine.md` second-miss rule and industry-name rule |
-| Disposition | Corrections applied verbatim; gates green; editor confirmation of the rendered screens pending (see Verification) |
+| Disposition | Passed. Corrections applied verbatim; gates green; the editor confirmed the rendered title screen and sitting 1 heading on 2026-08-21 |
 
 ## Verdicts
 
@@ -46,6 +46,6 @@ The three strings are one decision: the need's on-screen name is **Cross the Str
 
 ## Verification
 
-The editor's replacements were applied byte-for-byte from the copy-gate block. Same-reviewer verification is the editor's confirmation that the rendered title screen and sitting 1 heading read as intended; until that confirmation is recorded here, `F-lessons` stays open and the sittings remain *playable, copy gate open*.
+The editor's replacements were applied byte-for-byte from the copy-gate block. Same-reviewer verification is the editor's confirmation that the rendered title screen and sitting 1 heading read as intended.
 
-Editor confirmation: _pending_.
+Editor confirmation: recorded 2026-08-21 from the built app's title screen and sitting 1 render. The editor also noted that object relationships on the placeholder block are not yet real-world correct (for example the railroad-tracks hotspot sitting over water); that is an art matter carried by `F-art-geometry-migration`, not a copy matter, and does not reopen this gate.

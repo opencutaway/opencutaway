@@ -5,7 +5,7 @@
 
 ## What counts as finished work
 
-The product is the working game. This slice lands guard rails plus widen sittings 1–2 (Cross the Street, Lights) playable on the busy block; their kid-facing copy still waits on the human ROLE-EDITOR gate (`F-lessons` in `docs/open-faults.md`); later sittings still fill in.
+The product is the working game. This slice ships guard rails plus widen sittings 1–2 (Cross the Street, Lights) on the busy block, their kid-facing copy read and passed by the human ROLE-EDITOR (`docs/reviews/CTX-EDITOR-SITTINGS-1-2.md`); later sittings still fill in.
 Tests and documents exist to protect the game; they are never the goal by themselves.
 
 Do not create status files, progress logs, or session summaries. Update the single document that already owns the fact. A new governing file needs the same owner-visible approval as a new dependency.
