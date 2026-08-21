@@ -70,7 +70,7 @@ export const CODE_ROWS = [
     validates: 'schema/sitting-widen-1.schema.json',
     instances: ['content/sittings/widen-1-get-across.json'],
     e2eSpecs: ['e2e/specs/widen-1-get-across.spec.ts'],
-    publishes: 'Widen sitting 1 (Get across) copy and hotspots'
+    publishes: 'Widen sitting 1 (Cross the Street) copy and hotspots'
   },
   {
     id: 'CODE-WIDEN-SITTING-2',

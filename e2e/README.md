@@ -14,4 +14,4 @@ Do not add a one-off script. In the same change:
 
 `npm run gauntlet` runs these specs against the production preview when `dist/` exists.
 
-Playable coverage now includes the title and widen sittings 1–2 (Get across, Lights); shared steps live in `e2e/helpers/` (adult controls; hotspot reachability, keyboard order, and name legibility). Challenge and Life list stay stubbed in `modes-not-shipped.spec.ts`.
+Playable coverage now includes the title and widen sittings 1–2 (Cross the Street, Lights); shared steps live in `e2e/helpers/` (adult controls; hotspot reachability, keyboard order, and name legibility). Challenge and Life list stay stubbed in `modes-not-shipped.spec.ts`.

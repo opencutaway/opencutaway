@@ -2,22 +2,22 @@ import { expectControlsAtLeast44 } from '../helpers/hotspot-reach.ts'
 import { expect, test } from '../fixtures/player.ts'
 
 test.describe('title screen', () => {
-  test('teaches the game name and opens Get across or Lights', async ({
+  test('teaches the game name and opens Cross the Street or Lights', async ({
     titleScreen,
     widenSitting1,
     widenSitting2,
     page
   }) => {
-    await test.step('teaching: name, blurb, Get across, and Lights', async () => {
+    await test.step('teaching: name, blurb, Cross the Street, and Lights', async () => {
       await expect(page).toHaveTitle('Open Cutaway')
       await expect(titleScreen.heading()).toBeVisible()
       await expect(titleScreen.blurb()).toBeVisible()
       await expect(titleScreen.learnControl()).toBeVisible()
       await expect(titleScreen.lightsControl()).toBeVisible()
-      await expectControlsAtLeast44(page, ['Get across', 'Lights'])
+      await expectControlsAtLeast44(page, ['Cross the Street', 'Lights'])
     })
 
-    await test.step('interaction: Get across opens widen sitting 1', async () => {
+    await test.step('interaction: Cross the Street opens widen sitting 1', async () => {
       await titleScreen.learnControl().click()
       await expect(widenSitting1.heading()).toBeVisible()
       await expect(widenSitting1.prompt()).toBeVisible()

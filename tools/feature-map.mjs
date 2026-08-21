@@ -16,7 +16,7 @@ export const FEATURES = [
     name: 'Title screen',
     status: 'shipped',
     actors: ['child', 'adult'],
-    canDo: 'See the game name and open Get across or Lights (widen sittings 1 and 2). Progress stays on this device.',
+    canDo: 'See the game name and open Cross the Street or Lights (widen sittings 1 and 2). Progress stays on this device.',
     entry: 'src/app/App.tsx',
     e2eSpecs: ['e2e/specs/title.spec.ts'],
     tutorialIds: ['TUT-TITLE-NAME'],
@@ -28,7 +28,7 @@ export const FEATURES = [
     status: 'shipped',
     actors: ['child', 'adult'],
     canDo:
-      'Widen sittings 1–2: find Get across objects or Lights objects (pole, overhead conductor, distribution transformer) on the busy block; read the real name, a short gloss, and what it does. Sittings 3–11 are not in this build.',
+      'Widen sittings 1–2: find Cross the Street objects or Lights objects (pole, overhead conductor, distribution transformer) on the busy block; read the real name, a short gloss, and what it does. Sittings 3–11 are not in this build.',
     entry: 'src/app/WidenSitting1.tsx',
     e2eSpecs: [
       'e2e/specs/widen-1-get-across.spec.ts',
@@ -82,7 +82,7 @@ export function generateMarkdown(features = FEATURES) {
         'Status is `shipped` or `stub` only.',
         'Actors MUST include `child` and `adult`.',
         '`e2eSpecs` is a non-empty array of Playwright spec paths; every path MUST exist on disk.',
-        'Shipped Learn sittings MUST list every sitting spec (Get across and Lights).',
+        'Shipped Learn sittings MUST list every sitting spec (Cross the Street and Lights).',
         'Name `entry`, `schemaIds`, and `tutorialIds`; G-lockstep reads those fields.',
         'Regenerate (`node tools/feature-map.mjs`) so this artifact byte-matches `generateMarkdown()`.'
       ],

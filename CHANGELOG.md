@@ -46,3 +46,9 @@ Keep personal names out of this file.
 - The busy block's assistive description now names every hotspot object by its card name, with no development jargon; a unit test pins it (closes the former `F-svg-description`).
 - Street-geometry addendum: a hard constraint layer for every scene with a street, signal, crosswalk, or vehicle (layout before art, deterministic street assets, a separate plausibility review, a fifteen-row acceptance checklist); the reusable generation prompt and review templates are versioned under `workflows/prompts/`.
 - The bible's ten lesson subjects are mapped onto the spine's eleven needs and rungs (owner pick); the spine stays the only curriculum.
+
+## Copy gate — sittings 1–2 read aloud
+
+- ROLE-EDITOR read every kid-facing string on the title screen and in both sittings: 40 of 43 pass as written.
+- The first need is named **Cross the Street** on screen; the title blurb now says progress always stays on this device. Internal ids keep their slugs.
+- Record: `docs/reviews/CTX-EDITOR-SITTINGS-1-2.md`; editor confirmation of the rendered screens is the last step before the sittings count as shipped.

@@ -13,9 +13,9 @@ const MAP_PATH = path.join(repoRoot, 'docs', 'effect-map.md')
 /** Per-file declarations small enough to stay true. */
 export const FILE_META = {
   'tests/title.test.ts': {
-    protects: 'The title names Open Cutaway and offers Get across and Lights.',
+    protects: 'The title names Open Cutaway and offers Cross the Street and Lights.',
     doesNotProve: 'Sittings 3–11 or Challenge.',
-    oracle: 'Literal title string Open Cutaway and control labels Get across and Lights.',
+    oracle: 'Literal title string Open Cutaway and control labels Cross the Street and Lights.',
     platform: 'Node vitest',
     mutantFamily: 'none',
     evidence: 'vitest',

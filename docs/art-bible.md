@@ -786,9 +786,9 @@ The curriculum is the eleven needs and their rungs in `docs/level-spine.md` (thr
 
 | Subject | Need | Rung | Local mechanism | Brief system connection |
 |---|---|---|---|---|
-| Traffic signal and pedestrian crossing | Get across | nearest (built) | Lenses, push button, controller sequence | Detection and coordinated right-of-way |
-| Railway crossing | Get across | nearest (built) | Detection, lights, bell, gate sequence | Train movement and road safety |
-| Bridge | Get across | carrier | Deck, girder or cable, bearing, pier or abutment | Load path to foundations and ground |
+| Traffic signal and pedestrian crossing | Cross the Street | nearest (built) | Lenses, push button, controller sequence | Detection and coordinated right-of-way |
+| Railway crossing | Cross the Street | nearest (built) | Detection, lights, bell, gate sequence | Train movement and road safety |
+| Bridge | Cross the Street | carrier | Deck, girder or cable, bearing, pier or abutment | Load path to foundations and ground |
 | Storm sewer inlet | Rain | nearest | Grate, catch basin, sump, outlet pipe | Street runoff to the combined trunk |
 | Stormwater outfall | Rain | carrier to facility | Pipe, headwall, energy dissipation | The combined trunk's end, back to streets and drains |
 | Fire hydrant and water main | Drink | nearest to carrier | Main, branch, valve, hydrant barrel (potable only) | Reservoir, treatment, pressure system |

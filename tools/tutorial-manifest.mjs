@@ -24,7 +24,7 @@ export const TUTORIALS = [
   {
     id: 'TUT-OBJECT-NAME-FUNCTION',
     mechanic: 'Street object name to function',
-    taughtBy: 'Widen sittings 1–2 (Get across, Lights) on the busy block',
+    taughtBy: 'Widen sittings 1–2 (Cross the Street, Lights) on the busy block',
     featureId: 'FEAT-LEARN',
     status: 'taught',
     actors: ['child', 'adult'],

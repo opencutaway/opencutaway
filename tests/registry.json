@@ -5,7 +5,7 @@
     "TEST-BOOTSTRAP-TITLE": {
       "identity": {
         "test_id": "TEST-BOOTSTRAP-TITLE",
-        "title": "Title screen names Open Cutaway and offers Get across and Lights",
+        "title": "Title screen names Open Cutaway and offers Cross the Street and Lights",
         "objective": "The title identifies the game and points to widen sittings 1 and 2."
       },
       "classification": {
@@ -98,7 +98,7 @@
         },
         "expected_outputs": [
           "GAME_TITLE equals Open Cutaway",
-          "LEARN_CONTROL_LABEL equals Get across",
+          "LEARN_CONTROL_LABEL equals Cross the Street",
           "LIGHTS_CONTROL_LABEL equals Lights"
         ],
         "expected_state_changes": {
@@ -110,7 +110,7 @@
           "No hydrant lesson on the title"
         ],
         "required_invariants": [
-          "Title offers Get across and Lights"
+          "Title offers Cross the Street and Lights"
         ]
       },
       "ownership": {
@@ -155,7 +155,7 @@
         ],
         "included_behaviour": [
           "Title string",
-          "Get across control",
+          "Cross the Street control",
           "Lights control"
         ],
         "supported_platforms": [
@@ -2296,7 +2296,7 @@
       "identity": {
         "test_id": "TEST-E2E-TITLE",
         "title": "Playwright covers title-screen teaching, interaction, and regression",
-        "objective": "A child and grown-up opening the app see Open Cutaway and can open Get across or Lights without a dam dump."
+        "objective": "A child and grown-up opening the app see Open Cutaway and can open Cross the Street or Lights without a dam dump."
       },
       "classification": {
         "execution_mode": "automated",
@@ -2385,9 +2385,9 @@
         },
         "expected_outputs": [
           "Heading Open Cutaway visible",
-          "Get across control visible",
+          "Cross the Street control visible",
           "Lights control visible",
-          "Sitting heading Get across after click",
+          "Sitting heading Cross the Street after click",
           "Sitting heading Lights after click"
         ],
         "expected_state_changes": {
@@ -2398,7 +2398,7 @@
           "Must not call network APIs from the child app"
         ],
         "required_invariants": [
-          "Title offers Get across and Lights"
+          "Title offers Cross the Street and Lights"
         ]
       },
       "ownership": {
@@ -2485,7 +2485,7 @@
       "identity": {
         "test_id": "TEST-E2E-STUB-MODES",
         "title": "Playwright keeps Challenge and Life list unshipped",
-        "objective": "The title offers Get across and Lights and does not grow Challenge or Life list controls."
+        "objective": "The title offers Cross the Street and Lights and does not grow Challenge or Life list controls."
       },
       "classification": {
         "execution_mode": "automated",
@@ -2572,7 +2572,7 @@
           "reason": "No telemetry in this product."
         },
         "expected_outputs": [
-          "Get across button",
+          "Cross the Street button",
           "Lights button",
           "No Challenge button",
           "No Life list heading"
@@ -2668,7 +2668,7 @@
       "identity": {
         "test_id": "TEST-WIDEN-SITTING-1",
         "title": "Widen sitting 1 validates and teaches miss, hint, and find",
-        "objective": "Get across copy matches schema, uses real names, and the session shows try-again then a rung hint."
+        "objective": "Cross the Street copy matches schema, uses real names, and the session shows try-again then a rung hint."
       },
       "classification": {
         "execution_mode": "automated",
@@ -2859,7 +2859,7 @@
     "TEST-E2E-WIDEN-1": {
       "identity": {
         "test_id": "TEST-E2E-WIDEN-1",
-        "title": "Playwright covers Get across teaching, interaction, and regression",
+        "title": "Playwright covers Cross the Street teaching, interaction, and regression",
         "objective": "A child can open sitting 1, miss the shop twice, then find the traffic signal and read name plus function. An adult can reveal and toggle Show all names."
       },
       "classification": {
@@ -3054,7 +3054,7 @@
       "identity": {
         "test_id": "TEST-WIDEN-SITTING-2",
         "title": "Widen sitting 2 validates and keeps crossing objects quiet",
-        "objective": "Lights copy matches schema, uses real names, and keeps Get across objects off the through-line."
+        "objective": "Lights copy matches schema, uses real names, and keeps Cross the Street objects off the through-line."
       },
       "classification": {
         "execution_mode": "automated",

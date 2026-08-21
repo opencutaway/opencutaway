@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://opencutaway.github.io/schema/sitting-widen-1.schema.json",
-  "title": "Widen sitting 1 (Get across)",
+  "title": "Widen sitting 1 (Cross the Street)",
   "description": "Copy and hotspot contract for the first block lesson. JSON Schema is the authority path; the child app must not invent a parallel parser.",
   "type": "object",
   "additionalProperties": false,
@@ -35,7 +35,7 @@
     },
     "throughLine": {
       "type": "string",
-      "const": "Get across"
+      "const": "Cross the Street"
     },
     "phase": {
       "type": "string",

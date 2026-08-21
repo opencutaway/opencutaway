@@ -2,10 +2,13 @@
   "schemaVersion": "0.3.0",
   "screenId": "title",
   "title": "Open Cutaway",
-  "blurb": "A visual game about how infrastructure works. Start on the block with Get across or Lights. Progress stays on this device.",
-  "actors": ["child", "adult"],
+  "blurb": "A visual game about how infrastructure works. Start on the block with \"Cross the Street\" or \"Lights\". Progress always stays on this device.",
+  "actors": [
+    "child",
+    "adult"
+  ],
   "learnControl": {
-    "label": "Get across",
+    "label": "Cross the Street",
     "sittingId": "sitting-widen-1-get-across"
   },
   "lightsControl": {

@@ -20,7 +20,7 @@ const SITTING_1_OFF_NEED = [
   'obj-railroad-tracks'
 ]
 
-test.describe('widen sitting 1 Get across', () => {
+test.describe('widen sitting 1 Cross the Street', () => {
   test('teaches find, name, and function on the busy block', async ({
     titleScreen,
     widenSitting1,

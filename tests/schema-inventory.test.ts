@@ -35,13 +35,13 @@ describe('Ajv schema inventory', () => {
     const result = validateInstance('schema/ui-title-screen.schema.json', data)
     expect(result.ok).toBe(true)
     expect(data.title).toBe('Open Cutaway')
-    expect(data.learnControl.label).toBe('Get across')
+    expect(data.learnControl.label).toBe('Cross the Street')
     expect(data.learnControl.sittingId).toBe('sitting-widen-1-get-across')
     expect(data.lightsControl.label).toBe('Lights')
     expect(data.lightsControl.sittingId).toBe('sitting-widen-2-lights')
   })
 
-  it('rejects a title contract that opens Get across as Lights', () => {
+  it('rejects a title contract that opens Cross the Street as Lights', () => {
     const result = validateInstance('schema/ui-title-screen.schema.json', {
       schemaVersion: '0.3.0',
       screenId: 'title',
@@ -49,7 +49,7 @@ describe('Ajv schema inventory', () => {
       blurb: 'A visual game about how infrastructure works.',
       actors: ['child', 'adult'],
       learnControl: {
-        label: 'Get across',
+        label: 'Cross the Street',
         sittingId: 'sitting-widen-2-lights'
       },
       lightsControl: {
@@ -60,7 +60,7 @@ describe('Ajv schema inventory', () => {
     expect(result.ok).toBe(false)
   })
 
-  it('rejects a title contract that opens Lights as Get across', () => {
+  it('rejects a title contract that opens Lights as Cross the Street', () => {
     const result = validateInstance('schema/ui-title-screen.schema.json', {
       schemaVersion: '0.3.0',
       screenId: 'title',
@@ -68,7 +68,7 @@ describe('Ajv schema inventory', () => {
       blurb: 'A visual game about how infrastructure works.',
       actors: ['child', 'adult'],
       learnControl: {
-        label: 'Get across',
+        label: 'Cross the Street',
         sittingId: 'sitting-widen-1-get-across'
       },
       lightsControl: {
@@ -87,7 +87,7 @@ describe('Ajv schema inventory', () => {
       blurb: 'A visual game about how infrastructure works.',
       actors: ['child', 'adult'],
       learnControl: {
-        label: 'Get across',
+        label: 'Cross the Street',
         sittingId: 'sitting-widen-1-get-across'
       },
       lightsControl: {

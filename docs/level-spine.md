@@ -63,7 +63,7 @@ Jobs may be visible before the facility; they are not the test until the facilit
 
 | Through-line | Rungs now | Frozen sequence |
 | --- | --- | --- |
-| Get across | 3 unless it grows later | Signal / crosswalk / gates → loop / cable in the street → small signal bungalow / rail ops. **Not** the toy factory. |
+| Cross the Street | 3 unless it grows later | Signal / crosswalk / gates → loop / cable in the street → small signal bungalow / rail ops. **Not** the toy factory. |
 | Lights (power) | 4 | Pole → wires → substation → dam (dam = where power is generated; substation may name lights and heat as loads/uses) |
 | Drink | 4 | Tap / hydrant → street main → potable treatment plant → reservoir or river intake (outside town OK; **plant then intake**, not intake before plant). **Hydrant is potable only.** |
 | Trash | 3 | Can / alley → collection truck → far campus (**one site, two zones**: transfer station + MRF sorting). **Not** a landfill visit. Do not slash-confuse the jobs. |
@@ -110,7 +110,7 @@ A sitting is **~10–15 minutes**. Labels are short. Adult reads the longer plan
 
 | # | Through-line | On the block (examples, unfrozen nouns) |
 | --- | --- | --- |
-| 1 | Get across | Signal, crosswalk, rail crossing as street furniture |
+| 1 | Cross the Street | Signal, crosswalk, rail crossing as street furniture |
 | 2 | Lights | Pole, wire, transformer |
 | 3 | Drink | Tap / meter / hydrant — the **clean** chain (**hydrant is potable only**) |
 | 4 | Trash | Can, alley, truck |

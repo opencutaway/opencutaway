@@ -223,7 +223,7 @@ export function runSelfTest() {
     {
       name: 'instance-invalid',
       run: () => {
-        // The committed title instance with Get across pointed at the Lights sitting.
+        // The committed title instance with Cross the Street pointed at the Lights sitting.
         const root = plantRoot(tempRoots)
         const wrongTitle = loadInstance(TITLE_INSTANCE, root)
         wrongTitle.learnControl.sittingId = 'sitting-widen-2-lights'

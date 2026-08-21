@@ -16,7 +16,7 @@ import { WIDEN_SITTING_1, throughLineHotspots } from '../src/app/sitting.ts'
 const sittingSchema = compileSchema('schema/sitting-widen-1.schema.json')
 
 describe('widen sitting 1 content', () => {
-  it('accepts the Get across sitting instance', () => {
+  it('accepts the Cross the Street sitting instance', () => {
     expect(sittingSchema(readRepoJson('content/sittings/widen-1-get-across.json'))).toBe(
       true
     )
@@ -25,7 +25,7 @@ describe('widen sitting 1 content', () => {
   it('uses real names for the through-line and keeps off-need out of tab order', () => {
     const names = throughLineHotspots().map((hotspot) => hotspot.displayName)
     expect(names).toEqual(['Traffic signal', 'Crosswalk', 'Crossing gates'])
-    expect(WIDEN_SITTING_1.throughLine).toBe('Get across')
+    expect(WIDEN_SITTING_1.throughLine).toBe('Cross the Street')
     expect(WIDEN_SITTING_1.secondMissHint).toBe(
       'This is the street object for getting across.'
     )

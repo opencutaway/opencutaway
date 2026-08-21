@@ -16,7 +16,7 @@ MUST:
 - Status is `shipped` or `stub` only.
 - Actors MUST include `child` and `adult`.
 - `e2eSpecs` is a non-empty array of Playwright spec paths; every path MUST exist on disk.
-- Shipped Learn sittings MUST list every sitting spec (Get across and Lights).
+- Shipped Learn sittings MUST list every sitting spec (Cross the Street and Lights).
 - Name `entry`, `schemaIds`, and `tutorialIds`; G-lockstep reads those fields.
 - Regenerate (`node tools/feature-map.mjs`) so this artifact byte-matches `generateMarkdown()`.
 
@@ -37,8 +37,8 @@ Negative controls: `e2e-spec-missing-on-disk`, `missing-e2e-spec`, `untutoried-f
 
 | id | name | status | actors | entry | e2eSpecs | schemaIds | tutorialIds | canDo |
 |---|---|---|---|---|---|---|---|---|
-| FEAT-TITLE | Title screen | shipped | child, adult | `src/app/App.tsx` | `e2e/specs/title.spec.ts` | `CODE-TITLE-SCREEN` | `TUT-TITLE-NAME` | See the game name and open Get across or Lights (widen sittings 1 and 2). Progress stays on this device. |
-| FEAT-LEARN | Learn | shipped | child, adult | `src/app/WidenSitting1.tsx` | `e2e/specs/widen-1-get-across.spec.ts`, `e2e/specs/widen-2-lights.spec.ts` | `CODE-OBJECT-CARD`, `CODE-SYSTEM-CHAIN`, `CODE-WIDEN-SITTING-1`, `CODE-WIDEN-SITTING-2` | `TUT-OBJECT-NAME-FUNCTION`, `TUT-CHAIN-PATH` | Widen sittings 1–2: find Get across objects or Lights objects (pole, overhead conductor, distribution transformer) on the busy block; read the real name, a short gloss, and what it does. Sittings 3–11 are not in this build. |
+| FEAT-TITLE | Title screen | shipped | child, adult | `src/app/App.tsx` | `e2e/specs/title.spec.ts` | `CODE-TITLE-SCREEN` | `TUT-TITLE-NAME` | See the game name and open Cross the Street or Lights (widen sittings 1 and 2). Progress stays on this device. |
+| FEAT-LEARN | Learn | shipped | child, adult | `src/app/WidenSitting1.tsx` | `e2e/specs/widen-1-get-across.spec.ts`, `e2e/specs/widen-2-lights.spec.ts` | `CODE-OBJECT-CARD`, `CODE-SYSTEM-CHAIN`, `CODE-WIDEN-SITTING-1`, `CODE-WIDEN-SITTING-2` | `TUT-OBJECT-NAME-FUNCTION`, `TUT-CHAIN-PATH` | Widen sittings 1–2: find Cross the Street objects or Lights objects (pole, overhead conductor, distribution transformer) on the busy block; read the real name, a short gloss, and what it does. Sittings 3–11 are not in this build. |
 | FEAT-CHALLENGE | Challenge | stub | child, adult | `SPEC.md` | `e2e/specs/modes-not-shipped.spec.ts` | `CODE-SYSTEM-CHAIN` | `TUT-CHAIN-PATH` | Later: recall and path-choice without becoming a scavenger hunt. |
 | FEAT-LIFE-LIST | Life list | stub | child, adult | `SPEC.md` | `e2e/specs/modes-not-shipped.spec.ts` | — | `TUT-LIFE-LIST` | Later: optional honor-system IRL finds that must not unlock Learn or Challenge. |
 

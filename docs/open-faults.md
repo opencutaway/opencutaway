@@ -7,7 +7,7 @@ A fault that lives only in a chat log is a fault this project will lose.
 
 | ID | Where | What's wrong | Done means |
 |---|---|---|---|
-| F-lessons | `src/`, `content/` | Sitting 1–2 copy exists; ROLE-EDITOR human gate still required | First Learn cards exist and pass human copy gate |
+| F-lessons | `docs/reviews/CTX-EDITOR-SITTINGS-1-2.md` | The ROLE-EDITOR read all 43 strings and requested three corrections, applied verbatim; the editor has not yet confirmed the rendered title screen and sitting 1 heading | Editor confirmation recorded in that review; then the four documents say shipped instead of playable |
 | F-profiles | `src/` | On-device sibling profiles are schema-only | A local profile picker writes gitignored saves |
 | F-cosmetics | `cosmetics/` | Album/hat **art** is unbuilt; **rules** are frozen in `docs/level-spine.md` | Stub assets exist; no collectible UI until Learn follows the spine |
 | F-spine-lessons | `docs/level-spine.md` | Widen #1–2 are playable; sittings 3–11 and deepen remain unbuilt | First Learn sittings match widen order 1–3 without inventing a second curriculum |

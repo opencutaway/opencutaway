@@ -13,12 +13,12 @@ export class TitleScreen {
 
   blurb(): Locator {
     return this.page.getByText(
-      'A visual game about how infrastructure works. Start on the block with Get across or Lights. Progress stays on this device.'
+      'A visual game about how infrastructure works. Start on the block with "Cross the Street" or "Lights". Progress always stays on this device.'
     )
   }
 
   learnControl(): Locator {
-    return this.page.getByRole('button', { name: 'Get across' })
+    return this.page.getByRole('button', { name: 'Cross the Street' })
   }
 
   lightsControl(): Locator {

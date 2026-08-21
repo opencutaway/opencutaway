@@ -162,6 +162,7 @@ HISTORY ceiling: 0
 | `docs/level-spine.md` | OWN-LEVEL-SPINE | OWNER | Curriculum shape and numbering |
 | `docs/open-faults.md` | OWN-OPEN-FAULTS | OWNER | Open gaps |
 | `docs/reviews/CTX-BOOTSTRAP-DRIFT.md` | OWN-GLOB-REVIEWS | DOC | Independent review records |
+| `docs/reviews/CTX-EDITOR-SITTINGS-1-2.md` | OWN-GLOB-REVIEWS | DOC | Independent review records |
 | `docs/reviews/CTX-REVIEW-SITTINGS-GIP.md` | OWN-GLOB-REVIEWS | DOC | Independent review records |
 | `docs/reviews/README.md` | OWN-REVIEWS-README | DOC | Review record home |
 | `docs/settled.md` | OWN-SETTLED | OWNER | Closed questions |

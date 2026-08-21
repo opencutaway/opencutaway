@@ -6,7 +6,7 @@ test.describe('modes not shipped', () => {
       await expect(titleScreen.heading()).toBeVisible()
     })
 
-    await test.step('interaction: Get across and Lights are the Learn controls', async () => {
+    await test.step('interaction: Cross the Street and Lights are the Learn controls', async () => {
       await expect(titleScreen.learnControl()).toBeVisible()
       await expect(titleScreen.lightsControl()).toBeVisible()
       await expect(page.getByRole('button', { name: 'Challenge' })).toHaveCount(0)

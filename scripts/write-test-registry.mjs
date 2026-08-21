@@ -105,7 +105,7 @@ const tests = {
   'TEST-BOOTSTRAP-TITLE': testRecord({
     identity: {
       test_id: 'TEST-BOOTSTRAP-TITLE',
-      title: 'Title screen names Open Cutaway and offers Get across and Lights',
+      title: 'Title screen names Open Cutaway and offers Cross the Street and Lights',
       objective: 'The title identifies the game and points to widen sittings 1 and 2.'
     },
     classification: {
@@ -126,10 +126,10 @@ const tests = {
     oracle: {
       expected_failure_mode: na('Passing run expected.'),
       expected_logs_events_and_alerts: na('No telemetry in this product.'),
-      expected_outputs: ['GAME_TITLE equals Open Cutaway', 'LEARN_CONTROL_LABEL equals Get across', 'LIGHTS_CONTROL_LABEL equals Lights'],
+      expected_outputs: ['GAME_TITLE equals Open Cutaway', 'LEARN_CONTROL_LABEL equals Cross the Street', 'LIGHTS_CONTROL_LABEL equals Lights'],
       expected_state_changes: na('No durable state.'),
       prohibited_side_effects: ['No network calls', 'No hydrant lesson on the title'],
-      required_invariants: ['Title offers Get across and Lights']
+      required_invariants: ['Title offers Cross the Street and Lights']
     },
     initial_state: 'src/app/title.ts present.',
     required_failure_diagnostics: ['Assertion diff for GAME_TITLE or TITLE_BLURB'],
@@ -137,7 +137,7 @@ const tests = {
     scope: {
       component: 'src/app/title.ts',
       exclusions: ['Sittings 3–11 and Challenge'],
-      included_behaviour: ['Title string', 'Get across control', 'Lights control'],
+      included_behaviour: ['Title string', 'Cross the Street control', 'Lights control'],
       supported_platforms: ['Node.js >=22'],
       supported_versions: ['0.0.0']
     },
@@ -748,7 +748,7 @@ const tests = {
       test_id: 'TEST-E2E-TITLE',
       title: 'Playwright covers title-screen teaching, interaction, and regression',
       objective:
-        'A child and grown-up opening the app see Open Cutaway and can open Get across or Lights without a dam dump.'
+        'A child and grown-up opening the app see Open Cutaway and can open Cross the Street or Lights without a dam dump.'
     },
     classification: {
       execution_mode: 'automated',
@@ -772,14 +772,14 @@ const tests = {
       expected_logs_events_and_alerts: na('No telemetry in this product.'),
       expected_outputs: [
         'Heading Open Cutaway visible',
-        'Get across control visible',
+        'Cross the Street control visible',
         'Lights control visible',
-        'Sitting heading Get across after click',
+        'Sitting heading Cross the Street after click',
         'Sitting heading Lights after click'
       ],
       expected_state_changes: na('No durable state.'),
       prohibited_side_effects: ['Must not call network APIs from the child app'],
-      required_invariants: ['Title offers Get across and Lights']
+      required_invariants: ['Title offers Cross the Street and Lights']
     },
     initial_state: 'Dependencies and Chromium installed; dist/ present for preview.',
     required_failure_diagnostics: ['Playwright trace on retry; screenshot on failure'],
@@ -806,7 +806,7 @@ const tests = {
       test_id: 'TEST-E2E-STUB-MODES',
       title: 'Playwright keeps Challenge and Life list unshipped',
       objective:
-        'The title offers Get across and Lights and does not grow Challenge or Life list controls.'
+        'The title offers Cross the Street and Lights and does not grow Challenge or Life list controls.'
     },
     classification: {
       execution_mode: 'automated',
@@ -824,7 +824,7 @@ const tests = {
     oracle: {
       expected_failure_mode: na('Passing run expected.'),
       expected_logs_events_and_alerts: na('No telemetry in this product.'),
-      expected_outputs: ['Get across button', 'Lights button', 'No Challenge button', 'No Life list heading'],
+      expected_outputs: ['Cross the Street button', 'Lights button', 'No Challenge button', 'No Life list heading'],
       expected_state_changes: na('No durable state.'),
       prohibited_side_effects: ['Must not change game behaviour'],
       required_invariants: ['Challenge and Life list stay unshipped']
@@ -854,7 +854,7 @@ const tests = {
       test_id: 'TEST-WIDEN-SITTING-1',
       title: 'Widen sitting 1 validates and teaches miss, hint, and find',
       objective:
-        'Get across copy matches schema, uses real names, and the session shows try-again then a rung hint.'
+        'Cross the Street copy matches schema, uses real names, and the session shows try-again then a rung hint.'
     },
     classification: {
       execution_mode: 'automated',
@@ -907,7 +907,7 @@ const tests = {
   'TEST-E2E-WIDEN-1': testRecord({
     identity: {
       test_id: 'TEST-E2E-WIDEN-1',
-      title: 'Playwright covers Get across teaching, interaction, and regression',
+      title: 'Playwright covers Cross the Street teaching, interaction, and regression',
       objective:
         'A child can open sitting 1, miss the shop twice, then find the traffic signal and read name plus function. An adult can reveal and toggle Show all names.'
     },
@@ -971,7 +971,7 @@ const tests = {
       test_id: 'TEST-WIDEN-SITTING-2',
       title: 'Widen sitting 2 validates and keeps crossing objects quiet',
       objective:
-        'Lights copy matches schema, uses real names, and keeps Get across objects off the through-line.'
+        'Lights copy matches schema, uses real names, and keeps Cross the Street objects off the through-line.'
     },
     classification: {
       execution_mode: 'automated',

@@ -4,7 +4,7 @@ export class WidenSitting1Page {
   constructor(readonly page: Page) {}
 
   heading(): Locator {
-    return this.page.getByRole('heading', { level: 1, name: 'Get across' })
+    return this.page.getByRole('heading', { level: 1, name: 'Cross the Street' })
   }
 
   prompt(): Locator {
